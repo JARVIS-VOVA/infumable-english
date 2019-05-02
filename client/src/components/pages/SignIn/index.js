@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { AuthenticationButton } from '../../atoms'
+import { DefaultReduxFormButton } from '../../atoms'
 import SignInForm from '../SignInForm'
 
 import './styles.scss'
@@ -16,11 +16,11 @@ const SignIn = ({ isValidForm, handleSubmit }) => (
       </div>
 
       <div className='button'>
-        <AuthenticationButton
+        <DefaultReduxFormButton
             isValidForm={isValidForm}
             handleSubmit={handleSubmit}>
           Sign In
-        </AuthenticationButton>
+        </DefaultReduxFormButton>
       </div>
     </div>
   </>
