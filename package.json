@@ -4,5 +4,12 @@
   "main": "index.js",
   "repository": "git@github.com:JARVIS-VOVA/infumable-english.git",
   "author": "JARVIS-VOVA",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec babel-node server.js",
+    "start:server": "nodemon --exec babel-node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0"
+  }
 }
