@@ -22,7 +22,7 @@ class SignUp extends Component {
     return (
       <SignUpComponent
           isValidForm={valid}
-          handleSubmit={this.handleSubmit} />
+          onSubmit={this.handleSubmit} />
     )
   }
 }

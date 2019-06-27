@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import './styles.scss'
 
-const AuthenticationButton = ({ isValidForm, handleSubmit, children }) => (
+const AuthenticationButton = ({ isValidForm, onSubmit, children }) => (
   <button
       disabled={!isValidForm}
       className={isValidForm ? 'valid' : 'invalid'}
-      onClick={handleSubmit}
+      onClick={onSubmit}
   >
     {children}
   </button>
@@ -15,7 +15,7 @@ const AuthenticationButton = ({ isValidForm, handleSubmit, children }) => (
 
 AuthenticationButton.propTypes = {
   isValidForm: PropTypes.bool.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired
 }
 

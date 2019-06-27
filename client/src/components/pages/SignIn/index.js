@@ -6,7 +6,7 @@ import SignInForm from '../SignInForm'
 
 import './styles.scss'
 
-const SignIn = ({ isValidForm, handleSubmit }) => (
+const SignIn = ({ isValidForm, onSubmit }) => (
   <>
     <h1 className='title'>Sign In</h1>
 
@@ -18,7 +18,7 @@ const SignIn = ({ isValidForm, handleSubmit }) => (
       <div className='button'>
         <DefaultReduxFormButton
             isValidForm={isValidForm}
-            handleSubmit={handleSubmit}>
+            handleSubmit={onSubmit}>
           Sign In
         </DefaultReduxFormButton>
       </div>

@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
 
+import { resourceCreateRequest } from '../store/word/actions'
 import router from '../config/createRouter'
-import { resourceCreateRequest } from '../store/session/actions'
-import SignInComponent from '../components/pages/SignIn'
+import WordNewComponent from '../components/pages/WordNew'
 
-class SignIn extends Component {
+class WordNew extends Component {
   handleSubmit = () => {
-    const { createSession, signInForm } = this.props
+    const { createWord, wordForm } = this.props
 
-    createSession(signInForm.values)
+    createWord(wordForm.values)
       .then(() => router.navigate('word'))
   }
 
@@ -20,7 +20,7 @@ class SignIn extends Component {
     const { valid } = this.props
 
     return (
-      <SignInComponent
+      <WordNewComponent
           isValidForm={valid}
           onSubmit={this.handleSubmit} />
     )
@@ -28,23 +28,21 @@ class SignIn extends Component {
 }
 
 const mapStateToProps = state => ({
-  isCreating: state.session.isCreating,
-  signInForm: state.form.signIn
+  isCreating: state.word.isCreating,
+  wordForm: state.form.word
 })
 
 const mapDispatchToProps = dispatch => ({
-  createSession: data => dispatch(resourceCreateRequest({ data }))
+  createWord: data => dispatch(resourceCreateRequest({ data }))
 })
 
-SignIn.propTypes = {
+WordNew.propTypes = {
   isCreating: PropTypes.bool.isRequired,
-  signInForm: PropTypes.object,
+  wordForm: PropTypes.object,
   valid: PropTypes.bool.isRequired
 }
 
-// TODO: Remove initialValues
-
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  reduxForm({ form: 'signIn', initialValues: { email: 'example3@gmail.com', password: 'password' } })
-)(SignIn)
+  reduxForm({ form: 'word' })
+)(WordNew)

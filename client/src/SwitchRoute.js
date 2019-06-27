@@ -9,6 +9,7 @@ import NotFound from './components/pages/NotFound'
 import SignIn from './containers/SignIn'
 import SignUp from './containers/SignUp'
 import Word from './containers/Word'
+import WordNew from './containers/WordNew'
 
 const SwitchRoute = ({ route, currentUser }) => {
   const topRouteName = route.name.split('.')[0]
@@ -18,6 +19,7 @@ const SwitchRoute = ({ route, currentUser }) => {
     if (topRouteName === 'signUp') return <SignUp />
   } else {
     if (topRouteName === 'word') return <Word />
+    if (topRouteName === 'wordNew') return <WordNew />
 
     if (topRouteName === 'logout') return <Logout />
   }
