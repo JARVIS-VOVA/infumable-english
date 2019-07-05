@@ -9,7 +9,8 @@
     "start": "",
     "server": "nodemon --exec babel-node server.js",
     "client": "webpack-dev-server --config ./config/webpack/dev.js --open",
-    "build": "webpack --config ./config/webpack/build.js"
+    "build": "webpack --config ./config/webpack/build.js",
+    "reinstall": "rm -rf ./node_modules && rm -rf ./yarn.lock && yarn install"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
