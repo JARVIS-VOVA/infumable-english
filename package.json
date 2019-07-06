@@ -25,7 +25,14 @@
     "path": "^0.12.7",
     "pg": "^7.11.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router5": "6.0.1",
+    "redux": "^4.0.1",
+    "redux-form": "^8.2.4",
+    "redux-logger": "^3.0.6",
+    "redux-router5": "5.5.0",
+    "router5": "6.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
