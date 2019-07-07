@@ -20,6 +20,11 @@ nav {
       cursor: pointer;
     }
 
+    .left {
+      flex-grow: 1;
+      margin-left: 50px;
+    }
+
     .left > *, .right > * {
       padding: 10px;
       display: inline-block;
