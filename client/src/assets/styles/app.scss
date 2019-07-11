@@ -1,5 +1,9 @@
 @import "./colors.scss";
 
+a {
+  text-decoration: none;
+}
+
 h1 {
   color: $CURIOUS_BLUE;
   text-align: center;
