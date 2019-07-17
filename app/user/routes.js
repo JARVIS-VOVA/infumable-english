@@ -10,16 +10,16 @@ function isValidId(req, res, next) {
 }
 
 function validUser(user) {
-  const hasLogin = typeof user.login == 'string' && user.login.trim() != '';
-  const hasPassword = typeof user.password == 'string' && user.password.trim() != '';
+  const hasLogin = typeof user.login == 'string' && user.login.trim() != ''
+  const hasPassword = typeof user.password == 'string' && user.password.trim() != ''
   return hasLogin && hasPassword
 }
 
 function validUserUpdate(user) {
-  const hasLogin = user.login ? typeof user.login == 'string' && user.login.trim() != '' : true;
+  const hasLogin = user.login ? typeof user.login == 'string' && user.login.trim() != '' : true
   const hasPassword = user.password
     ? typeof user.password == 'string' && user.password.trim() != ''
-    : true;
+    : true
   return hasLogin && hasPassword
 }
 

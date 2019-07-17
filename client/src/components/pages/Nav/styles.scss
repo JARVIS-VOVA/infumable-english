@@ -1,0 +1,69 @@
+@import "../../../assets/styles/colors";
+
+nav {
+  a {
+    color: $CURIOUS_BLUE;
+
+    &.active {
+      color: $WEB_ORANGE;
+    }
+  }
+
+  .top-menu {
+    background-color: $SEASHELL;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    *:hover {
+      cursor: pointer;
+    }
+
+    .left {
+      flex-grow: 1;
+      margin-left: 50px;
+    }
+
+    .left > *, .right > * {
+      padding: 10px;
+      display: inline-block;
+      text-align: center;
+      min-width: 50px;
+    }
+
+    .top-menu-icon {
+      position: absolute;
+      top: 41px;
+      right: 20px;
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .top-menu {
+      .left, .right {
+        display: none;
+      }
+    }
+
+    .top-menu-icon {
+      display: block !important;
+    }
+
+    .top-menu.toggled {
+      max-height: 1500px;
+      transition: max-height 1s;
+      display: block;
+
+      .left {
+        border-bottom: 1px solid $BLACK;
+      }
+
+      *:not(.top-menu-lead):not(.top-menu-icon) {
+        display: block !important;
+        text-align: left;
+      }
+    }
+  }
+}

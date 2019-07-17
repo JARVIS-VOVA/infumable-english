@@ -25,3 +25,6 @@ DB_DATABASE=database
 ```
 $ npm start
 ```
+
+### Links
+Take names colors for css from http://chir.ag/projects/name-that-color/#FFFFFF
