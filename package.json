@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "nodemon --exec babel-node --presets @babel/preset-env server.js",
     "client": "webpack-dev-server --config ./config/webpack/dev.js --open",
     "build": "webpack --config ./config/webpack/build.js",
     "reinstall": "rm -rf ./node_modules && rm -rf ./yarn.lock && yarn install"
@@ -18,10 +18,17 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
+    "express-validator": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.17.3",
+    "lodash.isempty": "^4.4.0",
+    "node-cookie": "^2.1.1",
     "path": "^0.12.7",
     "pg": "^7.11.0",
     "react": "^16.8.6",
@@ -32,6 +39,9 @@
     "redux-form": "^8.2.4",
     "redux-logger": "^3.0.6",
     "redux-router5": "5.5.0",
+    "redux-saga": "^1.0.5",
+    "redux-saga-thunk": "^0.7.3",
+    "regenerator-runtime": "^0.13.2",
     "router5": "6.2.1"
   },
   "devDependencies": {
