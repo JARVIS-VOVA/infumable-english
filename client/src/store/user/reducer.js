@@ -6,7 +6,7 @@ const initialState = {
   isCreating: false
 }
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type }) => {
   switch (type) {
     case RESOURCE_CREATE_REQUEST:
       return { ...state, isCreating: true }

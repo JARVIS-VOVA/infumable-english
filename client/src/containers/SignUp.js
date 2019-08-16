@@ -4,11 +4,16 @@ import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
 
+import router from '../config/createRouter'
+import { resourceCreateRequest } from '../store/user/actions'
 import SignUpComponent from '../components/pages/SignUp'
 
 class SignUp extends Component {
   handleSubmit = () => {
-    // TODO: Add create user
+    const { createUser, signUpForm } = this.props
+
+    createUser(signUpForm.values)
+      .then(() => router.navigate('signIn'))
   }
 
   render() {
@@ -28,7 +33,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  createUser: () => { /* Add dispatch createUser */ }
+  createUser: data => dispatch(resourceCreateRequest({ data }))
 })
 
 SignUp.propTypes = {
@@ -37,7 +42,9 @@ SignUp.propTypes = {
   valid: PropTypes.bool.isRequired
 }
 
+// TODO: Remove initialValues
+
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  reduxForm({ form: 'signUp' })
+  reduxForm({ form: 'signUp', initialValues: { email: 'example@gmail.com', login: 'MaryPoppins', password: 'password', passwordConfirmation: 'password' } })
 )(SignUp)
