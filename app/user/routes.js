@@ -1,69 +1,31 @@
 import express from 'express'
+import isEmpty from 'lodash.isempty'
+import { validationResult } from 'express-validator'
 
-import queries from './queries'
+import hashPassword from '../../lib/hashPassword'
+
+import queriesUser from './queries'
+import MESSAGE_I18nt from './messages'
+import { validationCreateRules } from './validations'
 
 const router = express.Router()
 
-function isValidId(req, res, next) {
-  if(!isNaN(req.params.id)) return next()
-  next(new Error('Invalid ID'))
-}
+router.post('/users', validationCreateRules, async (req, res, next) => {
+  const { errors } = validationResult(req)
 
-function validUser(user) {
-  const hasLogin = typeof user.login == 'string' && user.login.trim() != ''
-  const hasPassword = typeof user.password == 'string' && user.password.trim() != ''
-  return hasLogin && hasPassword
-}
+  if (!isEmpty(errors)) return res.status(422).json({ message: errors })
 
-function validUserUpdate(user) {
-  const hasLogin = user.login ? typeof user.login == 'string' && user.login.trim() != '' : true
-  const hasPassword = user.password
-    ? typeof user.password == 'string' && user.password.trim() != ''
-    : true
-  return hasLogin && hasPassword
-}
+  const { email, login, password } = req.body
 
-router.get('/users', (req, res) => {
-  queries.users.index()
-    .then(users => {
-      res.json(users)
-    })
-})
-
-router.get('/users/:id', (req, res) => {
-  queries.users.show(req.params.id)
-    .then(user => {
-      res.json(user)
-    })
-})
-
-router.put('/users/:id', isValidId, (req, res, next) => {
-  if(validUserUpdate(req.body)) {
-    queries.users.update(req.params.id, req.body)
-      .then(users => {
-        res.json(users[0])
-      })
-  } else {
-    next(new Error('Invalid params'))
+  const user = {
+    email,
+    login,
+    password: await hashPassword(password)
   }
-})
 
-router.post('/users', (req, res) => {
-  if(validUser(req.body)) {
-    queries.users.create(req.body)
-      .then(results => {
-        res.send(results[0])
-      })
-  } else {
-    next(new Error('Invalid params'))
-  }
-})
+  await queriesUser.users.create(user)
 
-router.delete('/users/:id', isValidId, (req, res, next) => {
-  queries.users.delete(req.params.id)
-    .then(() => {
-      res.json({ deleted: true })
-    })
+  res.status(201).send({ message: MESSAGE_I18nt.createUser.successfully })
 })
 
 module.exports = router

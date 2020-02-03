@@ -3,9 +3,9 @@ exports.up = function(knex, Promise) {
     t.increments('id').unsigned().primary()
     t.dateTime('createdAt').notNull()
     t.dateTime('updatedAt').nullable()
-    t.dateTime('deletedAt').nullable()
 
-    t.string('login').notNull()
+    t.string('email').unique().notNull()
+    t.string('login').unique().notNull()
     t.string('password').notNull()
   })
 }
