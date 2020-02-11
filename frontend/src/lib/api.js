@@ -1,42 +1,19 @@
-import axios from 'axios'
+import requestManager from './requestManager'
 
 // TODO: Move to .env
-const API_URI = 'http://localhost:3000'
+const PREFIX_API_V1 = '/api/v1'
 
-export const api = (resource, method, data) => {
-  axios.defaults.withCredentials = true
+export default {
+  Session: {
+    create: (params) => requestManager.post(PREFIX_API_V1 + '/sessions', params),
+    destroy:      () => requestManager.delete(PREFIX_API_V1 + '/sessions')
+  },
 
-  const url = `${API_URI}/${resource}`
-  const headers = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  }
+  User: {
+    create: (params) => requestManager.post(PREFIX_API_V1 + '/users', params),
+  },
 
-  const options = {
-    method,
-    headers,
-    url,
-    credentials: 'include'
-  }
-
-  if(method.toUpperCase() == 'POST') {
-    options.data = JSON.stringify(data)
-  }
-
-  return (
-    axios(options)
-      .then(response => checkStatus(response))
-      .catch(error => { console.log('Eroor:', error.response) })
-  )
-}
-
-const checkStatus = response => {
-  const { status, data } = response
-
-  const responseData = {
-    status,
-    data
-  }
-
-  return responseData
-}
+  CurrentUser: {
+    show: () => requestManager.get(PREFIX_API_V1 + '/current_user'),
+  },
+};

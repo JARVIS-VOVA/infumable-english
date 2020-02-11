@@ -1,26 +1,23 @@
-import {
-  DEFAULT_RESOURCE,
-  RESOURCE_CREATE_REQUEST, RESOURCE_CREATE_SUCCESS, RESOURCE_CREATE_FAILURE
-} from './constants'
+import USER from './constants'
 
-export const resourceCreateRequest = ({ resource=DEFAULT_RESOURCE, data }) => ({
-  type: RESOURCE_CREATE_REQUEST,
-  payload: data,
-  resource,
-  meta: {
-    thunk: true
-  }
-})
+export default {
+  createRequest: (payload) => ({
+    type: USER.CREATE_REQUEST,
+    payload,
+    meta: {
+      thunk: true
+    }
+  }),
 
-export const resourceCreateSuccess = (resource, meta) => ({
-  type: RESOURCE_CREATE_SUCCESS,
-  resource,
-  meta
-})
+  createSuccess: (payload, meta) => ({
+    type: USER.CREATE_SUCCESS,
+    payload,
+    meta
+  }),
 
-export const resourceCreateFailure = (resource, error, meta) => ({
-  type: RESOURCE_CREATE_FAILURE,
-  payload: error,
-  resource,
-  meta
-})
+  createFailure: (error, meta) => ({
+    type: USER.CREATE_FAILURE,
+    error,
+    meta
+  }),
+}

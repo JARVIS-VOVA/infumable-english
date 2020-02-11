@@ -1,4 +1,9 @@
-node_modules/
+frontend/dist/
+frontend/node_modules/
+frontend/yarn-error.log
+frontend/.env
+
+backend/node_modules/
+backend/.env
+
 *.swp
-yarn-error.log
-config/.env

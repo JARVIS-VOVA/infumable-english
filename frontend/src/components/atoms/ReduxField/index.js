@@ -1,38 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.scss'
+// import './styles.scss'
+import WrapperField from './styled'
 
-const ReduxField = ({ input, label, type, options = [], meta: { touched, error } }) => {
+const FieldForm = ({ input, placeholder, options = [], meta: { touched, error } }) => {
   const isValid = () => touched && error
   const switchBorder = () => isValid() ? 'validation-border-error' : 'validation-border-success'
   const errorMessage = () => isValid() && <span className='text-error'>{error}</span>
 
   return (
-    <div className='wrapper-field'>
+    <WrapperField>
       <input
           {...input}
           className={`input ${switchBorder()}`}
-          placeholder={label}
-          type={type} />
+          placeholder={placeholder} />
 
       <div className='view-error'>
         {errorMessage()}
       </div>
-    </div>
+    </WrapperField>
   )
 }
 
-ReduxField.propTypes = {
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+FieldForm.propTypes = {
+  placeholder: PropTypes.string.isRequired,
   options: PropTypes.array,
   input: PropTypes.shape({
     onChange: PropTypes.func.isRequired,
     onFocus: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
   }).isRequired,
   meta: PropTypes.shape({
     touched: PropTypes.bool.isRequired,
@@ -40,4 +40,4 @@ ReduxField.propTypes = {
   }).isRequired
 }
 
-export default ReduxField
+export default FieldForm

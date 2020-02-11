@@ -1,27 +1,20 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
 
-import { api } from '../../lib/api'
+import Api from '../../lib/api'
 
-import * as actions from './actions'
-
-import {
-  RESOURCE_CREATE_REQUEST
-} from './constants'
+import userActions from './actions'
+import USER from './constants'
 
 export default function* watcherSaga() {
-  yield takeLatest(RESOURCE_CREATE_REQUEST, watchResourceCreateRequest)
+  yield takeLatest(USER.CREATE_REQUEST, watchCreateRequest)
 }
 
-function* watchResourceCreateRequest({ payload, resource, meta }) {
+function* watchCreateRequest({ payload, meta }) {
   try {
-    const response = yield call(createResource, resource, payload)
+    const response = yield call(Api.User.create, payload)
 
-    yield put(actions.resourceCreateSuccess(resource, meta))
+    yield put(userActions.createSuccess(response.data, meta))
   } catch (error) {
-    yield put(actions.resourceCreateFailure(resource, error, meta))
+    yield put(userActions.createFailure(error.response, meta))
   }
-}
-
-function* createResource(resource, data) {
-  return yield call(api, resource, 'POST', data)
 }

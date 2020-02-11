@@ -1,14 +1,18 @@
 import React from 'react'
 
-import { notFound } from '../../../assets/img'
+import BaseTemplate from 'Templates/Base'
+import Header from 'Containers/Header'
+import NotFound from 'Organisms/NotFound'
+import Footer from 'Organisms/Footer'
 
-import './styles.scss'
-
-const NotFound = () => (
-  <div id='not-found'>
-    <h1 className='title'>404</h1>
-    <img src={notFound} />
-  </div>
+const NotFoundPage = () => (
+  <BaseTemplate
+    footer={<Footer />}
+    header={<Header />}
+    title='404'
+  >
+    <NotFound />
+  </BaseTemplate>
 )
 
-export default NotFound
+export default NotFoundPage

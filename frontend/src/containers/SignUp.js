@@ -1,50 +1,37 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
 
 import router from '../config/createRouter'
-import { resourceCreateRequest } from '../store/user/actions'
-import SignUpComponent from '../components/pages/SignUp'
+// import { resourceCreateRequest } from 'Store/user/actions'
+import SignUpComponent from 'Organisms/SignUp'
+import { userActions } from 'Store/actions'
 
-class SignUp extends Component {
-  handleSubmit = () => {
-    const { createUser, signUpForm } = this.props
-
-    createUser(signUpForm.values)
-      .then(() => router.navigate('signIn'))
+const SignUp = ({ createUser }) => {
+  const onSubmit = data => {
+    createUser(data)
+      .then(() => console.log('!!!!!!'))
+      .then(() => console.log('!!!!!!', data))
+      .then(() => console.log('!!!!!!'))
+      // .then(() => router.navigate('signIn'))
   }
 
-  render() {
-    const { valid } = this.props
-
-    return (
-      <SignUpComponent
-          isValidForm={valid}
-          handleSubmit={this.handleSubmit} />
-    )
-  }
+  return <SignUpComponent handleSubmit={onSubmit} />
 }
 
 const mapStateToProps = state => ({
   isCreating: state.user.isCreating,
-  signUpForm: state.form.signUp
 })
 
 const mapDispatchToProps = dispatch => ({
-  createUser: data => dispatch(resourceCreateRequest({ data }))
+  createUser: data => dispatch(userActions.createRequest(data)),
 })
 
 SignUp.propTypes = {
   isCreating: PropTypes.bool.isRequired,
-  signUpForm: PropTypes.object,
-  valid: PropTypes.bool.isRequired
 }
-
-// TODO: Remove initialValues
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  reduxForm({ form: 'signUp', initialValues: { email: 'example@gmail.com', login: 'MaryPoppins', password: 'password', passwordConfirmation: 'password' } })
 )(SignUp)

@@ -1,7 +1,18 @@
 import React from 'react'
 
-const Home = () => (
-  <h1 className='title'>WELCOME!</h1>
+import BaseTemplate from 'Templates/Base'
+import Header from 'Containers/Header'
+import Home from 'Organisms/Home'
+import Footer from 'Organisms/Footer'
+
+const HomePage = () => (
+  <BaseTemplate
+    footer={<Footer />}
+    header={<Header />}
+    title='WELCOME!'
+  >
+    <Home />
+  </BaseTemplate>
 )
 
-export default Home
+export default HomePage

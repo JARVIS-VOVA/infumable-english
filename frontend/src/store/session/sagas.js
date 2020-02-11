@@ -1,62 +1,32 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
 
-import { api } from '../../lib/api'
-
-import * as actions from './actions'
+import Api from '../../lib/api'
 import { resourceChangeStatus } from '../loader/actions'
 
-import {
-  RESOURCE_CREATE_REQUEST, RESOURCE_GET_REQUEST, RESOURCE_DELETE_REQUEST
-} from './constants'
+import sessionActions from './actions'
+import SESSION from './constants'
 
 export default function* watcherSaga() {
-  yield takeLatest(RESOURCE_CREATE_REQUEST, watchResourceCreateRequest)
-  yield takeLatest(RESOURCE_GET_REQUEST, watchResourceGetRequest)
-  yield takeLatest(RESOURCE_DELETE_REQUEST, watchResourceDeleteRequest)
+  yield takeLatest(SESSION.CREATE_REQUEST, watchCreateRequest)
+  yield takeLatest(SESSION.DELETE_REQUEST, watchDeleteRequest)
 }
 
-function* watchResourceCreateRequest({ payload, resource, meta }) {
+function* watchCreateRequest({ payload, meta }) {
   try {
-    const response = yield call(createResource, resource, payload)
+    const response = yield call(Api.Session.create, payload)
 
-    yield put(actions.resourceCreateSuccess(resource, response, meta))
+    yield put(sessionActions.createSuccess(response.data, meta))
   } catch (error) {
-    yield put(actions.resourceCreateFailure(resource, error, meta))
+    yield put(sessionActions.createFailure({}, error.response, meta))
   }
 }
 
-function* createResource(resource, data) {
-  return yield call(api, resource, 'POST', data)
-}
-
-function* watchResourceGetRequest({ resource }) {
+function* watchDeleteRequest({ payload, meta }) {
   try {
-    yield put(resourceChangeStatus({ status: true }))
+    const response = yield call(Api.Session.destroy)
 
-    const response = yield call(getResource, resource)
-    yield put(actions.resourceGetSuccess(resource, response.data))
-
-    yield put(resourceChangeStatus({ status: false }))
+    yield put(sessionActions.deleteSuccess(payload, meta))
   } catch (error) {
-    yield put(resourceChangeStatus({ status: false }))
-    yield put(actions.resourceGetFailure(resource, error))
+    yield put(sessionActions.deleteFailure(payload, meta))
   }
-}
-
-function* getResource(resource) {
-  return yield call(api, resource, 'GET')
-}
-
-function* watchResourceDeleteRequest({ resource, meta }) {
-  try {
-    const response = yield call(deleteResource, resource)
-
-    yield put(actions.resourceDeleteSuccess(resource, meta))
-  } catch (error) {
-    yield put(actions.resourceDeleteFailure(resource, meta))
-  }
-}
-
-function* deleteResource(resource) {
-  return yield call(api, resource, 'DELETE')
 }

@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.scss'
+import StyledAuthenticationButton from './styled'
 
-const AuthenticationButton = ({ isValidForm, handleSubmit, children }) => (
-  <button
-      disabled={!isValidForm}
-      className={isValidForm ? 'valid' : 'invalid'}
+const AuthenticationButton = ({ disabled, handleSubmit, children }) => (
+  <StyledAuthenticationButton
+      disabled={disabled}
+      className={disabled ? 'invalid' : 'valid'}
       onClick={handleSubmit}
   >
     {children}
-  </button>
+  </StyledAuthenticationButton>
 )
 
 AuthenticationButton.propTypes = {
-  isValidForm: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired
 }
