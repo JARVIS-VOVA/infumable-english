@@ -1,0 +1,21 @@
+import styled from 'styled-components'
+import { TURQUOISE, NEPAL, WHITE } from 'Constants/colors'
+
+const AuthenticationButton = styled.button`
+  width: 250px;
+  height: 50px;
+  border-radius: 10px;
+  color: ${WHITE};
+  font-weight: 600;
+  font-size: 22px;
+
+  &.valid {
+    background-color: ${TURQUOISE};
+  }
+
+  &.invalid {
+    background-color: ${NEPAL};
+  }
+`
+
+export default AuthenticationButton

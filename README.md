@@ -1,5 +1,6 @@
-Q
 # Infumable English
+
+[![CircleCI](https://circleci.com/gh//tree/master.svg?style=svg)](https://circleci.com//tree/master)
 
 > **Node**: 8.16.0
 > **PostgreSQL**: 7.11.0
@@ -10,22 +11,26 @@ Infumavle Englist is easy program for quick study english words
 
 ### Setup
 ```
-$ yarn install
+  git clone git@github.com:JARVIS-VOVA/infumable-english.git && cd infumable-english
 ```
 
-### Set keys to config/.env (show example config/.env.example)
+### Set keys to backend and frontend .env (show example .env.example in backend and frontend folders)
 ```
-// DB
-DB_HOST=localhost
-DB_USER=user
-DB_PASS=password
-DB_DATABASE=database
+  cp backend/.env.example backend/.env && cp frontend/.env.example frontend/.env
 ```
 
-### Start project
+### Build and run containers
 ```
-$ npm start
+ docker-compose up --build
 ```
 
-### Links
+## Testing
+```
+```
+
+## Deploy
+```
+```
+
+## Links
 Take names colors for css from http://chir.ag/projects/name-that-color/#FFFFFF
