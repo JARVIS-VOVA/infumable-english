@@ -32,5 +32,5 @@ Infumavle Englist is easy program for quick study english words
 ```
 ```
 
-## Links
-Take names colors for css from http://chir.ag/projects/name-that-color/#FFFFFF
+## Additional links
+Take names colors for css from http://chir.ag/projects/name-that-color
