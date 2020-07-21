@@ -1,4 +1,4 @@
-const { PREFIX_API_V1 } = process.env
+const PREFIX_API_V1 = '/api/v1'
 
 const ROUTES = {
   USERS: PREFIX_API_V1 + '/users',

@@ -1,23 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import LoaderComponent from '../components/pages/Loader'
+import LoaderComponent from 'Organisms/Loader'
 
-class Loader extends Component {
-  render() {
-    const { loader } = this.props
+const Loader = () => {
+  const { status } = useSelector(state => state.loader)
 
-    return <LoaderComponent loader={loader} />
-  }
+  return <LoaderComponent isLoading={status} />
 }
 
-const mapStateToProps = state => ({
-  loader: state.loader.status
-})
+// TODO: propTypes for useSelector
 
 Loader.propTypes = {
-  loader: PropTypes.bool.isRequired
+  // loader: PropTypes.bool.isRequired
 }
 
-export default connect(mapStateToProps)(Loader)
+export default Loader

@@ -1,16 +1,22 @@
 import React from 'react'
 
-// import './styles.scss'
+import StyledLoader from './styled'
 
-const Loader = ({ loader }) => {
-  if (!loader) return null
+const Loader = ({ isLoading }) => {
+  const renderChildren = () => {
+    if (!isLoading) return null
 
-  return (
-    <div id='loader'>
+    return (
       <div className='ease'>
         <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
       </div>
-    </div>
+    )
+  }
+
+  return (
+    <StyledLoader>
+      {renderChildren()}
+    </StyledLoader>
   )
 }
 

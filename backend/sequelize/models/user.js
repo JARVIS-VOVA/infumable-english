@@ -21,15 +21,16 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (user) => {
         const salt = bcrypt.genSaltSync();
+
         user.password = bcrypt.hashSync(user.password, salt)
       }
     }
   })
 
-  User.associate = function(models) {
-  }
+  // User.associate = function(models) {
+  // }
 
-  User.prototype.validPassword = function (password) { 
+  User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password)
   }
 

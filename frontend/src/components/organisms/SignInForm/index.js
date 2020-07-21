@@ -5,7 +5,7 @@ import { Form, Field } from 'react-final-form'
 import { AuthenticationButton, ReduxField, FormByCenter } from 'Atoms'
 import { composeValidators, required, email, minLengthPassword } from 'Validations/fieldLevelValidation'
 
-const SignInForm = ({ handleSubmit }) => {
+const SignInForm = ({ handleSubmit, isCreating }) => {
   // TODO: Remove initialValues
 
   return (
@@ -30,8 +30,10 @@ const SignInForm = ({ handleSubmit }) => {
 
           <div className='button'>
             <AuthenticationButton
-                disabled={invalid}
-                handleSubmit={handleSubmit}>
+              disabled={invalid}
+              handleSubmit={handleSubmit}
+              isLoading={isCreating}
+            >
               Sign In
             </AuthenticationButton>
           </div>
@@ -43,6 +45,7 @@ const SignInForm = ({ handleSubmit }) => {
 
 SignInForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  isCreating: PropTypes.bool.isRequired,
 }
 
 export default SignInForm

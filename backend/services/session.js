@@ -6,9 +6,18 @@ const SessionService = {
   async create(req, res) {
     const { body } = req
 
+    console.log('!!!!!!!1')
+    console.log('!!!!!!!1')
+    console.log('!!!!!!!1')
+    console.log('!!!!!!!1')
     const user = await UserModel.findOne({
       where: { login: body.login }
     })
+    console.log('!!!!!!!2')
+    console.log('!!!!!!!2')
+    console.log('!!!!!!!2')
+    console.log('!!!!!!!2')
+    console.log('!!!!!!!2')
 
     if (user && user.validPassword(body.password)) {
       const token = crypt.encrypt(user.id.toString())

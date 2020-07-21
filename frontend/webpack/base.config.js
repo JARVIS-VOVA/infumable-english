@@ -19,7 +19,6 @@ module.exports = {
       Constants: `${PATHS.src}/constants/`,
       Validations: `${PATHS.src}/lib/validations/`,
       Store: `${PATHS.src}/store/`,
-
       Pages: `${PATHS.src}/components/pages/`,
       Templates: `${PATHS.src}/components/templates/`,
       Containers: `${PATHS.src}/containers/`,

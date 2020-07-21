@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Loader from 'Containers/Loader'
+
 import { Wrapper, Header, Main, Title, Content, Footer } from './styled'
 
-      // {header}
 const PageTemplate = ({ header, footer, children, title }) => {
   return (
     <Wrapper>
       <Header>{header}</Header>
+      <Loader />
       <Main>
         <Title>{title}</Title>
         <Content>{children}</Content>

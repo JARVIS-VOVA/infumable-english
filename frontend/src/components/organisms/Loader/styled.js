@@ -1,7 +1,10 @@
-@import "../../../assets/styles/colors";
+import styled from 'styled-components'
 
-#loader {
-  padding: 10px;
+import { CURIOUS_BLUE, SEASHELL } from 'Constants/colors'
+
+export default styled.div`
+  padding: 5px;
+  background-color: ${SEASHELL};
 
   div {
     position: relative;
@@ -15,7 +18,7 @@
     left: 0;
     bottom: 0;
     border-radius: 50%;
-    background: $CURIOUS_BLUE;
+    background: ${CURIOUS_BLUE};
     animation: move 3s infinite;
   }
 
@@ -42,4 +45,4 @@
   i:nth-child(8) { animation-delay: .7s; }
   i:nth-child(9) { animation-delay: .8s; }
   i:nth-child(10){ animation-delay: .9s; }
-}
+`

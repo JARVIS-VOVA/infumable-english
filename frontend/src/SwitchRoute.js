@@ -6,7 +6,8 @@ import { Link, Route, Switch, Redirect } from 'react-router-dom'
 import Home from 'Components/pages/Home'
 import SignIn from 'Pages/SignIn'
 import SignUp from 'Pages/SignUp'
-// import Loader from 'Containers/Loader'
+import Police from 'Pages/Police'
+
 // import Messages from './Messages'
 import NotFound from 'Components/pages/NotFound'
 // import Logout from 'Containers/Logout'
@@ -29,7 +30,6 @@ const App = ({ getCurrentUser, currentUser, error, anythingWasRejected }) => {
       // console.log('error', error)
   }, [])
 
-  // <Loader />
 
   return (
     <>
@@ -41,8 +41,9 @@ const App = ({ getCurrentUser, currentUser, error, anythingWasRejected }) => {
         <PublicRouter path={ROUTES.SIGN_IN} component={SignIn} />
         <PublicRouter path={ROUTES.SIGN_UP} component={SignUp} />
 
-        <Route exact path='/' component={Home} />
+        <Route exact path={ROUTES.ROOT} component={Home} />
         <Route path={ROUTES.HOME} component={Home} />
+        <Route path={ROUTES.POLICE} component={Police} />
 
         <Route path={ROUTES.NOT_FOUND} component={NotFound} />
         <Redirect to={ROUTES.NOT_FOUND} />

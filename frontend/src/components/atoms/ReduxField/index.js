@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import './styles.scss'
 import WrapperField from './styled'
 
 const FieldForm = ({ input, placeholder, options = [], meta: { touched, error } }) => {
