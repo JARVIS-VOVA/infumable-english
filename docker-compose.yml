@@ -9,36 +9,35 @@ services:
       - ./tmp/db:/var/lib/postgresql/data:rw
     ports:
       - '5432:5432'
-    environment:
-      POSTGRES_DB: infumable_english_development
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+    env_file: .env/development/db
 
-  backend:
-    container_name: backend
+  api:
+    container_name: api
     build:
-      context: ./backend
-      dockerfile: ./Dockerfile
+      context: ./api
+      dockerfile: $PWD/docker/development/api
     volumes:
-      - ./backend:/usr/apps/infumable-english/backend
-      - /usr/apps/infumable-english/backend/node_modules
+      - ./api:/apps/infumable-english/api
+      - /apps/infumable-english/api/node_modules
     ports:
       - '3000:3000'
-    env_file: ./backend/.env
+    env_file:
+      - .env/development/api
+      - .env/development/db
     depends_on:
       - db
 
-  frontend:
-    container_name: frontend
+  web:
+    container_name: web
     build:
-      context: ./frontend
-      dockerfile: ./Dockerfile
+      context: ./web
+      dockerfile: $PWD/docker/development/web
     volumes:
-      - ./frontend:/usr/apps/infumable-english/frontend
-      - /usr/apps/infumable-english/frontend/node_modules
+      - ./web:/apps/infumable-english/web
+      - /apps/infumable-english/web/node_modules
     ports:
       - '4000:4000'
-    # environment: 
+    # environment:
     #   env_file: ./frontend/.env
     depends_on:
-      - backend
+      - api

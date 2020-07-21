@@ -1,0 +1,14 @@
+FROM node:latest
+
+WORKDIR /apps/infumable-english/web
+
+COPY package.json .
+COPY yarn.lock .
+
+RUN yarn install
+
+COPY . .
+
+EXPOSE 4000
+
+CMD ["yarn", "run", "start"]
