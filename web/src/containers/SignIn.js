@@ -40,14 +40,10 @@ import { sessionActions } from 'Store/actions'
 
 const SignIn = ({ error }) => {
   const dispatch = useDispatch();
+  const history = useHistory()
   const { isCreating } = useSelector(state => state.session)
 
   console.log('isCreating', isCreating)
-  // const handleClick = () => {
-  //   let history = useHistory()
-
-  //   history.push("/home")
-  // }
 
   const createSession = data => dispatch(sessionActions.createRequest(data))
 
@@ -58,6 +54,7 @@ const SignIn = ({ error }) => {
       // .then(() => handleClick())   // router.navigate('word')
       .then(response => {
         console.log('Success sign in. Response: ', response)
+        history.push('/')
       })
       // .rejected(error => console.log('Error: ', error))
   }
