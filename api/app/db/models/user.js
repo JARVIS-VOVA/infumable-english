@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('../../helpers/bcrypt')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -19,10 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     hooks: {
-      beforeCreate: (user) => {
-        const salt = bcrypt.genSaltSync()
-
-        user.password = bcrypt.hashSync(user.password, salt)
+      beforeCreate: user => {
+        user.password = bcrypt.hashSync(user.password)
       }
     }
   })
@@ -31,9 +29,6 @@ module.exports = (sequelize, DataTypes) => {
   // }
 
   User.prototype.validPassword = function (password) {
-    // TODO:
-    console.log('this.', this)
-    return password == this.password
     return bcrypt.compareSync(password, this.password)
   }
 

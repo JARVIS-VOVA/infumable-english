@@ -11,26 +11,16 @@ module.exports = app => {
 
   app.post(ROUTES.USERS, async (req, res) => {
     const userParams = req.body
-    const { status, data } = await UserService.create(userParams)
+    const { status, data, error } = await UserService.create(userParams)
 
-    res.status(status).json(data)
+    res.status(status).json(data || error)
   }),
 
   app.get(ROUTES.USERS, middlewares.attachCurrentUser, async (req, res) => {
-    console.log('!!!!!!!!!', req.currentUser)
-    console.log('!!!!!!!!!', req.currentUser)
-    console.log('!!!!!!!!!', req.currentUser)
     const { status, data } = await UserService.show()
 
     res.status(status).json(data)
   })
-
-
-  // app.get(ROUTES.SESSIONS, async (req, res) => {
-  //   const { status, data } = await SessionService.get(req, res)
-
-  //   res.status(status).json(data)
-  // })
 }
 
 

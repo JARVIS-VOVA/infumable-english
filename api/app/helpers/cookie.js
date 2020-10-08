@@ -1,4 +1,4 @@
-const EXPIRATION_ONE_HOUR = require('../constants/expirationOneHour')
+const EXPIRATION_ONE_HOUR = require('../../constants/expirationOneHour')
 
 async function set(res, key, value) {
   const expires = new Date(new Date().getTime() + EXPIRATION_ONE_HOUR)

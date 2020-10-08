@@ -11,7 +11,7 @@ const SignInForm = ({ handleSubmit, isCreating }) => {
   return (
     <Form
       onSubmit={handleSubmit}
-      initialValues={{ login: 'MaryPoppins', password: 'password' }}
+      initialValues={{ login: 'Mary Poppins', password: 'password' }}
       render={({ handleSubmit, form, submitting, pristine, values, invalid }) => (
         <FormByCenter onSubmit={handleSubmit}>
           <Field

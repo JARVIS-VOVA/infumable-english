@@ -1,6 +1,6 @@
+const { SUCCESS, ERROR  } = require('../constants/colorsForConsole')
 const expressLoader = require('./express')
 const sequelizeConnect = require('./sequelize')
-const { SUCCESS, ERROR  } = require('../constants/colorsForConsole')
 
 const loaders = async ({ expressApp }) => {
   await sequelizeConnect()

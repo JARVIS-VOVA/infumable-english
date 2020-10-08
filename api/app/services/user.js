@@ -1,5 +1,5 @@
 const crypt = require('../helpers/crypt')
-const UserModel = require('../sequelize/models').User
+const UserModel = require('../db/models').User
 
 // TODO: Add email confirmation
 

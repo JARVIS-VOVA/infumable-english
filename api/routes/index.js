@@ -1,15 +1,16 @@
 const { Router } = require('express')
 
-const session = require('./api/v1/session')
-const user = require('./api/v1/user')
-const currentUser = require('./api/v1/currentUser')
+const middlewares = require('../app/middlewares')
+const controllers = require('../app/controllers')
+const ROUTES = require('../constants/routes')
 
-const app = Router()
+const router = new Router()
 
-module.exports = () => {
-  session(app)
-  user(app)
-  currentUser(app)
+router.post(ROUTES.SESSIONS, controllers.sessions.create)
 
-  return app
-}
+router.get(ROUTES.USERS, controllers.users.index)
+router.post(ROUTES.USERS, controllers.users.create)
+
+router.get(ROUTES.CURRENT_USER, middlewares.attachCurrentUser, controllers.currentUser.show)
+
+module.exports = router

@@ -7,7 +7,7 @@ const Sequelize = require('sequelize')
 const { ENV } = process.env
 
 const basename = path.basename(__filename)
-const config = require('../../config/db.config')[ENV]
+const config = require('../../../config/db.config')[ENV]
 
 const db = {}
 const sequelize = new Sequelize(config.database, config.username, config.password, config)

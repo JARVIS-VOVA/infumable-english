@@ -1,6 +1,6 @@
-const { ERROR } = require('../constants/colorsForConsole')
+const { ERROR } = require('../../constants/colorsForConsole')
 const crypt = require('../helpers/crypt')
-const UserModel = require('../sequelize/models').User
+const UserModel = require('../db/models').User
 
 module.exports = async (req, res, next) => {
   const { token } = req.cookies
@@ -8,7 +8,6 @@ module.exports = async (req, res, next) => {
   if (token) {
     const id = crypt.decrypt(token)
     const currentUser = await UserModel.findOne({ where: { id } })
-    // console.log('currentUser: ', currentUser.validPassword('password'))
 
     if (currentUser) {
       req.currentUser = currentUser
@@ -19,7 +18,6 @@ module.exports = async (req, res, next) => {
 
   console.log(ERROR, '🔥 Error attaching user to req')
   // new Error('Error attaching user to req')
-  // next()
 
   return res.status(422).json({ error: 'Error attaching user to req' })
 }

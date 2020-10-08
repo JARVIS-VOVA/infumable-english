@@ -10,7 +10,7 @@ import { composeValidators, required, email, minLengthPassword, passwordsMatch }
 const SignUpForm = ({ handleSubmit }) => (
   <Form
     onSubmit={handleSubmit}
-    initialValues={{ email: 'example@gmail.com', login: 'MaryPoppins', password: 'password', passwordConfirmation: 'password' }}
+    initialValues={{ email: 'example@gmail.com', login: 'Mary Poppins', password: 'password', passwordConfirmation: 'password' }}
     render={({ handleSubmit, form, submitting, pristine, values, invalid }) => (
       <FormByCenter onSubmit={handleSubmit}>
         <Field
