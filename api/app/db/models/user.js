@@ -4,9 +4,18 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
-      unique: true,
+      // unique: true,
       isEmail: true,
-      allowNull: false
+      allowNull: false,
+
+      validate: {
+        isEmail: true,
+        // unique: true,
+        unique: {
+          args: true,
+          message: 'Email address already in use!'
+        },
+      },
     },
     login: {
       type: DataTypes.STRING,
