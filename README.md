@@ -2,9 +2,6 @@
 
 [![CircleCI](https://circleci.com/gh//tree/master.svg?style=svg)](https://circleci.com//tree/master)
 
-> **Node**: 8.16.0
-> **PostgreSQL**: 7.11.0
-
 Infumavle Englist is easy program for quick study english words
 
 ## Quik start
@@ -14,9 +11,14 @@ Infumavle Englist is easy program for quick study english words
   git clone git@github.com:JARVIS-VOVA/infumable-english.git && cd infumable-english
 ```
 
-### Set keys to backend and frontend .env (show example .env.example in backend and frontend folders)
+### Create web/.env
 ```
-  cp backend/.env.example backend/.env && cp frontend/.env.example frontend/.env
+  cp frontend/.env.example frontend/.env
+```
+
+### Create master.key
+```
+  echo 'fc1c74_0e5e3c44__98af7bb94ffba10' >> api/config/master.key
 ```
 
 ### Build and run containers
@@ -34,3 +36,9 @@ Infumavle Englist is easy program for quick study english words
 
 ## Additional links
 Take names colors for css from http://chir.ag/projects/name-that-color
+
+## Credentials
+```
+  docker-compose run --rm -e EDITOR=vi api bin/rails credentials:edit
+  Rails.application.credentials[Rails.env.to_sym][:db][:user]
+```
