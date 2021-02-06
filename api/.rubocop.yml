@@ -6,8 +6,9 @@ AllCops:
   TargetRubyVersion: 2.7
   NewCops: enable
   Exclude:
-    - 'bin/*'
-    - 'vendor/**/*.rb'
+    - bin/**/*
+    - db/**/*
+    - vendor/**/*
 
 Style/Documentation:
   Enabled: false
@@ -17,8 +18,8 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*.rb'
+    - spec/**/*.rb
 
 Metrics/ModuleLength:
   Exclude:
-    - 'spec/**/*.rb'
+    - spec/**/*.rb

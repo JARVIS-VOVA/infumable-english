@@ -1,0 +1,84 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@1.0.2
+
+executors:
+  default_api:
+    working_directory: ~/infumable-english
+    docker:
+      - image: cimg/ruby:2.7.2
+        environment:
+          BUNDLER_VERSION: 2.2.2
+      - image: circleci/postgres:12.0
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+
+caches:
+  - &bundle_cache_full v1-infumable-english-api-{{ checksum "~/infumable-english/api/Gemfile.lock" }}
+  - &bundle_cache v1-infumable-english-api-
+
+commands:
+  configure_bundler:
+    description: Configure bundler
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - *bundle_cache_full
+            - *bundle_cache
+      - run:
+          name: Bundle check or install
+          working_directory: ~/infumable-english/api
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          key: *bundle_cache_full
+          paths:
+            - api/vendor/bundle
+  run_rubocop:
+    description: Run rubocop
+    steps:
+      - run:
+          working_directory: ~/infumable-english/api
+          command: bundle exec rubocop
+  run_fasterer:
+    description: Run fasterer
+    steps:
+      - run:
+          working_directory: ~/infumable-english/api
+          command: bundle exec fasterer
+  run_spec:
+    description: Run rspec
+    steps:
+      - run:
+          working_directory: ~/infumable-english/api
+          command: bundle exec rspec
+
+jobs:
+  building:
+    executor: default_api
+    steps:
+      - configure_bundler
+  lintering:
+    executor: default_api
+    steps:
+      - configure_bundler
+      - run_rubocop
+      - run_fasterer
+  testing:
+    executor: default_api
+    steps:
+      - configure_bundler
+      - run_spec
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - building
+      - lintering:
+          requires:
+            - building
+      - testing:
+          requires:
+            - building

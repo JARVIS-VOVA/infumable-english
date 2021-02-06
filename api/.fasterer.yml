@@ -19,5 +19,6 @@ speedups:
   setter_vs_attr_writer: true
 
 exclude_paths:
-  - 'vendor/**/*.rb'
+  - 'config/puma.rb'
   - 'db/schema.rb'
+  - 'vendor/**/*.rb'
