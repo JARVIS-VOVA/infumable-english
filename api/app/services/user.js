@@ -1,8 +1,6 @@
 const crypt = require('../helpers/crypt')
 const UserModel = require('../db/models').User
 
-// TODO: Add email confirmation
-
 module.exports = {
   async index() {
     const users = await UserModel.findAll()
@@ -11,8 +9,24 @@ module.exports = {
   },
 
   async create(params) {
-    const user = await UserModel.create(params)
+    console.log('params', params)
+    const newParams = {
+      ...params,
+      // email: ''
+    }
 
-    return { status: 201, data: user }
+    // const user = await UserModel.create(newParams)
+    // console.log('user', user)
+
+    await UserModel.create(newParams)
+      .then(result => {
+        const user = result
+        console.log('result ->', result)
+        return { status: 201, data: user }
+      })
+      .catch(error => {
+        console.log('error ->', error.message)
+        return { status: 442, error: error.message }
+      })
   },
 }
