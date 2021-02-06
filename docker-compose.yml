@@ -12,6 +12,18 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
 
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: $PWD/docker/development/api
+    volumes:
+      - ./api:/apps/infumable-english/api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
   web:
     container_name: web
     build:
