@@ -11,21 +11,21 @@ services:
       - '5432:5432'
     env_file: .env/development/db
 
-  api:
-    container_name: api
-    build:
-      context: ./api
-      dockerfile: $PWD/docker/development/api
-    volumes:
-      - ./api:/apps/infumable-english/api
-      - /apps/infumable-english/api/node_modules
-    ports:
-      - '3000:3000'
-    env_file:
-      - .env/development/api
-      - .env/development/db
-    depends_on:
-      - db
+  # api-node:
+  #   container_name: api-node
+  #   build:
+  #     context: ./api-node
+  #     dockerfile: $PWD/docker/development/api-node
+  #   volumes:
+  #     - ./api-node:/apps/infumable-english/api-node
+  #     - /apps/infumable-english/api-node/node_modules
+  #   ports:
+  #     - '3000:3000'
+  #   env_file:
+  #     - .env/development/api-node
+  #     - .env/development/db
+  #   depends_on:
+  #     - db
 
   web:
     container_name: web
@@ -39,5 +39,5 @@ services:
       - '4000:4000'
     # environment:
     #   env_file: ./frontend/.env
-    depends_on:
-      - api
+    # depends_on:
+      # - api-node

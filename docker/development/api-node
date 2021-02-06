@@ -1,6 +1,6 @@
 FROM node:latest
 
-WORKDIR /apps/infumable-english/api
+WORKDIR /apps/infumable-english/api-node
 
 COPY ./package.json .
 COPY ./yarn.lock .
