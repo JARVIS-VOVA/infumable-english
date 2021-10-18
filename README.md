@@ -14,12 +14,12 @@ Infumavle Englist is easy program for quick study english words
 
 ### Create web/.env
 ```
-  cp frontend/.env.example frontend/.env
+  cp web/.env.example web/.env
 ```
 
 ### Create master.key
 ```
-  echo 'fc1c74_0e5e3c44__98af7bb94ffba10' >> api/config/master.key
+  echo '7728f22957c_8b9ad2966a1568bdbcba' >> api/config/master.key
 ```
 
 ### Build and run containers
@@ -41,6 +41,11 @@ Take names colors for css from http://chir.ag/projects/name-that-color
 
 ## Credentials
 ```
-  docker-compose run --rm -e EDITOR=vi api bin/rails credentials:edit
+  docker-compose run --rm -e EDITOR=vi api bin/rails credentials:edit -e production
   Rails.application.credentials[Rails.env.to_sym][:db][:user]
+```
+
+## Api created with command
+```
+  docker-compose run --no-deps api rails new . --force --database=postgresql --api
 ```

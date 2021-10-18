@@ -7,9 +7,9 @@ executors:
   default_api:
     working_directory: ~/infumable-english
     docker:
-      - image: cimg/ruby:2.7.2
+      - image: cimg/ruby:3.0.2
         environment:
-          BUNDLER_VERSION: 2.2.2
+          BUNDLER_VERSION: 2.2.22
       - image: circleci/postgres:12.0
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust

@@ -3,7 +3,7 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0.2
   NewCops: enable
   Exclude:
     - bin/**/*
@@ -11,6 +11,9 @@ AllCops:
     - vendor/**/*
 
 Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
   Enabled: false
 
 Layout/LineLength:
