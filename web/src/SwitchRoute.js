@@ -30,7 +30,6 @@ const App = ({ getCurrentUser, currentUser, error, anythingWasRejected }) => {
       // console.log('error', error)
   }, [])
 
-
   return (
     <>
       <GlobalStyle />
