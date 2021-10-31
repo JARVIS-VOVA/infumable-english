@@ -1,8 +1,7 @@
 import axios from 'axios'
-// import camelCaseKeys from 'camelcase-keys'
 import snakecaseKeys from 'snakecase-keys'
 
-// import isObject from 'Src/lib/isObject'
+import isObject from 'Src/lib/isObject'
 
 // TODO: Move to .env
 const API_URL = 'http://localhost:3000'
