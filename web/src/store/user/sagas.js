@@ -12,7 +12,6 @@ export default function* watcherSaga() {
 function* watchCreateRequest({ payload, meta }) {
   try {
     const response = yield call(Api.User.create, payload)
-
     yield put(userActions.createSuccess(response.data, meta))
   } catch (error) {
     yield put(userActions.createFailure(error.response, meta))

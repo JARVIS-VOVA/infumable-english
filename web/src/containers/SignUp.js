@@ -10,7 +10,7 @@ import { userActions } from 'Store/actions'
 
 const SignUp = ({ createUser }) => {
   const onSubmit = data => {
-    createUser(data)
+    createUser({ user: data })
       .then(() => console.log('!!!!!!'))
       .then(() => console.log('!!!!!!', data))
       .then(() => console.log('!!!!!!'))
