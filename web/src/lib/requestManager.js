@@ -15,16 +15,6 @@ axios.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
-// axios.interceptors.response.use(function (response) {
-//   console.log('=======', response)
-//   console.log('=======', response)
-//   // if (isObject(config.data)) config.data = snakecaseKeys(config.data)
-//   // config.data = camelCaseKeys(config.data, { deep: true })
-//   return response;
-// }, function (error) {
-//   return Promise.reject(error);
-// });
-
 export default {
   post:   (path, params) => axios.post(`${API_URL}${path}`, params),
   get:    (path, params) => axios.get(`${API_URL}${path}`, params),
