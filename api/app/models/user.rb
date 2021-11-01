@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,
          :trackable
 
-  # validates :username, uniqueness: { case_sensitive: false },
-  # presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9]+\z/ }
+  validates :username, presence: true,
+                       allow_blank: false,
+                       uniqueness: { case_sensitive: false },
+                       format: { with: /\A[a-zA-Z0-9]+\z/ }
 end
