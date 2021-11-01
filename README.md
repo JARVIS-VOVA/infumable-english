@@ -17,9 +17,13 @@ Infumavle Englist is easy program for quick study english words
   cp web/.env.example web/.env
 ```
 
-### Create master.key
+### Create *.key
 ```
   echo '7728f22957c_8b9ad2966a1568bdbcba' >> api/config/master.key
+  echo 'd3_fa0c205928111_978f6025d392ed7' >> api/config/development.key
+  echo '80b53bad_45af4dc1af4dabdb7051714' >> api/config/production.key
+  echo 'd62b5cfbb14a117d1f46_cb040d1d468' >> api/config/test.key
+
 ```
 
 ### Build and run containers

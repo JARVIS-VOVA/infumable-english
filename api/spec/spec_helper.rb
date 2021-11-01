@@ -5,8 +5,10 @@ require 'simplecov'
 SimpleCov.minimum_coverage 100
 SimpleCov.start
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
