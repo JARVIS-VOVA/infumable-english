@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::TagsController < BaseController
+class Api::V1::TagsController < ApplicationController
   def index
     @tags = Tag.all
     render 'api/tags/collection', status: :ok
@@ -10,7 +10,7 @@ class Api::V1::TagsController < BaseController
     @tag = Tag.new(tag_params)
     return render 'api/tags/object', status: :created if @tag.save
 
-    render json: { errors: @tag.errors.full_message }, status: :unprocessable_entity
+    render json: { error: @tag.errors.full_messages }, status: :unprocessable_entity
   end
 
   def show
@@ -22,14 +22,14 @@ class Api::V1::TagsController < BaseController
     @tag = Tag.find(params[:id])
     return render 'api/tags/object', status: :accepted if @tag.update(tag_params)
 
-    render json: { errors: @tag.errors.full_message }, status: :unprocessable_entity
+    render json: { error: @tag.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
     @tag = Tag.find(params[:id])
     return head :ok if @tag.destroy
 
-    render json: { errors: @tag.errors.full_message }, status: :unprocessable_entity
+    render json: { error: @tag.errors.full_messages }, status: :unprocessable_entity
   end
 
   private

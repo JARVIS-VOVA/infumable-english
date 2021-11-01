@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import router from '../config/createRouter'
-import { resourceDeleteRequest } from '../store/session/actions'
+import router from 'Src/config/createRouter'
+import { sessionActions } from 'Src/store/actions'
 
 class Logout extends Component {
   async componentDidMount() {
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logoutSession: () => dispatch(resourceDeleteRequest())
+  logoutSession: () => dispatch(sessionActions.deleteRequest())
 })
 
 Logout.propTypes = {

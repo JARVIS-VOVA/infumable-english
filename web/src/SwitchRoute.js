@@ -10,7 +10,7 @@ import Police from 'Pages/Police'
 
 // import Messages from './Messages'
 import NotFound from 'Components/pages/NotFound'
-// import Logout from 'Containers/Logout'
+import Logout from 'Containers/Logout'
 // import { resourceGetRequest } from 'Store/session/actions'
 
 import ROUTES from 'Constants/routes'
@@ -19,14 +19,19 @@ import PrivateRouter from 'Src/lib/privateRoute'
 import PublicRouter from 'Src/lib/publicRoute'
 import GlobalStyle from './styled'
 
-const Logout = () => (<div>logout</div>)
+// const Logout = () => (<div>logout</div>)
 const Word = () => (<div>Word</div>)
 
 const App = ({ getCurrentUser, currentUser, error, anythingWasRejected }) => {
   useEffect(() => {
     getCurrentUser()
-      .then(res => console.log('SwitchRoute ++', res))
-      .catch(qweerror => console.log('SwitchRoute --', anythingWasRejected))
+      .then(result => {
+        console.log('current user present', result)
+      })
+      .catch(error => {
+        console.log('error', error)
+        console.log('SwitchRoute --', anythingWasRejected)
+      })
       // console.log('error', error)
   }, [])
 

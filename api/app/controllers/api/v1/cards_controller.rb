@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::CardsController < BaseController
+class Api::V1::CardsController < ApplicationController
   def index
     @cards = Card.all
     render 'api/cards/collection', status: :ok
@@ -10,7 +10,7 @@ class Api::V1::CardsController < BaseController
     @card = Card.new(card_params)
     return render 'api/cards/object', status: :created if @card.save
 
-    render json: { errors: @card.errors.full_message }, status: :unprocessable_entity
+    render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   def show
@@ -22,14 +22,14 @@ class Api::V1::CardsController < BaseController
     @card = Card.find(params[:id])
     return render 'api/cards/object', status: :accepted if @card.update(card_params)
 
-    render json: { errors: @card.errors.full_message }, status: :unprocessable_entity
+    render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
     @card = Card.find(params[:id])
     return head :ok if @card.destroy
 
-    render json: { errors: @card.errors.full_message }, status: :unprocessable_entity
+    render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   private

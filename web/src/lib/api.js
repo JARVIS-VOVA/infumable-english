@@ -11,9 +11,11 @@ export default {
 
   User: {
     create: params => requestManager.post(PREFIX_API_V1 + '/users', params),
+    show: () => requestManager.get(PREFIX_API_V1 + '/users'), // for show should add ?=  , params
   },
 
+  // TODO: Need move to User.show and change it on project (use User.show instead CurrentUser.show). I'm not sure
   CurrentUser: {
-    show: () => requestManager.get(PREFIX_API_V1 + '/current_user'),
+    show: () => requestManager.get(PREFIX_API_V1 + '/users'),
   },
 }
