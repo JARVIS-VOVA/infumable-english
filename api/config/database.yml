@@ -7,10 +7,10 @@ default: &default
   password: <%= Rails.application.credentials[:db][:password] %>
   host: <%= Rails.application.credentials[:db][:host] %>
 
-development:
+test:
   <<: *default
 
-test:
+development:
   <<: *default
 
 production:

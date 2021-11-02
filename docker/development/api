@@ -7,7 +7,7 @@ RUN apt update -qq && \
 WORKDIR /apps/infumable-english/api
 
 COPY Gemfile* .
-RUN bundle check || bundle install
+RUN bundle install
 COPY . .
 
 COPY entrypoint.sh /usr/bin/
