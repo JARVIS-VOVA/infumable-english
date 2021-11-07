@@ -34,16 +34,6 @@ RSpec.configure do |config|
       ],
       components: {
         schemas: {
-          users: {
-            type: :array,
-            properties: {
-              id: { type: :integer, example: 3 }, # rand(1..10)
-              username: { type: :string, example: 'Marry Poppins' }, # FFaker::Internet.user_name
-              email: { type: :string, example: 'user@example.com' }, # FFaker::Internet.email
-              createdAt: { type: :datatime, example: Time.new(1636311796) } # Time.now
-            },
-            required: %w[id username email createdAt]
-          },
           user: {
             type: :object,
             properties: {
