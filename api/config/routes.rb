@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   devise_for :users, skip: :all
   namespace :api do
     namespace :v1 do
-      resource :users, only: %w[create show]
+      resources :users, only: %w[index create show]
       resource :sessions, only: %w[create destroy]
       resources :cards, only: %w[index create show update destroy]
       resources :tags, only: %w[index create show update destroy]
