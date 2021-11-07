@@ -8,6 +8,5 @@ class User < ApplicationRecord
 
   validates :username, presence: true,
                        allow_blank: false,
-                       uniqueness: { case_sensitive: false },
-                       format: { with: /\A[a-zA-Z0-9]+\z/ }
+                       uniqueness: { case_sensitive: false }
 end

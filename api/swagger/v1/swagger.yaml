@@ -1,0 +1,125 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users":
+    get:
+      summary: "#index"
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful return all users
+    post:
+      summary: "#create"
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: successful user created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/new_user"
+  "/api/v1/users/{id}":
+    get:
+      summary: "#show"
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/user"
+        '404':
+          description: user not found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  schemas:
+    users:
+      type: array
+      properties:
+        id:
+          type: integer
+          example: 3
+        username:
+          type: string
+          example: Marry Poppins
+        email:
+          type: string
+          example: user@example.com
+        createdAt:
+          type: datatime
+          example: 1636311796-01-01 00:00:00 +0000
+      required:
+      - id
+      - username
+      - email
+      - createdAt
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        username:
+          type: string
+          example: Marry Poppins
+        email:
+          type: string
+          example: user@example.com
+        createdAt:
+          type: datatime
+          example: 1636311796-01-01 00:00:00 +0000
+      required:
+      - id
+      - username
+      - email
+      - createdAt
+    new_user:
+      type: object
+      properties:
+        user:
+          type: object
+          properties:
+            username:
+              type: string
+              example: Marry Poppins
+            email:
+              type: string
+              example: user@example.com
+            password:
+              type: string
+              example: password
+              min_length: 6
+              max_length: 128
+            password_confirmation:
+              type: string
+              example: password
+              min_length: 6
+              max_length: 128
+          required:
+          - username
+          - email
+          - password
+          - password_confirmation
+      required:
+      - user

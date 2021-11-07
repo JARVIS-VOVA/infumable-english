@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[create]
+  skip_before_action :authenticate_user!, only: %i[index create show]
+
+  def index
+    @users = User.all
+    render 'api/users/collection', status: :ok
+  end
 
   def create
     @user = User.new(user_params)
@@ -13,10 +18,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = params[:id] ? User.find(params[:id]) : current_user
-    raise ActiveRecord::RecordNotFound unless @user
-
-    render 'api/users/object', status: :created
+    @user = User.find(params[:id])
+    render 'api/users/object', status: :ok
   end
 
   private

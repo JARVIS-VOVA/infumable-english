@@ -1,5 +1,4 @@
 # Infumable English
-
 [![CircleCI](https://circleci.com/gh/JARVIS-VOVA/infumable-english.svg?style=shield)](https://app.circleci.com/pipelines/github/JARVIS-VOVA)
 [![codecov](https://codecov.io/gh/JARVIS-VOVA/infumable-english/branch/main/graph/badge.svg?token=9YV2GTED6Z)](https://codecov.io/gh/JARVIS-VOVA/infumable-english)
 
@@ -31,9 +30,10 @@ Infumavle Englist is easy program for quick study english words
  docker-compose up --build
 ```
 
-## Testing and lintering
+## Testing, lintering and rswag
 ```
   docker-compose exec api rubocop && fasterer && rspec spec
+  docker-compose exec api rails rswag # update rswag
 ```
 
 ## Deploy

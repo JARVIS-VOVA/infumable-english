@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-object @user
+object @users
 attributes :id, :username, :email, :created_at
