@@ -27,5 +27,9 @@ Metrics/ModuleLength:
   Exclude:
     - spec/**/*.rb
 
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - spec/requests/**/*.rb
+
 RSpec/ImplicitExpect:
   EnforcedStyle: should

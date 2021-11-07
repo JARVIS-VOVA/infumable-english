@@ -54,26 +54,6 @@ servers:
       default: localhost:3000
 components:
   schemas:
-    users:
-      type: array
-      properties:
-        id:
-          type: integer
-          example: 3
-        username:
-          type: string
-          example: Marry Poppins
-        email:
-          type: string
-          example: user@example.com
-        createdAt:
-          type: datatime
-          example: 1636311796-01-01 00:00:00 +0000
-      required:
-      - id
-      - username
-      - email
-      - createdAt
     user:
       type: object
       properties:
