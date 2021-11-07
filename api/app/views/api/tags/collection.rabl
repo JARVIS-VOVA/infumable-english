@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
 collection @tags
-attributes :id, :title
+attributes :id, :title, :color

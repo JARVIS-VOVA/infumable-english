@@ -3,5 +3,7 @@
 class Tag < ApplicationRecord
   has_and_belongs_to_many :cards
 
-  validates :title, presence: true
+  belongs_to :user
+
+  validates :title, :color, presence: true
 end

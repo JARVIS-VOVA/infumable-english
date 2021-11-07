@@ -43,6 +43,8 @@ Infumavle Englist is easy program for quick study english words
 ## Additional links
 Take names colors for css from http://chir.ag/projects/name-that-color
 
+Swagger http://localhost:3000/api-docs/index.html
+
 ## Credentials
 ```
   docker-compose run --rm -e EDITOR=vi api bin/rails credentials:edit -e production

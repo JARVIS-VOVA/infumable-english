@@ -2,12 +2,16 @@
 
 class Api::V1::CardsController < ApplicationController
   def index
-    @cards = Card.all
+    @cards = if filter_params[:user_id]
+               Card.where(user_id: filter_params[:user_id])
+             else
+               Card.all
+             end
     render 'api/cards/collection', status: :ok
   end
 
   def create
-    @card = Card.new(card_params)
+    @card = current_user.cards.new(card_params)
     return render 'api/cards/object', status: :created if @card.save
 
     render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
@@ -19,14 +23,14 @@ class Api::V1::CardsController < ApplicationController
   end
 
   def update
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
     return render 'api/cards/object', status: :accepted if @card.update(card_params)
 
     render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
     return head :ok if @card.destroy
 
     render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
@@ -36,5 +40,9 @@ class Api::V1::CardsController < ApplicationController
 
   def card_params
     params.require(:card).permit(:origin, :translate)
+  end
+
+  def filter_params
+    params.permit(:user_id)
   end
 end

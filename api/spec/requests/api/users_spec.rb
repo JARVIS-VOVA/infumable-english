@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/users', type: :request do
   path '/api/v1/users' do
-    get '#index'  do
+    get '#index' do
       tags 'Users'
       consumes 'application/json'
 
