@@ -12,6 +12,7 @@ module.exports = {
     paths: PATHS
   },
   resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
       Src: `${PATHS.src}/`,
       Components: `${PATHS.src}/components/`,
@@ -27,7 +28,8 @@ module.exports = {
     }
   },
   entry: {
-    app: ["@babel/polyfill", `${PATHS.src}/index.js`]
+    // app: ["@babel/polyfill", `${PATHS.src}/index.js`]
+    app: ["@babel/polyfill", `${PATHS.src}/index.tsx`]
   },
   output: {
     filename: '[name].js',
@@ -37,10 +39,25 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: '/node_modules/'
-      }, {
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
+      },
+      // {
+      //   test: /\.(ts|js)x?$/,
+      //   loader: 'babel-loader',
+      //   exclude: '/node_modules/'
+      // },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
