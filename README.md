@@ -4,6 +4,13 @@
 
 Infumavle Englist is easy program for quick study english words
 
+## Additional links
+Take names colors for css from http://chir.ag/projects/name-that-color
+
+Swagger http://localhost:3000/api-docs/index.html
+
+Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
+
 ## Quik start
 
 ### Setup
@@ -39,11 +46,6 @@ Infumavle Englist is easy program for quick study english words
 ## Deploy
 ```
 ```
-
-## Additional links
-Take names colors for css from http://chir.ag/projects/name-that-color
-
-Swagger http://localhost:3000/api-docs/index.html
 
 ## Credentials
 ```
