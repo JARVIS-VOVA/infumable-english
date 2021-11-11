@@ -2,11 +2,7 @@
 
 class Api::V1::TagsController < ApplicationController
   def index
-    @tags = if filter_params[:user_id]
-              Tag.where(user_id: filter_params[:user_id])
-            else
-              Tag.all
-            end
+    @tags = TagsQuery.new.call(filter_params)
     render 'api/tags/collection', status: :ok
   end
 
