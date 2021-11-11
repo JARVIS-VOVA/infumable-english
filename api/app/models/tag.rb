@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Tag < ApplicationRecord
-  has_and_belongs_to_many :cards
-
   belongs_to :user
+
+  has_many :cards_tags, dependent: :destroy
+  has_many :cards, through: :cards_tags
 
   validates :title, :color, presence: true
 end

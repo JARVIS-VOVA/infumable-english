@@ -2,11 +2,7 @@
 
 class Api::V1::CardsController < ApplicationController
   def index
-    @cards = if filter_params[:user_id]
-               Card.where(user_id: filter_params[:user_id])
-             else
-               Card.all
-             end
+    @cards = CardsQuery.new.call(filter_params)
     render 'api/cards/collection', status: :ok
   end
 
