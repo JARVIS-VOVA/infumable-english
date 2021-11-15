@@ -24,11 +24,13 @@ ActiveRecord::Schema.define(version: 2021_10_30_213218) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
-  create_table "cards_tags", id: false, force: :cascade do |t|
+  create_table "cards_tags", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "card_id"
     t.bigint "tag_id"
     t.index ["card_id"], name: "index_cards_tags_on_card_id"
     t.index ["tag_id"], name: "index_cards_tags_on_tag_id"
+    t.index ["user_id"], name: "index_cards_tags_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|

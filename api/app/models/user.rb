@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :cards, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :cards_tags, dependent: :destroy
 
   validates :username, presence: true,
                        allow_blank: false,
