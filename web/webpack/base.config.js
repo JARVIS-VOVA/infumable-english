@@ -16,19 +16,17 @@ module.exports = {
     alias: {
       Src: `${PATHS.src}/`,
       Components: `${PATHS.src}/components/`,
-      Img: `${PATHS.src}/assets/img/`,
-      Constants: `${PATHS.src}/constants/`,
-      Validations: `${PATHS.src}/lib/validations/`,
+      Forms: `${PATHS.src}/components/forms/`,
+      Hooks: `${PATHS.src}/hooks/`,
+      Pages: `${PATHS.src}/pages/`,
+      Routes: `${PATHS.src}/routes/`,
+      Services: `${PATHS.src}/services/`,
+      Api: `${PATHS.src}/services/API`,
       Store: `${PATHS.src}/store/`,
-      Pages: `${PATHS.src}/components/pages/`,
-      Templates: `${PATHS.src}/components/templates/`,
-      Containers: `${PATHS.src}/containers/`,
-      Organisms: `${PATHS.src}/components/organisms/`,
-      Atoms: `${PATHS.src}/components/atoms/`,
+      Types: `${PATHS.src}/types/`,
     }
   },
   entry: {
-    // app: ["@babel/polyfill", `${PATHS.src}/index.js`]
     app: ["@babel/polyfill", `${PATHS.src}/index.tsx`]
   },
   output: {
@@ -52,11 +50,6 @@ module.exports = {
           },
         },
       },
-      // {
-      //   test: /\.(ts|js)x?$/,
-      //   loader: 'babel-loader',
-      //   exclude: '/node_modules/'
-      // },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',

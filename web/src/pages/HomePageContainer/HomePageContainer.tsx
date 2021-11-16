@@ -1,26 +1,27 @@
 import React, { FC, useState } from 'react'
 
-import { useActions } from '../../hooks/useActions'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
-import LoginForm from '../../components/forms/LoginForm'
-import RegistrationForm from '../../components/forms/RegistrationForm'
+import { useActions } from 'Hooks/useActions'
+import { useTypedSelector } from 'Hooks/useTypedSelector'
+import LoginForm from 'Forms/LoginForm'
+import RegistrationForm from 'Forms/RegistrationForm'
 
 let initialState: 'login' | 'registration'
 
 type initialStateType = typeof initialState
 
 const HomePageContainer: FC = () => {
-
-  const { logoutUser } = useActions()
-
-  const { user, loading, isAuthenticated } = useTypedSelector(state => state.auth)
-
+  const {sessionDestroy} = useActions()
+  const { user, loading } = useTypedSelector(state => state.session)
   const [authType, setAuthType] = useState<initialStateType>('login')
-  
+
   const clickHandler = () => {
     setAuthType(authType === 'login' ? 'registration' : 'login')
   }
-  
+
+  const logOut = () => {
+    sessionDestroy()
+  }
+
   if (loading) {
     return (
       <>
@@ -31,9 +32,9 @@ const HomePageContainer: FC = () => {
 
   return (
     <div>
-      { isAuthenticated
+      { user
         ? <div>
-            <button onClick={ () => logoutUser() }>LogOut</button>
+            <button onClick={logOut}>LogOut</button>
             <p>username: { user?.username }</p>
           </div>
         : <div>
