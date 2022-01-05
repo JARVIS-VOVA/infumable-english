@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Field, Form } from 'react-final-form'
 
 import { useActions } from 'Hooks/useActions'
 import { UserRegistrationType } from 'Types/index'
@@ -15,51 +16,74 @@ type initialStateType = typeof initialState
 
 const RegistrationForm = () => {
   const {userCreate} = useActions()
-  const [formData, setFormData] = useState<initialStateType>(initialState)
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value })
-  }
-  
-  const data: UserRegistrationType = {
-    user: {
-      email: formData.email,
-      username: formData.username,
-      password: formData.password,
-      passwordConfirmation: formData.passwordConfirmation
+
+  const handleSubmit = (values: initialStateType) => {
+    const data: UserRegistrationType = {
+      user: {
+        email: values.email,
+        username: values.username,
+        password: values.password,
+        passwordConfirmation: values.passwordConfirmation
+      }
     }
+
+    userCreate(data)
   }
-  const submitForm = () => userCreate(data)
   
   return (
-    <div>
-      <p>Registration</p>
+    <Form
+      onSubmit={handleSubmit}
+      initialValues={initialState}
+      render={({ handleSubmit }) => (
+        <div>
+          <p>Registration Form</p>
 
-      <input
-        type='text'
-        name='email'
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input
-        type='text'
-        name='username'
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <input
-        type='text'
-        name='password'
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <input
-        type='text'
-        name='passwordConfirmation'
-        value={formData.passwordConfirmation}
-        onChange={handleChange}
-      />
-      <button onClick={submitForm}>Registration</button>
-    </div>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Email</label>
+              <Field
+                name='email'
+                placeholder='Email'
+                type='text'
+                component='input'
+              />
+            </div>
+
+            <div>
+              <label>Username</label>
+              <Field
+                name='username'
+                placeholder='Username'
+                type='text'
+                component='input'
+              />
+            </div>
+
+            <div>
+              <label>Password</label>
+              <Field
+                name='password'
+                placeholder='Password'
+                type='password'
+                component='input'
+              />
+            </div>
+
+            <div>
+              <label>Confirm password</label>
+              <Field
+                name='passwordConfirmation'
+                placeholder='Repeat password'
+                type='password'
+                component='input'
+              />
+            </div>
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      )}
+    />
   )
 }
 

@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
+import { Field, Form } from 'react-final-form'
 
 import { useActions } from 'Hooks/useActions'
 import { UserLoginType } from 'Types/index'
@@ -13,38 +14,52 @@ type initialStateType = typeof initialState
 
 const LoginForm: FC = () => {
   const {sessionCreate} = useActions()
-  const [formData, setFormData] = useState<initialStateType>(initialState)
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value })
-  }
-  
-  const data: UserLoginType = {
-    session: {
-      email: formData.email,
-      password: formData.password,
-    }
-  }
 
-  const submitForm = () => sessionCreate(data)
+  const handleSubmit = (values: initialStateType) => {
+    const data: UserLoginType = {
+      session: {
+        email: values.email,
+        password: values.password,
+      }
+    }
+
+    sessionCreate(data)
+  }
   
   return (
-    <div>
-      <p>Login</p>
+    <Form
+      onSubmit={handleSubmit}
+      initialValues={initialState}
+      render={({ handleSubmit }) => (
+        <div>
+          <p>Login Form</p>
 
-      <input
-        type='text'
-        name='email'
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input
-        type='text'
-        name='password'
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <button onClick={submitForm}>login</button>
-    </div>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>Email</label>
+              <Field
+                name='email'
+                placeholder='Email'
+                type='text'
+                component='input'
+              />
+            </div>
+
+            <div>
+              <label>Password</label>
+              <Field
+                name='password'
+                placeholder='Password'
+                type='password'
+                component='input'
+              />
+            </div>
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      )}
+    />
   )
 }
 
