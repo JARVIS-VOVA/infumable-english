@@ -20,8 +20,11 @@
       "Components/*": [
         "components/*"
       ],
-      "Forms/*": [
-        "components/forms/*"
+      "Atoms/*": [
+        "components/atoms/*"
+      ],
+      "Organisms/*": [
+        "components/organisms/*"
       ],
       "Hooks/*": [
         "hooks/*"
@@ -43,6 +46,9 @@
       ],
       "Types/*": [
         "types/*"
+      ],
+      "Constants/*": [
+        "types/constants/*"
       ]
     }
   },

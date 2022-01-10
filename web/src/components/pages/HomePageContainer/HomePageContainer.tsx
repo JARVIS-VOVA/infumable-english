@@ -2,8 +2,8 @@ import React, { FC, useState } from 'react'
 
 import { useActions } from 'Hooks/useActions'
 import { useTypedSelector } from 'Hooks/useTypedSelector'
-import LoginForm from 'Forms/LoginForm'
-import RegistrationForm from 'Forms/RegistrationForm'
+import LoginForm from 'Organisms/LoginForm'
+import RegistrationForm from 'Organisms/RegistrationForm'
 
 let initialState: 'login' | 'registration'
 

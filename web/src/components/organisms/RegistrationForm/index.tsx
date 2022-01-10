@@ -3,6 +3,8 @@ import { Field, Form } from 'react-final-form'
 
 import { useActions } from 'Hooks/useActions'
 import { UserRegistrationType } from 'Types/index'
+import { composeValidators, required, email, minLengthPassword, passwordsMatch } from 'Services/validations'
+import FormField from 'Atoms/FormField'
 
 // TODO: Remove initialValues
 const initialState = {
@@ -34,7 +36,7 @@ const RegistrationForm = () => {
     <Form
       onSubmit={handleSubmit}
       initialValues={initialState}
-      render={({ handleSubmit }) => (
+      render={({ handleSubmit, values }) => (
         <div>
           <p>Registration Form</p>
 
@@ -45,7 +47,8 @@ const RegistrationForm = () => {
                 name='email'
                 placeholder='Email'
                 type='text'
-                component='input'
+                component={FormField}
+                validate={composeValidators(required, email)}
               />
             </div>
 
@@ -55,7 +58,8 @@ const RegistrationForm = () => {
                 name='username'
                 placeholder='Username'
                 type='text'
-                component='input'
+                component={FormField}
+                validate={required}
               />
             </div>
 
@@ -65,7 +69,8 @@ const RegistrationForm = () => {
                 name='password'
                 placeholder='Password'
                 type='password'
-                component='input'
+                component={FormField}
+                validate={composeValidators(required, minLengthPassword)}
               />
             </div>
 
@@ -75,7 +80,8 @@ const RegistrationForm = () => {
                 name='passwordConfirmation'
                 placeholder='Repeat password'
                 type='password'
-                component='input'
+                component={FormField}
+                validate={composeValidators(required, minLengthPassword, passwordsMatch(values))}
               />
             </div>
 

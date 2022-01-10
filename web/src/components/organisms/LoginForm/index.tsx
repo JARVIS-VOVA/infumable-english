@@ -3,6 +3,8 @@ import { Field, Form } from 'react-final-form'
 
 import { useActions } from 'Hooks/useActions'
 import { UserLoginType } from 'Types/index'
+import { composeValidators, required, email, minLengthPassword } from 'Services/validations'
+import FormField from 'Atoms/FormField'
 
 // TODO: Remove initialValues
 const initialState = {
@@ -41,7 +43,8 @@ const LoginForm: FC = () => {
                 name='email'
                 placeholder='Email'
                 type='text'
-                component='input'
+                component={FormField}
+                validate={composeValidators(required, email)}
               />
             </div>
 
@@ -51,7 +54,8 @@ const LoginForm: FC = () => {
                 name='password'
                 placeholder='Password'
                 type='password'
-                component='input'
+                component={FormField}
+                validate={composeValidators(required, minLengthPassword)}
               />
             </div>
 

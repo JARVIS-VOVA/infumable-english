@@ -16,14 +16,16 @@ module.exports = {
     alias: {
       Src: `${PATHS.src}/`,
       Components: `${PATHS.src}/components/`,
-      Forms: `${PATHS.src}/components/forms/`,
+      Atoms: `${PATHS.src}/components/atoms/`,
+      Organisms: `${PATHS.src}/components/organisms/`,
+      Pages: `${PATHS.src}/components/pages/`,
       Hooks: `${PATHS.src}/hooks/`,
-      Pages: `${PATHS.src}/pages/`,
       Routes: `${PATHS.src}/routes/`,
       Services: `${PATHS.src}/services/`,
       Api: `${PATHS.src}/services/API`,
       Store: `${PATHS.src}/store/`,
       Types: `${PATHS.src}/types/`,
+      Constants: `${PATHS.src}/constants/`,
     }
   },
   entry: {
