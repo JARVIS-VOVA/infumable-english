@@ -12,22 +12,24 @@ module.exports = {
     paths: PATHS
   },
   resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
       Src: `${PATHS.src}/`,
       Components: `${PATHS.src}/components/`,
-      Img: `${PATHS.src}/assets/img/`,
-      Constants: `${PATHS.src}/constants/`,
-      Validations: `${PATHS.src}/lib/validations/`,
-      Store: `${PATHS.src}/store/`,
-      Pages: `${PATHS.src}/components/pages/`,
-      Templates: `${PATHS.src}/components/templates/`,
-      Containers: `${PATHS.src}/containers/`,
-      Organisms: `${PATHS.src}/components/organisms/`,
       Atoms: `${PATHS.src}/components/atoms/`,
+      Organisms: `${PATHS.src}/components/organisms/`,
+      Pages: `${PATHS.src}/components/pages/`,
+      Hooks: `${PATHS.src}/hooks/`,
+      Routes: `${PATHS.src}/routes/`,
+      Services: `${PATHS.src}/services/`,
+      Api: `${PATHS.src}/services/API`,
+      Store: `${PATHS.src}/store/`,
+      Types: `${PATHS.src}/types/`,
+      Constants: `${PATHS.src}/constants/`,
     }
   },
   entry: {
-    app: ["@babel/polyfill", `${PATHS.src}/index.js`]
+    app: ["@babel/polyfill", `${PATHS.src}/index.tsx`]
   },
   output: {
     filename: '[name].js',
@@ -37,10 +39,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: '/node_modules/'
-      }, {
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react",
+              "@babel/preset-typescript",
+            ],
+          },
+        },
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {

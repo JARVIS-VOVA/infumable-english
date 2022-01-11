@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import SwitchRoute from './SwitchRoute'
 import store from './store/configStore'
+import TsApp from './ts/TsApp'
 
 const App = () => (
   <Provider store={store}>

@@ -11,12 +11,12 @@ const SignInForm = ({ handleSubmit, isCreating }) => {
   return (
     <Form
       onSubmit={handleSubmit}
-      initialValues={{ login: 'Mary Poppins', password: 'password' }}
+      initialValues={{ username: 'Mary Poppins', password: 'password' }}
       render={({ handleSubmit, form, submitting, pristine, values, invalid }) => (
         <FormByCenter onSubmit={handleSubmit}>
           <Field
-            name='login'
-            placeholder='Login'
+            name='username'
+            placeholder='Username'
             type='text'
             component={ReduxField}
             validate={required} />
