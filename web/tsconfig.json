@@ -26,11 +26,11 @@
       "Organisms/*": [
         "components/organisms/*"
       ],
+      "Pages/*": [
+        "components/pages/*"
+      ],
       "Hooks/*": [
         "hooks/*"
-      ],
-      "Pages/*": [
-        "pages/*"
       ],
       "Routes/*": [
         "routes/*"
@@ -48,7 +48,7 @@
         "types/*"
       ],
       "Constants/*": [
-        "types/constants/*"
+        "constants/*"
       ]
     }
   },

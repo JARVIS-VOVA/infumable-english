@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import { useActions } from 'Hooks/useActions'
 import { useTypedSelector } from 'Hooks/useTypedSelector'
-import HomePageContainer from 'Pages/HomePageContainer/HomePageContainer'
+import HomePageContainer from 'Pages/HomePageContainer'
 
 export const Routes: FC = () => {
   const {getSession} = useActions()
