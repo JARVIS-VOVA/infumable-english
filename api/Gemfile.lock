@@ -119,6 +119,8 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.0.2.0)
@@ -128,7 +130,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
-    puma (5.5.2)
+    puma (5.6.2)
       nio4r (~> 2.0)
     rabl (0.14.5)
       activesupport (>= 2.3.14)
@@ -253,6 +255,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  x86_64-linux
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
@@ -266,7 +269,7 @@ DEPENDENCIES
   listen (~> 3.3)
   pg (~> 1.1)
   pry (~> 0.14.1)
-  puma (~> 5.0)
+  puma (~> 5.6)
   rabl (~> 0.14.5)
   rack-cors (~> 1.1.1)
   rails (~> 6.1.4, >= 6.1.4.1)
