@@ -10,7 +10,7 @@ class Api::V1::CardsController < ApplicationController
     @card = current_user.cards.new(card_params)
     return render 'api/cards/object', status: :created if @card.save
 
-    render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   def show
@@ -22,14 +22,14 @@ class Api::V1::CardsController < ApplicationController
     @card = current_user.cards.find(params[:id])
     return render 'api/cards/object', status: :accepted if @card.update(card_params)
 
-    render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
     @card = current_user.cards.find(params[:id])
     return head :ok if @card.destroy
 
-    render json: { error: @card.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @card.errors.full_messages }, status: :unprocessable_entity
   end
 
   private

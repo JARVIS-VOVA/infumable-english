@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resource :sessions, only: %w[create show destroy]
       resources :cards, only: %w[index create show update destroy]
       resources :tags, only: %w[index create show update destroy]
+      resources :cards_tags, only: %w[create destroy]
     end
   end
 end
