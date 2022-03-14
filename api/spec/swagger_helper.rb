@@ -40,9 +40,9 @@ RSpec.configure do |config|
               id: { type: :integer, example: 3 }, # rand(1..10)
               username: { type: :string, example: 'Marry Poppins' }, # FFaker::Internet.user_name
               email: { type: :string, example: 'user@example.com' }, # FFaker::Internet.email
-              createdAt: { type: :datatime, example: Time.new(1_636_311_796) } # Time.now
+              created_at: { type: :datatime, example: Time.new(1_636_311_796) } # Time.now
             },
-            required: %w[id username email createdAt]
+            required: %w[id username email created_at]
           },
           new_user: {
             type: :object,
