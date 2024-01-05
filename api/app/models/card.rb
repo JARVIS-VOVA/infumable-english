@@ -6,5 +6,5 @@ class Card < ApplicationRecord
   has_many :cards_tags, dependent: :destroy
   has_many :tags, through: :cards_tags
 
-  validates :origin, :translate, presence: true
+  validates :origin, :translation, presence: true
 end

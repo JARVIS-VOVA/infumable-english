@@ -4,9 +4,9 @@
 user = User.create_with(username: 'Mary Poppins', password: 'password').find_or_create_by(email: 'user@example.com')
 
 # Card
-laptop_card = user.cards.create_with(origin: 'Laptop').find_or_create_by(translate: 'Ноутбук')
-meat_card = user.cards.create_with(origin: 'Meat').find_or_create_by(translate: 'Мясо')
-sofa_card = user.cards.create_with(origin: 'Sofa').find_or_create_by(translate: 'Ліжко')
+laptop_card = user.cards.create_with(origin: 'Laptop').find_or_create_by(translation: 'Ноутбук')
+meat_card = user.cards.create_with(origin: 'Meat').find_or_create_by(translation: 'Мясо')
+sofa_card = user.cards.create_with(origin: 'Sofa').find_or_create_by(translation: 'Ліжко')
 
 # Tag
 web_tag = user.tags.create_with(color: '#0065FF').find_or_create_by(title: 'web')
