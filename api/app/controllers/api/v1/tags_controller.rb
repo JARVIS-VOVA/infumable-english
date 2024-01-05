@@ -10,7 +10,7 @@ class Api::V1::TagsController < ApplicationController
     @tag = current_user.tags.new(tag_params)
     return render 'api/tags/object', status: :created if @tag.save
 
-    render json: { error: @tag.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @tag.errors.full_messages }, status: :unprocessable_entity
   end
 
   def show
@@ -22,14 +22,14 @@ class Api::V1::TagsController < ApplicationController
     @tag = current_user.tags.find(params[:id])
     return render 'api/tags/object', status: :accepted if @tag.update(tag_params)
 
-    render json: { error: @tag.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @tag.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
     @tag = current_user.tags.find(params[:id])
     return head :ok if @tag.destroy
 
-    render json: { error: @tag.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @tag.errors.full_messages }, status: :unprocessable_entity
   end
 
   private

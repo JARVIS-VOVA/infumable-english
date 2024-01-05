@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
       sign_in(:user, @user)
       return render 'api/users/object', status: :created
     end
-    render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
   end
 
   def show
