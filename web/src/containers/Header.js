@@ -2,12 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import HeaderComponent from 'Organisms/Header'
+import HeaderComponent from 'organisms/Header'
 
 const Header = ({ router, currentUser }) => {
-  const [isToggle, setToggle] = useState(false)
-
-  return <HeaderComponent router={router} currentUser={currentUser} isToggle={isToggle} setToggle={setToggle} />
+  return <HeaderComponent router={router} currentUser={currentUser} />
 }
 
 const mapStateToProps = state => ({

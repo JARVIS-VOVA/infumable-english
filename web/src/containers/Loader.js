@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import LoaderComponent from 'Organisms/Loader'
+import LoaderComponent from 'organisms/Loader'
 
 const Loader = () => {
   const { status } = useSelector(state => state.loader)

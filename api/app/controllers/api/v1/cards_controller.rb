@@ -35,7 +35,7 @@ class Api::V1::CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:origin, :translate)
+    params.require(:card).permit(:origin, :translation)
   end
 
   def filter_params

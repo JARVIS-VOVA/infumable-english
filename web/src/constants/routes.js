@@ -1,17 +1,20 @@
 export default {
-  ROOT: '/',
-  HOME: '/home',
-  POLICE: '/police',
+  root: '/',
+  welcome: '/welcome',
+  police: '/police',
 
-  WORDS: '/words',
-  LOGOUT: '/logout',
+  words: '/words',
+  addWords: '/add-words',
+  importWords: '/import-words',
+  tags: '/tags',
+  logout: '/logout',
 
-  SIGN_UP: '/sign_up',
-  SIGN_IN: '/sign_in',
+  signUp: '/sign-up',
+  signIn: '/sign-in',
 
-  NOT_FOUND: '/not_found',
+  notFound: '/not-found',
 }
 
-export const OUT_SIDE_ROUTES = {
-  URL_GITHUB_REPOSITORY: 'https://github.com/JARVIS-VOVA/infumable-english',
+export const OUTSIDE_ROUTES = {
+  UrlGitHubRepository: 'https://github.com/JARVIS-VOVA/infumable-english',
 }

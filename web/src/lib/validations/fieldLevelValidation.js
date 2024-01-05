@@ -6,4 +6,4 @@ export const email = value => value && !/.+@.+\..+/i.test(value) ? 'Invalid emai
 
 export const minLength = min => value => value && value.length < min ? `Must be ${min} characters or more` : undefined
 export const minLengthPassword = minLength(6)
-export const passwordsMatch = allValues => (value) => allValues.password != value ? "Passwords don't match" : undefined
+export const passwordsMatch = paddsordValues => (value) => paddsordValues != value ? "Passwords don't match" : undefined

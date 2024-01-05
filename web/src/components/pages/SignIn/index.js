@@ -1,18 +1,12 @@
 import React from 'react'
 
-import BaseTemplate from 'Templates/Base'
-import Header from 'Containers/Header'
-import SignInContainer from 'Containers/SignIn'
-import Footer from 'Organisms/Footer'
+import BaseLayout from 'layouts/Base'
+import SignInContainer from 'containers/SignIn'
 
 const SignInPage = () => (
-  <BaseTemplate
-    footer={<Footer />}
-    header={<Header />}
-    title='Sign In'
-  >
+  <BaseLayout title='Sign In'>
     <SignInContainer />
-  </BaseTemplate>
+  </BaseLayout>
 )
 
 export default SignInPage

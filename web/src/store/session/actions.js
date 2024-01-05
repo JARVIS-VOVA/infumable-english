@@ -1,7 +1,7 @@
 import SESSION from './constants'
 
 export default {
-  createRequest: (payload) => ({
+  createRequest: payload => ({
     type: SESSION.CREATE_REQUEST,
     payload,
     meta: {
@@ -23,7 +23,7 @@ export default {
   }),
 
 
-  deleteRequest: (payload) => ({
+  deleteRequest: payload => ({
     type: SESSION.DELETE_REQUEST,
     payload,
     meta: {

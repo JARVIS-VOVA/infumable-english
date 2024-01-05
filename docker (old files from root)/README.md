@@ -34,12 +34,13 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 
 ### Build and run containers
 ```
+ docker-compose up --build
 ```
 
 ## Testing, lintering and rswag
 ```
-  rubocop && fasterer && rspec spec
-  rails rswag # update rswag
+  docker-compose exec api rubocop && fasterer && rspec spec
+  docker-compose exec api rails rswag # update rswag
 ```
 
 ## Deploy
@@ -48,11 +49,11 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 
 ## Credentials
 ```
-  EDITOR=vi bin/rails credentials:edit -e production
+  docker-compose run --rm -e EDITOR=vi api bin/rails credentials:edit -e production
   Rails.application.credentials[Rails.env.to_sym][:db][:user]
 ```
 
 ## Api created with command
 ```
-  rails new . --force --database=postgresql --api
+  docker-compose run --no-deps api rails new . --force --database=postgresql --api
 ```

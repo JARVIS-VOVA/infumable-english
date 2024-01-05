@@ -1,18 +1,12 @@
 import React from 'react'
 
-import BaseTemplate from 'Templates/Base'
-import Header from 'Containers/Header'
-import Police from 'Organisms/Police'
-import Footer from 'Organisms/Footer'
+import BaseLayout from 'layouts/Base'
+import Police from 'organisms/Police'
 
-const NotFoundPage = () => (
-  <BaseTemplate
-    footer={<Footer />}
-    header={<Header />}
-    title='Police'
-  >
+const PolicePage = () => (
+  <BaseLayout title='Police'>
     <Police />
-  </BaseTemplate>
+  </BaseLayout>
 )
 
-export default NotFoundPage
+export default PolicePage

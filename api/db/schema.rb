@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_10_30_213218) do
   create_table "cards", force: :cascade do |t|
     t.bigint "user_id"
     t.string "origin"
-    t.string "translate"
+    t.string "translation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_cards_on_user_id"

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import isEmpty from 'lodash.isempty'
 
-import NotFound from 'Components/pages/NotFound'
+import NotFound from 'components/pages/NotFound'
 
 const PrivateRoute = ({ component: Component, currentUser, ...props }) => {
   if (isEmpty(currentUser)) return <NotFound />
