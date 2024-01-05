@@ -1,18 +1,12 @@
 import React from 'react'
 
-import BaseTemplate from 'Templates/Base'
-import Header from 'Containers/Header'
-import NotFound from 'Organisms/NotFound'
-import Footer from 'Organisms/Footer'
+import BaseLayout from 'layouts/Base'
+import NotFound from 'organisms/NotFound'
 
 const NotFoundPage = () => (
-  <BaseTemplate
-    footer={<Footer />}
-    header={<Header />}
-    title='404'
-  >
+  <BaseLayout title='Not Found'>
     <NotFound />
-  </BaseTemplate>
+  </BaseLayout>
 )
 
 export default NotFoundPage

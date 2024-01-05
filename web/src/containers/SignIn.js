@@ -1,60 +1,28 @@
-// import React, { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { eventsActions } from '../../store/events';
-// import { Events } from './events';
-// import { Spinner } from '../../components/Spinner';
-
-// export const EventsContainer = () => {
-//   const dispatch = useDispatch();
-//   const { loading, events } = useSelector(state => state.events);
-//
-//   useEffect(() => {
-//     dispatch(eventsActions.fetch({}));
-//   }, []);
-//
-//   if (loading) return <Spinner className="spinner" />;
-//
-//   return (
-//     <Events
-//       events={ events }
-//     />
-//   );
-// };
-
-
-
-
 import React, { Component } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { pending, rejected, fulfilled, done } from 'redux-saga-thunk'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // import { resourceCreateRequest } from '../store/session/actions'
+import SignInComponent from 'organisms/SignIn'
 
-import SignInComponent from 'Organisms/SignIn'
-
-import { sessionActions } from 'Store/actions'
+import { sessionActions } from 'store/actions'
 
 const SignIn = ({ error }) => {
-  const dispatch = useDispatch();
-  const history = useHistory()
-  const { isCreating } = useSelector(state => state.session)
-
-  console.log('isCreating', isCreating)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const isCreating = useSelector(state => state.session.isCreating)
 
   const createSession = data => dispatch(sessionActions.createRequest(data))
 
   const handleSubmit = data => {
-    // const history = useHistory();
-
     createSession(data)
       // .then(() => handleClick())   // router.navigate('word')
       .then(response => {
         console.log('Success sign in. Response: ', response)
-        history.push('/')
+        navigate('/')
       })
       // .rejected(error => console.log('Error: ', error))
   }
@@ -63,7 +31,6 @@ const SignIn = ({ error }) => {
 }
 
 const mapStateToProps = state => ({
-  // isCreating: state.session.isCreating,
   error: rejected(state, 'CURRENT_USER/GET_REQUEST'),
   anythingWasRejected: rejected(state),
 })

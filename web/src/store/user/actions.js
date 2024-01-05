@@ -1,7 +1,7 @@
 import USER from './constants'
 
 export default {
-  createRequest: (payload) => ({
+  createRequest: payload => ({
     type: USER.CREATE_REQUEST,
     payload,
     meta: {

@@ -1,18 +1,12 @@
 import React from 'react'
 
-import BaseTemplate from 'Templates/Base'
-import Header from 'Containers/Header'
-import SignUpContainer from 'Containers/SignUp'
-import Footer from 'Organisms/Footer'
+import BaseLayout from 'layouts/Base'
+import SignUpContainer from 'containers/SignUp'
 
 const SignUpPage = () => (
-  <BaseTemplate
-    footer={<Footer />}
-    header={<Header />}
-    title='Sign Up'
-  >
+  <BaseLayout title='Sign Up'>
     <SignUpContainer />
-  </BaseTemplate>
+  </BaseLayout>
 )
 
 export default SignUpPage

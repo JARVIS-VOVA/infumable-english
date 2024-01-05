@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Word extends Component {
-  render() {
-    return (
-      <>
-        <h1 className='title'>Word</h1>
-      </>
-    )
-  }
+const Word = () => {
+  return (
+    <>
+      <h1 className='title'>Word</h1>
+    </>
+  )
 }
 
 export default Word

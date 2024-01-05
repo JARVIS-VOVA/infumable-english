@@ -13,17 +13,17 @@ module.exports = {
   },
   resolve: {
     alias: {
-      Src: `${PATHS.src}/`,
-      Components: `${PATHS.src}/components/`,
-      Img: `${PATHS.src}/assets/img/`,
-      Constants: `${PATHS.src}/constants/`,
-      Validations: `${PATHS.src}/lib/validations/`,
-      Store: `${PATHS.src}/store/`,
-      Pages: `${PATHS.src}/components/pages/`,
-      Templates: `${PATHS.src}/components/templates/`,
-      Containers: `${PATHS.src}/containers/`,
-      Organisms: `${PATHS.src}/components/organisms/`,
-      Atoms: `${PATHS.src}/components/atoms/`,
+      src: `${PATHS.src}/`,
+      components: `${PATHS.src}/components/`,
+      img: `${PATHS.src}/assets/img/`,
+      constants: `${PATHS.src}/constants/`,
+      validations: `${PATHS.src}/lib/validations/`,
+      store: `${PATHS.src}/store/`,
+      pages: `${PATHS.src}/components/pages/`,
+      layouts: `${PATHS.src}/components/layouts`,
+      containers: `${PATHS.src}/containers/`,
+      organisms: `${PATHS.src}/components/organisms/`,
+      atoms: `${PATHS.src}/components/atoms/`,
     }
   },
   entry: {

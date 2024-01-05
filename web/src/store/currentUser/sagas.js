@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
 
-import Api from 'Src/lib/api'
+import Api from 'src/lib/api'
 
 import currentUserActions from './actions'
 import CURRENT_USER from './constants'

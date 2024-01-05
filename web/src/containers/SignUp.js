@@ -1,37 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { compose } from 'redux'
 
-import router from '../config/createRouter'
+// import router from '../config/createRouter'
 // import { resourceCreateRequest } from 'Store/user/actions'
-import SignUpComponent from 'Organisms/SignUp'
-import { userActions } from 'Store/actions'
+import SignUpComponent from 'organisms/SignUp'
+import { userActions } from 'store/actions'
 
-const SignUp = ({ createUser }) => {
+const SignUp = () => {
+  const dispatch = useDispatch()
+  const isCreating = useSelector(state => state.user.isCreating)
+
   const onSubmit = data => {
-    createUser({ user: data })
+    dispatch(userActions.createRequest({ user: data }))
       .then(() => console.log('!!!!!!'))
       .then(() => console.log('!!!!!!', data))
       .then(() => console.log('!!!!!!'))
       // .then(() => router.navigate('signIn'))
   }
 
-  return <SignUpComponent handleSubmit={onSubmit} />
+  return <SignUpComponent handleSubmit={onSubmit} isCreating={isCreating} />
 }
 
-const mapStateToProps = state => ({
-  isCreating: state.user.isCreating,
-})
-
-const mapDispatchToProps = dispatch => ({
-  createUser: data => dispatch(userActions.createRequest(data)),
-})
-
-SignUp.propTypes = {
-  isCreating: PropTypes.bool.isRequired,
-}
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(SignUp)
+export default SignUp

@@ -1,10 +1,8 @@
 import axios from 'axios'
 import snakecaseKeys from 'snakecase-keys'
 
-import isObject from 'Src/lib/isObject'
-
-// TODO: Move to .env
-const API_URL = 'http://localhost:3000'
+import isObject from 'src/lib/isObject'
+import { API_URL } from 'src/globals'
 
 axios.defaults.withCredentials = true
 

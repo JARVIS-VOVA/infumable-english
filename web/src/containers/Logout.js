@@ -1,20 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import router from 'Src/config/createRouter'
-import { sessionActions } from 'Src/store/actions'
+// import router from 'src/config/createRouter'
+import { sessionActions } from 'src/store/actions'
 
-class Logout extends Component {
-  async componentDidMount() {
-    await this.props.logoutSession()
+const Logout = () => {
+  // await this.props.logoutSession()
+    // router.navigate('signIn')
 
-    router.navigate('signIn')
-  }
-
-  render() {
-    return null
-  }
+  return null
 }
 
 const mapStateToProps = state => ({
