@@ -9,16 +9,16 @@ import {
 } from '@mui/material'
 import { useTheme } from '@emotion/react'
 
-import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'img'
-import Footer from 'organisms/Footer'
-import Header from 'containers/Header'
-import Loader from 'containers/Loader'
+import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'src/assets/img'
+import Footer from 'src/components/organisms/Footer'
+import Header from 'src/containers/Header'
+import Loader from 'src/containers/Loader'
 import { THEME_MODES } from 'src/theme'
 
 const HEADER_HEIGHT = '100px'
-const FOOTER_HEIGHT = '100px'
+const FOOTER_HEIGHT = '200px'
 
-const PageTemplate = props => {
+const BaseLayout = props => {
   const { title, children } = props
   const theme = useTheme()
 
@@ -53,11 +53,11 @@ const PageTemplate = props => {
 
       <Box component='main' sx={{ minHeight: `calc(100vh - ${HEADER_HEIGHT} - ${FOOTER_HEIGHT})` }}>
         <Loader />
-        <Container maxWidth='lg' sx={{ py: theme.spacing(2) }}>
+        <Container maxWidth='lg' sx={{ pt: theme.spacing(2), pb: theme.spacing(8) }}>
           <Typography variant='h4'>
             {title}
           </Typography>
-          <Box sx={{ pt: theme.spacing(4) }}>
+          <Box sx={{ pt: theme.spacing(2) }}>
             {children}
           </Box>
         </Container>
@@ -70,9 +70,9 @@ const PageTemplate = props => {
   )
 }
 
-PageTemplate.propTypes = {
+BaseLayout.propTypes = {
   children: PropTypes.any.isRequired,
   title: PropTypes.string.isRequired,
 }
 
-export default PageTemplate
+export default BaseLayout

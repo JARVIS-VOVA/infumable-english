@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: %w[index create show]
+      resource :current_user, only: %w[show]
       resource :sessions, only: %w[create show destroy]
       resources :cards, only: %w[index create show update destroy]
       resources :tags, only: %w[index create show update destroy]

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import BaseLayout from 'layouts/Base'
-import Welcome from 'organisms/Welcome'
+import BaseLayout from 'src/components/layouts/BaseLayout'
+import Welcome from 'src/components/organisms/Welcome'
 
 const WelcomePage = () => (
   <BaseLayout title='Welcome!'>

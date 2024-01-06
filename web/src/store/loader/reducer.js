@@ -1,14 +1,12 @@
-import {
-  RESOURCE_CHANGE_STATUS
-} from './constants'
+import LOADER from './constants'
 
 const initialState = {
-  status: false
+  status: false,
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case RESOURCE_CHANGE_STATUS:
+    case LOADER.RESOURCE_CHANGE_STATUS:
       return { ...state, status: payload.status }
 
     default:

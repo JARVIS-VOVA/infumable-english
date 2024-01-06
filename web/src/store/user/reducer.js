@@ -12,7 +12,7 @@ export default (state = initialState, { payload, type }) => {
     case USER.CREATE_SUCCESS:
       return { ...state, isCreating: false }
 
-    case USER.CREATE_FAILURE:
+    case USER.CREATE_FAILED:
       return { ...state, isCreating: false }
 
 

@@ -1,21 +1,38 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
 
-import HeaderComponent from 'organisms/Header'
+import { AUTHENTICATED_COOKIE_KEY } from 'src/App'
+import Api from 'src/helpers/api'
+import { sessionActions, currentUserActions, loaderActions } from 'src/store/actions'
+import HeaderComponent from 'src/components/organisms/Header'
+import ROUTES from 'src/constants/routes'
 
-const Header = ({ router, currentUser }) => {
-  return <HeaderComponent router={router} currentUser={currentUser} />
+const Header = () => {
+  const dispatch = useDispatch()
+  const currentUser = useSelector(state => state.currentUser.item)
+  const [_cookies, _setCookie, removeCookie] = useCookies()
+  const navigate = useNavigate()
+
+  const onLogout = async () => {
+    try {
+      dispatch(sessionActions.deleteRequest())
+      dispatch(loaderActions.changeStatus({ status: true }))
+      await Api.Session.destroy()
+      dispatch(sessionActions.deleteSuccess())
+      navigate(ROUTES.root)
+      dispatch(currentUserActions.logout())
+      dispatch(loaderActions.changeStatus({ status: false }))
+      removeCookie(AUTHENTICATED_COOKIE_KEY)
+    } catch (error) {
+      dispatch(sessionActions.deleteFailed())
+      dispatch(loaderActions.changeStatus({ status: false }))
+    }
+
+  }
+
+  return <HeaderComponent currentUser={currentUser} handleLogout={onLogout} />
 }
 
-const mapStateToProps = state => ({
-  router: state.router,
-  currentUser: state.currentUser.item,
-})
-
-Header.propTypes = {
-  router: PropTypes.object.isRequired,
-  currentUser: PropTypes.object,
-}
-
-export default connect(mapStateToProps)(Header)
+export default Header

@@ -13,8 +13,12 @@ export default (state = initialState, { payload, type }) => {
     case CURRENT_USER.GET_SUCCESS:
       return { ...state, isGetting: false, item: payload }
 
-    case CURRENT_USER.GET_FAILURE:
+    case CURRENT_USER.GET_FAILED:
       return { ...state, isGetting: false }
+
+
+    case CURRENT_USER.LOGOUT:
+      return { ...state, item: {} }
 
 
     default:

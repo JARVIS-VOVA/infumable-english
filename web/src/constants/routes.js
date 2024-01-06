@@ -7,7 +7,6 @@ export default {
   addWords: '/add-words',
   importWords: '/import-words',
   tags: '/tags',
-  logout: '/logout',
 
   signUp: '/sign-up',
   signIn: '/sign-in',

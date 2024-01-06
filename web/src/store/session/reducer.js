@@ -2,7 +2,6 @@ import SESSION from './constants'
 
 const initialState = {
   isCreating: false,
-  isGetting: false,
   isDeleting: false,
   item: {}
 }
@@ -13,9 +12,9 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, isCreating: true }
 
     case SESSION.CREATE_SUCCESS:
-      return { ...state, isCreating: false, item: payload }
+      return { ...state, isCreating: false }
 
-    case SESSION.CREATE_FAILURE:
+    case SESSION.CREATE_FAILED:
       return { ...state, isCreating: false, item: {} }
 
 
@@ -25,7 +24,7 @@ export default (state = initialState, { type, payload }) => {
     case SESSION.DELETE_SUCCESS:
       return { ...state, isDeleting: false, item: {} }
 
-    case SESSION.DELETE_FAILURE:
+    case SESSION.DELETE_FAILED:
       return { ...state, isDeleting: false, item: {} }
 
     default:

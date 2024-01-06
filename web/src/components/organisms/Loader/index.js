@@ -2,7 +2,7 @@ import React from 'react'
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
 
-import { CURIOUS_BLUE } from 'constants/colors'
+import { CURIOUS_BLUE } from 'src/constants/colors'
 
 const WrapperBox = styled(Box)({
   padding: '5px',

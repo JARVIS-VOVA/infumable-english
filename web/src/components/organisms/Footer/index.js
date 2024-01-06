@@ -7,27 +7,29 @@ import {
   Link as MUILink,
 } from '@mui/material'
 
-import ROUTES, { OUTSIDE_ROUTES } from 'constants/routes'
-import { gitHubSvg } from 'img'
+import ROUTES, { OUTSIDE_ROUTES } from 'src/constants/routes'
+import { gitHubSvg } from 'src/assets/img'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <Container maxWidth='lg'
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: '100%',
-      }}
-    >
-      <Typography>Copyright © 2019 - {currentYear}</Typography>
-      <MUILink component={Link} to={ROUTES.police} color='secondary'>Police</MUILink>
+    <Container maxWidth='lg' sx={{ height: '100%' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, height: '100%' }}>
+        <Box sx={{ flex: 1 }}>
+          <MUILink component={Link} to={ROUTES.police} color='secondary'>Police</MUILink>
+        </Box>
 
-      <Link to={OUTSIDE_ROUTES.UrlGitHubRepository} target='_blank'>
-        <Box component='img' sx={{ width: '30px', height: '30px' }} src={gitHubSvg} />
-      </Link>
+        <Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
+          <Typography>Copyright © 2019 - {currentYear}</Typography>
+        </Box>
+
+        <Box sx={{ display: 'flex', flex: 1, justifyContent: 'flex-end' }}>
+          <Link to={OUTSIDE_ROUTES.UrlGitHubRepository} target='_blank' aria-label='github'>
+            <Box component='img' alt='github' sx={{ width: '30px', height: '30px' }} src={gitHubSvg} />
+          </Link>
+        </Box>
+      </Box>
     </Container>
   )
 }

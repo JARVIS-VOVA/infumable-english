@@ -14,11 +14,11 @@ export const THEME_MODES = {
 const baseTheme = {
   spacing: 8,
   components: {
-    MuiCssBaseline: {
-      styleOverrides: (themeParam) => ({
-        body: themeParam.palette.mode === 'dark' ? darkScrollbar() : null,
-      }),
-    },
+    // MuiCssBaseline: {
+    //   styleOverrides: (themeParam) => ({
+    //     body: themeParam.palette.mode === 'dark' ? darkScrollbar() : null,
+    //   }),
+    // },
   },
 }
 

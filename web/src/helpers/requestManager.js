@@ -1,8 +1,8 @@
 import axios from 'axios'
 import snakecaseKeys from 'snakecase-keys'
 
-import isObject from 'src/lib/isObject'
-import { API_URL } from 'src/globals'
+import isObject from 'src/helpers/isObject'
+import { API_URL } from 'src/constants/globals'
 
 axios.defaults.withCredentials = true
 

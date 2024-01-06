@@ -1,7 +1,7 @@
 import React from 'react'
 
-import BaseLayout from 'layouts/Base'
-import NotFound from 'organisms/NotFound'
+import BaseLayout from 'src/components/layouts/BaseLayout'
+import NotFound from 'src/components/organisms/NotFound'
 
 const NotFoundPage = () => (
   <BaseLayout title='Not Found'>

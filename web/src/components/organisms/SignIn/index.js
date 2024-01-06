@@ -10,8 +10,8 @@ import {
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import KeyIcon from '@mui/icons-material/Key'
 
-import { composeValidators, required, email, minLengthPassword } from 'validations/fieldLevelValidation'
-import { loginImg } from 'img'
+import { composeValidators, required, email, minLengthPassword } from 'src/helpers/validations/fieldLevelValidation'
+import { loginImg } from 'src/assets/img'
 
 const SignIn = props => {
   const { handleSubmit, isCreating } = props
@@ -75,7 +75,7 @@ const SignIn = props => {
               )}
             />
 
-            <Button size='large' variant='contained' disabled={invalid}>
+            <Button size='large' variant='contained' disabled={invalid} type='submit'>
               {isCreating ? 'Loading...' : 'Sign In'}
             </Button>
           </Box>

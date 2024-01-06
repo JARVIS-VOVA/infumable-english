@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import ROUTES from 'src/constants/routes'
 
-const NotFound = () => {
+const NotImplemented = () => {
   return (
     <Box
       sx={{
@@ -16,10 +16,10 @@ const NotFound = () => {
       }}
     >
       <Typography variant='h4'>
-        404
+        Doesn't Implemented
       </Typography>
       <Typography>
-        The page you’re looking for doesn’t exist
+        The page you’re looking for doesn’t Implemented
       </Typography>
       <Button component={Link} to={ROUTES.root} variant='contained'>
         Back Home
@@ -28,4 +28,4 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default NotImplemented

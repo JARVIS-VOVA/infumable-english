@@ -1,8 +1,8 @@
-import {
-  RESOURCE_CHANGE_STATUS
-} from './constants'
+import LOADER from './constants'
 
-export const resourceChangeStatus = data => ({
-  type: RESOURCE_CHANGE_STATUS,
-  payload: data
-})
+export default {
+  changeStatus: data => ({
+    type: LOADER.RESOURCE_CHANGE_STATUS,
+    payload: data
+  }),
+}

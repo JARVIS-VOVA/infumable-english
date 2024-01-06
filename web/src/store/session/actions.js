@@ -1,46 +1,28 @@
 import SESSION from './constants'
 
 export default {
-  createRequest: payload => ({
+  createRequest: () => ({
     type: SESSION.CREATE_REQUEST,
-    payload,
-    meta: {
-      thunk: true
-    }
   }),
 
-  createSuccess: (payload, meta) => ({
+  createSuccess: () => ({
     type: SESSION.CREATE_SUCCESS,
-    payload,
-    meta
   }),
 
-  createFailure: (payload, error, meta) => ({
-    type: SESSION.CREATE_FAILURE,
-    payload,
-    error,
-    meta
+  createFailed: () => ({
+    type: SESSION.CREATE_FAILED,
   }),
 
 
-  deleteRequest: payload => ({
+  deleteRequest: () => ({
     type: SESSION.DELETE_REQUEST,
-    payload,
-    meta: {
-      thunk: true
-    }
   }),
 
-  deleteSuccess: (payload, meta) => ({
+  deleteSuccess: () => ({
     type: SESSION.DELETE_SUCCESS,
-    payload,
-    meta
   }),
 
-  deleteFailure: (payload, error, meta) => ({
-    type: SESSION.DELETE_FAILURE,
-    payload,
-    error,
-    meta
+  deleteFailed: () => ({
+    type: SESSION.DELETE_FAILED,
   }),
 }

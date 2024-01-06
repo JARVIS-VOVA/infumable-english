@@ -1,90 +1,17 @@
-import * as React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+import { Toaster } from 'react-hot-toast'
+import { CookiesProvider } from 'react-cookie'
 
-import store from 'store/configStore'
 import { getTheme, THEME_MODES } from 'src/theme'
 import { ThemeModeContext } from 'src/contexts'
-import ROUTES from 'constants/routes'
-import Logout from 'containers/Logout'
-import Word from 'containers/Word'
-import NotFound from 'pages/NotFound'
-import Welcome from 'pages/Welcome'
-import SignIn from 'pages/SignIn'
-import SignUp from 'pages/SignUp'
-import Police from 'pages/Police'
+import store from 'src/store/config'
 
-// import PrivateRouter from 'src/lib/privateRoute'
-// import PublicRouter from 'src/lib/publicRoute'
-// import { currentUserActions } from 'store/actions'
-// import { resourceGetRequest } from 'store/session/actions'
-
-// const App = ({ mode, setMode, toggleMode, getCurrentUser, currentUser, error, anythingWasRejected }) => {
-//   // useEffect(() => {
-//   //   getCurrentUser()
-//   //     .then(result => {
-//   //       console.log('current user present', result)
-//   //     })
-//   //     .catch(error => {
-//   //       console.log('error', error)
-//   //       console.log('SwitchRoute --', anythingWasRejected)
-//   //     })
-//   //     // console.log('error', error)
-//   // }, [])
-
-// const mapStateToProps = state => ({
-//   currentUser: state.currentUser.item,
-//   error: rejected(state, 'CURRENT_USER/GET_REQUEST'),
-//   anythingWasRejected: rejected(state),
-// })
-
-const router = createBrowserRouter([
-  // NOTE: PrivateRouter
-  {
-    path: ROUTES.words,
-    element: <NotFound />,
-  }, {
-    path: ROUTES.logout,
-    element: <Logout />,
-  },
-  // NOTE: PublicRouter
-  {
-    path: ROUTES.signIn,
-    element: <SignIn />,
-  },  {
-    path: ROUTES.signUp,
-    element: <SignUp />,
-  },
-  // NOTE: Base Routes
-  {
-    path: ROUTES.words,
-    element: <Word />,
-  }, {
-    path: ROUTES.police,
-    element: <Police />,
-  }, {
-    path: ROUTES.root,
-    element: <Welcome />,
-  }, {
-    path: ROUTES.welcome,
-    element: <Welcome />,
-  }, {
-    path: ROUTES.signIn,
-    element: <SignIn />,
-  }, {
-    path: ROUTES.signUp,
-    element: <SignUp />,
-  }, {
-    path: ROUTES.notFound,
-    element: <NotFound />,
-  }, {
-    path: '*',
-    element: <NotFound />,
-  },
-])
+import reportWebVitals from './reportWebVitals'
+import App from './App'
 
 const ContextAndThemeProviders = ({ children }) => {
   const [themeMode, setThemeMode] = React.useState(THEME_MODES.default)
@@ -107,17 +34,22 @@ const ContextProviders = ({ children }) => (
   </ContextAndThemeProviders>
 )
 
-const App = () => {
-  return (
-    <React.StrictMode>
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+  <React.StrictMode>
+    <Toaster />
+    <CookiesProvider defaultSetOptions={{ path: '/' }}>
       <ContextProviders>
         <CssBaseline enableColorScheme />
         <Provider store={store}>
-          <RouterProvider router={router} />
+          <App />
         </Provider>
       </ContextProviders>
-    </React.StrictMode>
-  )
-}
+    </CookiesProvider>
+  </React.StrictMode>
+)
 
-ReactDOM.render(<App />, document.getElementById('root'))
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()

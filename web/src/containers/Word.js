@@ -1,11 +1,9 @@
 import React from 'react'
 
+import WordComponent from 'src/components/organisms/Word'
+
 const Word = () => {
-  return (
-    <>
-      <h1 className='title'>Word</h1>
-    </>
-  )
+  return <WordComponent />
 }
 
 export default Word
