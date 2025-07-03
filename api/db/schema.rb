@@ -10,28 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_213218) do
+ActiveRecord::Schema.define(version: 2021_02_15_220458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "cards", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "origin"
-    t.string "translation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_cards_on_user_id"
-  end
-
-  create_table "cards_tags", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "card_id"
-    t.bigint "tag_id"
-    t.index ["card_id"], name: "index_cards_tags_on_card_id"
-    t.index ["tag_id"], name: "index_cards_tags_on_tag_id"
-    t.index ["user_id"], name: "index_cards_tags_on_user_id"
-  end
 
   create_table "tags", force: :cascade do |t|
     t.bigint "user_id"
@@ -40,6 +22,24 @@ ActiveRecord::Schema.define(version: 2021_10_30_213218) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_tags_on_user_id"
+  end
+
+  create_table "term_tags", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "term_id"
+    t.bigint "tag_id"
+    t.index ["tag_id"], name: "index_term_tags_on_tag_id"
+    t.index ["term_id"], name: "index_term_tags_on_term_id"
+    t.index ["user_id"], name: "index_term_tags_on_user_id"
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "phrase"
+    t.string "meaning"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_terms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

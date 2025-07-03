@@ -47,7 +47,7 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
   Rails.application.credentials[Rails.env.to_sym][:db][:user]
 ```
 
-## Api created with command
+## Api was created with command
 ```
   rails new . --force --database=postgresql --api
 ```

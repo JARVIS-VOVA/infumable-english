@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class TagsQuery
+class TermsQuery
   def initialize(current_user:, options: {})
     @current_user = current_user
     @options = options
-    @tags = Tag.all
+    @terms = Term.all.includes(:term_tags)
   end
 
   def call
@@ -16,10 +16,10 @@ class TagsQuery
     user_id = @options[:user_id] || @current_user.id
     return unless user_id
 
-    @tags.where(user_id: user_id)
+    @terms = @terms.where(user_id: user_id)
   end
 
   def sort
-    @tags.order(created_at: :desc)
+    @terms.order(created_at: :desc)
   end
 end

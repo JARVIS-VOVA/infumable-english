@@ -3,8 +3,8 @@
 class Tag < ApplicationRecord
   belongs_to :user
 
-  has_many :cards_tags, dependent: :destroy
-  has_many :cards, through: :cards_tags
+  has_many :term_tags, dependent: :destroy
+  has_many :terms, through: :term_tags
 
   validates :title, :color, presence: true
 end

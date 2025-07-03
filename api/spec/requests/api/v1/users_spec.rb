@@ -35,9 +35,8 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         run_test! do |response|
-          # TODO: Move next line to helpers
-          data = JSON.parse(response.body, symbolize_names: true)
-          expect(data[:email]).to eq(user[:user][:email])
+          expect(response.status).to eq(201)
+          expect(User.find_by(email: user[:user][:email]).email).to eq(user[:user][:email])
         end
       end
 

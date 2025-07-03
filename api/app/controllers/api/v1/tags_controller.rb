@@ -2,7 +2,7 @@
 
 class Api::V1::TagsController < ApplicationController
   def index
-    @tags = TagsQuery.new.call(filter_params)
+    @tags = TagsQuery.new(current_user: current_user, options: filter_params).call
     render 'api/tags/collection', status: :ok
   end
 

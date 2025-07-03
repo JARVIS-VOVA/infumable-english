@@ -9,9 +9,9 @@ Rails.application.routes.draw do
       resources :users, only: %w[index create show]
       resource :current_user, only: %w[show]
       resource :sessions, only: %w[create show destroy]
-      resources :cards, only: %w[index create show update destroy]
+      resources :terms, only: %w[index create show update destroy]
       resources :tags, only: %w[index create show update destroy]
-      resources :cards_tags, only: %w[create destroy]
+      resources :term_tags, only: %w[create destroy]
     end
   end
 end

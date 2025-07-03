@@ -43,19 +43,20 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response).to have_http_status(:created)
     end
 
-    it 'user.id should be present' do
-      expect_json_types(id: :integer)
+    it 'sets current_user' do
+      expect(controller.current_user).to be_present
     end
 
-    it 'user.created_at should be present' do
-      expect_json_types(created_at: :string)
+    it 'assigns the correct email to current_user' do
+      expect(controller.current_user.email).to eq(user_params[:user][:email])
     end
 
-    it 'user should be present' do
-      expect_json({
-        email: user_params[:user][:email],
-        username: user_params[:user][:username],
-      })
+    it 'assigns the correct username to current_user' do
+      expect(controller.current_user.username).to eq(user_params[:user][:username])
+    end
+
+    it 'sets a non-empty session' do
+      expect(session).to_not be_empty
     end
   end
 

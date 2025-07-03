@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in(:user, @user)
-      return head :ok
+      return head :created
     end
     render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
   end

@@ -6,9 +6,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,
          :trackable
 
-  has_many :cards, dependent: :destroy
+  has_many :terms, dependent: :destroy
   has_many :tags, dependent: :destroy
-  has_many :cards_tags, dependent: :destroy
+  has_many :term_tags, dependent: :destroy
 
   validates :username, presence: true,
                        allow_blank: false,
