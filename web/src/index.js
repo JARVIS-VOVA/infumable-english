@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { Toaster } from 'react-hot-toast'
-import { CookiesProvider } from 'react-cookie'
 
 import { getTheme, THEME_MODES } from 'src/theme'
 import { ThemeModeContext } from 'src/contexts'
@@ -35,17 +34,16 @@ const ContextProviders = ({ children }) => (
 )
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
 root.render(
   <React.StrictMode>
     <Toaster />
-    <CookiesProvider defaultSetOptions={{ path: '/' }}>
-      <ContextProviders>
-        <CssBaseline enableColorScheme />
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ContextProviders>
-    </CookiesProvider>
+    <ContextProviders>
+      <CssBaseline enableColorScheme />
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ContextProviders>
   </React.StrictMode>
 )
 

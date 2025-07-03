@@ -3,10 +3,9 @@ import SESSION from './constants'
 const initialState = {
   isCreating: false,
   isDeleting: false,
-  item: {}
 }
 
-export default (state = initialState, { type, payload }) => {
+export default (state = initialState, { type }) => {
   switch (type) {
     case SESSION.CREATE_REQUEST:
       return { ...state, isCreating: true }
@@ -15,17 +14,17 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, isCreating: false }
 
     case SESSION.CREATE_FAILED:
-      return { ...state, isCreating: false, item: {} }
+      return { ...state, isCreating: false }
 
 
     case SESSION.DELETE_REQUEST:
       return { ...state, isDeleting: true }
 
     case SESSION.DELETE_SUCCESS:
-      return { ...state, isDeleting: false, item: {} }
+      return { ...state, isDeleting: false }
 
     case SESSION.DELETE_FAILED:
-      return { ...state, isDeleting: false, item: {} }
+      return { ...state, isDeleting: false }
 
     default:
       return state

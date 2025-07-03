@@ -1,24 +1,21 @@
 import React from 'react'
-import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
-import _ from 'lodash'
 import { Box, CircularProgress } from '@mui/material'
 
 import ROUTES from 'src/constants/routes'
 import NotFound from 'src/components/pages/NotFound'
-import Word from 'src/components/pages/Word'
+import Term from 'src/components/pages/Terms'
 import Welcome from 'src/components/pages/Welcome'
 import SignIn from 'src/components/pages/SignIn'
 import SignUp from 'src/components/pages/SignUp'
 import Police from 'src/components/pages/Police'
+import Tags from 'src/components/pages/Tags'
 import NotImplemented from 'src/components/pages/NotImplemented'
+import AddTerms from 'src/components/pages/AddTerms'
 
 import { loaderActions, currentUserActions } from 'src/store/actions'
 import Api from 'src/helpers/api'
-
-export const AUTHENTICATED_COOKIE_KEY = 'authenticated'
 
 const baseRouters = [
   {
@@ -53,52 +50,47 @@ const publicRouters = createBrowserRouter([
 const privateRouters = createBrowserRouter([
   ...baseRouters,
   {
-    path: ROUTES.words,
-    element: <Word />,
+    path: ROUTES.terms,
+    element: <Term />,
   },
   {
-    path: ROUTES.addWords,
-    element: <NotImplemented />
+    path: ROUTES.addTerms,
+    element: <AddTerms />
   },
   {
-    path: ROUTES.importWords,
+    path: ROUTES.importTerms,
     element: <NotImplemented />
   },
   {
     path: ROUTES.tags,
-    element: <NotImplemented />
+    element: <Tags />
   },
 ])
 
 const App = () => {
   const dispatch = useDispatch()
-  const [cookies, _setCookie, removeCookie] = useCookies()
   const currentUser = useSelector(state => state.currentUser.item)
   const isCurrentUserGetting = useSelector(state => state.currentUser.isGetting)
-  const [isSessionGetting, setIsSessionGetting] = React.useState(false)
+  const [isAuthGot, setIsAuthGot] = React.useState(false)
 
   const getSession = async () => {
     try {
-      setIsSessionGetting(true)
       dispatch(loaderActions.changeStatus({ status: true }))
       await Api.Session.show()
       dispatch(currentUserActions.getRequest())
       dispatch(loaderActions.changeStatus({ status: false }))
-      setIsSessionGetting(false)
+      setIsAuthGot(true)
     } catch (error) {
       dispatch(loaderActions.changeStatus({ status: false }))
-      setIsSessionGetting(false)
-      removeCookie(AUTHENTICATED_COOKIE_KEY)
+      setIsAuthGot(true)
     }
   }
-
-  const isAuthenticatedCookie = cookies[AUTHENTICATED_COOKIE_KEY]
 
   React.useEffect(() => {
     getSession()
   }, [])
 
-  if (isCurrentUserGetting || isSessionGetting) {
+  if (isCurrentUserGetting || !isAuthGot) {
     return (
       <Box sx={{ height: '100vh', width: '100vw', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <CircularProgress />
@@ -109,13 +101,11 @@ const App = () => {
   // import PrivateRouter from 'src/helpers/privateRoute'
   // import PublicRouter from 'src/helpers/publicRoute'
 
-  if (currentUser.id) {
+  if (currentUser) {
     return <RouterProvider router={privateRouters} />
   }
 
-  if (!isAuthenticatedCookie) {
-    return <RouterProvider router={publicRouters} />
-  }
+  return <RouterProvider router={publicRouters} />
 }
 
 export default App

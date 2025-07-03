@@ -11,17 +11,13 @@ Swagger http://localhost:3000/api-docs/index.html
 
 Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 
-## Quik start
-
-### Setup
+## Download project
 ```
   git clone git@github.com:JARVIS-VOVA/infumable-english.git && cd infumable-english
 ```
 
-### Create web/.env
-```
-  cp web/.env.example web/.env
-```
+# API
+## Quick start
 
 ### Create *.key
 ```
@@ -35,6 +31,11 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 ```
   rubocop && fasterer && rspec spec
   rails rswag # update rswag
+```
+
+## Run
+```
+  rails s
 ```
 
 ## Deploy
@@ -51,3 +52,29 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 ```
   rails new . --force --database=postgresql --api
 ```
+
+# WEB
+## Quick start
+
+### Create web/.env
+```
+  cp web/.env.example web/.env
+```
+
+## Run
+```
+  yarn start
+```
+
+## Available Scripts
+```
+  yarn build
+```
+
+## Deploy
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+## Web was created with Create React App
+
+[Create React App](https://github.com/facebook/create-react-app)

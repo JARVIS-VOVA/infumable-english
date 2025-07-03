@@ -25,7 +25,7 @@ const Footer = () => {
         </Box>
 
         <Box sx={{ display: 'flex', flex: 1, justifyContent: 'flex-end' }}>
-          <Link to={OUTSIDE_ROUTES.UrlGitHubRepository} target='_blank' aria-label='github'>
+          <Link to={OUTSIDE_ROUTES.urlGitHubRepository} target='_blank' aria-label='github'>
             <Box component='img' alt='github' sx={{ width: '30px', height: '30px' }} src={gitHubSvg} />
           </Link>
         </Box>

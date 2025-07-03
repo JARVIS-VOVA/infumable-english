@@ -11,7 +11,7 @@ import { useTheme } from '@emotion/react'
 
 import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'src/assets/img'
 import Footer from 'src/components/organisms/Footer'
-import Header from 'src/containers/Header'
+import Header from 'src/components/organisms/Header'
 import Loader from 'src/containers/Loader'
 import { THEME_MODES } from 'src/theme'
 

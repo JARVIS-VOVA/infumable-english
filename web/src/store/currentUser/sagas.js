@@ -11,10 +11,10 @@ export default function* watcherSaga() {
   yield takeLatest(CURRENT_USER.GET_REQUEST, watchGetRequest)
 }
 
-function* watchGetRequest({ payload }) {
+function* watchGetRequest() {
   try {
     yield put(loaderActions.changeStatus({ status: true }))
-    const response = yield call(Api.CurrentUser.show, payload)
+    const response = yield call(Api.CurrentUser.show)
     yield put(loaderActions.changeStatus({ status: false }))
     yield put(currentUserActions.getSuccess(response.data))
   } catch (error) {

@@ -3,20 +3,21 @@ import PropTypes from 'prop-types'
 import {
   Container,
   Box,
-  Typography,
   AppBar,
   Toolbar,
 } from '@mui/material'
 import { useTheme } from '@emotion/react'
 
-import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'src/assets/img'
-import Header from 'src/containers/Header'
-import Loader from 'src/containers/Loader'
 import { THEME_MODES } from 'src/theme'
+import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'src/assets/img'
+
+import Header from 'src/components/organisms/Header'
+import Loader from 'src/containers/Loader'
+import { MainTitle } from 'src/components/atoms'
 
 const HEADER_HEIGHT = '100px'
 
-const EasyLayouts = props => {
+const EasyLayout = props => {
   const { title, children } = props
   const theme = useTheme()
 
@@ -44,21 +45,18 @@ const EasyLayouts = props => {
       <Box component='main'>
         <Loader />
         <Container maxWidth='lg' sx={{ py: theme.spacing(2) }}>
-          <Typography variant='h4'>
-            {title}
-          </Typography>
-          <Box sx={{ pt: theme.spacing(2) }}>
-            {children}
-          </Box>
+          {title && <MainTitle title={title} />}
+          {children}
         </Container>
       </Box>
     </Box>
   )
 }
 
-EasyLayouts.propTypes = {
+EasyLayout.propTypes = {
   children: PropTypes.any.isRequired,
-  title: PropTypes.string.isRequired,
+  // title: PropTypes.string.isRequired | PropTypes.string,
+  title: PropTypes.string,
 }
 
-export default EasyLayouts
+export default EasyLayout

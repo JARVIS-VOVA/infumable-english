@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import {
@@ -12,8 +12,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import styled from '@emotion/styled'
-import { useSelector } from 'react-redux'
 
+import { useSession, useCurrentUser } from 'src/hooks'
 import ROUTES from 'src/constants/routes'
 import { ThemeModeContext } from 'src/contexts'
 import { THEME_MODES } from 'src/theme'
@@ -24,20 +24,20 @@ const SIGNED_PAGES = [
     pageName: 'Home',
   },
   {
-    path: ROUTES.words,
-    pageName: 'Words',
+    path: ROUTES.terms,
+    pageName: 'Terms',
+  },
+  {
+    path: ROUTES.addTerms,
+    pageName: 'Add Terms',
+  },
+  {
+    path: ROUTES.importTerms,
+    pageName: 'Import Terms',
   },
   {
     path: ROUTES.tags,
     pageName: 'Tags',
-  },
-  {
-    path: ROUTES.addWords,
-    pageName: 'Add Words',
-  },
-  {
-    path: ROUTES.IMPORT,
-    pageName: 'Import Words',
   },
 ]
 
@@ -46,10 +46,11 @@ const StyledButton = styled(Button)({
   textTransform: 'none'
 })
 
-const Header = props => {
-  const { currentUser, handleLogout } = props
+const Header = () => {
   const isDeleting = useSelector(state => state.session.isDeleting)
   const { themeMode, toggleThemeMode } = React.useContext(ThemeModeContext)
+  const { onLogout } = useSession()
+  const { currentUser } = useCurrentUser()
 
   return (
     <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center', gap: 3 }}>
@@ -89,7 +90,7 @@ const Header = props => {
               </StyledButton>
             ))}
 
-            <StyledButton variant='contained' color='primary' disabled={isDeleting} onClick={handleLogout}>
+            <StyledButton variant='contained' color='primary' disabled={isDeleting} onClick={onLogout}>
               {isDeleting ? 'Logging out...' : 'Logout'}
             </StyledButton>
           </>
@@ -97,11 +98,6 @@ const Header = props => {
       </Box>
     </Box>
   )
-}
-
-Header.propTypes = {
-  currentUser: PropTypes.object,
-  handleLogout: PropTypes.func.isRequired,
 }
 
 export default Header

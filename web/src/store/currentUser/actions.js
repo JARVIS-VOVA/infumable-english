@@ -10,12 +10,11 @@ export default {
     payload,
   }),
 
-  getFailed: () => ({
+  getFailed: ({
     type: CURRENT_USER.GET_FAILED,
   }),
 
-
-  logout: () => ({
-    type: CURRENT_USER.LOGOUT,
+  reset: () => ({
+    type: CURRENT_USER.RESET,
   }),
 }

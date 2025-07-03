@@ -3,9 +3,9 @@ export default {
   welcome: '/welcome',
   police: '/police',
 
-  words: '/words',
-  addWords: '/add-words',
-  importWords: '/import-words',
+  terms: '/terms',
+  addTerms: '/terms/add',
+  importTerms: '/terms/import',
   tags: '/tags',
 
   signUp: '/sign-up',
@@ -15,5 +15,5 @@ export default {
 }
 
 export const OUTSIDE_ROUTES = {
-  UrlGitHubRepository: 'https://github.com/JARVIS-VOVA/infumable-english',
+  urlGitHubRepository: 'https://github.com/JARVIS-VOVA/infumable-english',
 }
