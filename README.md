@@ -27,6 +27,11 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
   echo -n 'd62b5cfbb14a117d1f46_cb040d1d468' >> api/config/credentials/test.key
 ```
 
+### Setup DB && seeds
+```
+  rails db:create && rails db:migrate && rails db:seed
+```
+
 ## Testing, lintering and rswag
 ```
   rubocop && fasterer && rspec spec
