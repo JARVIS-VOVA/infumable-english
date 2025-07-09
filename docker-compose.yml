@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    volumes:
+      - ./tmp/log:/var/log/postgresql
+      - ./tmp/db:/var/lib/postgresql/data:rw
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: $PWD/docker/development/api
+    volumes:
+      - ./api:/apps/infumable-english/api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+
+  web:
+    container_name: web
+    build:
+      context: ./web
+      dockerfile: $PWD/docker/development/web
+    volumes:
+      - ./web:/apps/infumable-english/web
+      - /apps/infumable-english/web/node_modules
+    ports:
+      - '4000:4000'
+    depends_on:
+      - api
