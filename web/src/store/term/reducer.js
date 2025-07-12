@@ -17,7 +17,7 @@ export default (state = initialState, { type, payload }) => {
 
     // CREATE
     case TERM.CREATE_SUCCESS:
-      return { ...state, isCreating: false, items: [...payload, ...state.items] }
+      return { ...state, isCreating: false, items: [...payload, ...(state.items || [])] }
 
     // UPDATE
     case TERM.UPDATE_SUCCESS:

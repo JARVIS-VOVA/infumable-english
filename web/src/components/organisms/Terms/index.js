@@ -33,7 +33,6 @@ const Terms = () => {
     handleImportExcel,
   } = useTerms()
   const {
-    tags,
     fetchTagsIfNotFetched,
   } = useTags()
 
@@ -83,14 +82,13 @@ const Terms = () => {
     return (
       <Form
         onSubmit={isEditMode ? handleUpdateTerm : handleCreateTerms}
-        // initialValues={isEditMode ? editTerm : {}}
-        initialValues={{ phrase: 'q', meaning: 'q', tags: ['q'] }}
+        initialValues={isEditMode ? editTerm : {}}
         render={formProps => {
           const { handleSubmit, values, invalid, form } = formProps
 
           return (
             <Grid container spacing={2} sx={{ alignItems: 'center' }}>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <Field
                   name='phrase'
                   validate={required}
@@ -104,7 +102,7 @@ const Terms = () => {
                 />
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <Field
                   name='meaning'
                   validate={required}
@@ -118,7 +116,7 @@ const Terms = () => {
                 />
               </Grid>
 
-              <Field
+              {/* <Field
                 name='tags'
                 multiple
                 render={({ input, meta }) => {
@@ -160,7 +158,7 @@ const Terms = () => {
                     </Select>
                   )
                 }}
-              />
+              /> */}
 
               <Grid item xs={2}>
                 {!isEditMode && (
@@ -214,25 +212,25 @@ const Terms = () => {
 
               {!isEditNow && (
                 <Grid container spacing={2} sx={{ alignItems: 'center' }}>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography>
                       {term.phrase}
                     </Typography>
                   </Grid>
 
-                  <Grid item xs={4}>
+                  <Grid item xs={6}>
                     <Typography>
                       {term.meaning}
                     </Typography>
                   </Grid>
 
-                  <Grid item xs={3} sx={{ display: 'flex', gap: 1 }}>
+                  {/* <Grid item xs={3} sx={{ display: 'flex', gap: 1 }}>
                     {term.termTags.map(termTag => (
                       <Typography key={termTag.id}>
                         {tags?.find(tag => tag.id === termTag.tagId).title}
                       </Typography>
                     ))}
-                  </Grid>
+                  </Grid> */}
 
                   <Grid item xs={2}>
                     <IconButton onClick={() => setEditTermId(term.id)}>

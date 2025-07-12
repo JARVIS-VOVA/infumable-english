@@ -23,26 +23,24 @@ import {
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import RedoIcon from '@mui/icons-material/Redo'
 import AcUnitIcon from '@mui/icons-material/AcUnit'
-import AddIcon from '@mui/icons-material/Add'
+// import AddIcon from '@mui/icons-material/Add'
 
 import { useTags, useTerms } from 'src/hooks'
 import { required } from 'src/helpers/validations/fieldLevelValidation'
 
+const EMPTY_TERM = {
+  phrase: '',
+  meaning: '',
+  // tags: [],
+}
+
 const AddTerm = props => {
   const { createTerms } = useTerms()
-  const { tags, fetchTagsIfNotFetched } = useTags()
+  // const { tags, fetchTagsIfNotFetched } = useTags()
 
-  React.useEffect(() => {
-    fetchTagsIfNotFetched()
-  }, []);
-
-  const handleAddNewTag = () => {
-    console.log('handleAddNewTag not implemented')
-  }
-
-  const handleDelete = () => {
-    console.log('handleDelete not implemented')
-  }
+  // React.useEffect(() => {
+  //   fetchTagsIfNotFetched()
+  // }, []);
 
   let submitFunction
   let pushFunction
@@ -51,7 +49,7 @@ const AddTerm = props => {
   return (
     <Box>
       <Container maxWidth='sm'>
-        <Card> {/* sx={{ minWidth: '100%' }} */}
+        <Card>
           <CardContent sx={{ p: 3 }}>
             <Typography variant='h4'>
               Добавлення слова
@@ -62,13 +60,9 @@ const AddTerm = props => {
                 ...arrayMutators
               }}
               onSubmit={createTerms}
-              // TODO: Remove initialValues
-              // initialValues={{ email: 'user@example.com', password: 'password' }}
               initialValues = {{
                 terms: [
-                  {
-                    tags: [],
-                  },
+                  EMPTY_TERM,
                 ],
               }}
               render={({
@@ -94,29 +88,7 @@ const AddTerm = props => {
                           return (
                             <Box key={name}>
                               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                                <Stack direction="row" spacing={1}>
-                                  {tags?.map(tag => (
-                                    <Chip
-                                      icon={<AcUnitIcon />}
-                                      color="success"
-                                      size="small"
-                                      onDelete={handleDelete}
-                                      label={tag.title}
-                                      key={tag.id}
-                                      sx={{ color: tag.color }}
-                                    />
-                                  ))}
-                                  <Chip
-                                    color="primary"
-                                    size="small"
-                                    onClick={handleAddNewTag}
-                                    onDelete={handleAddNewTag}
-                                    deleteIcon={<AddIcon />}
-                                    label='Add tag'
-                                  />
-                                </Stack>
-
-                                <Field
+                                {/* <Field
                                   name={`${name}.tags`}
                                   render={({ input, meta }) => {
                                     return (
@@ -124,8 +96,9 @@ const AddTerm = props => {
                                         {...input}
                                         placeholder='Tags'
                                         multiple
-                                        input={<Box>
-                                          <Chip
+                                        input={
+                                          <Box>
+                                            <Chip
                                               color="primary"
                                               size="small"
                                               // onClick={handleAddNewTag}
@@ -165,7 +138,7 @@ const AddTerm = props => {
                                       </Select>
                                     )
                                   }}
-                                />
+                                /> */}
 
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 1 }}>
                                   <Typography sx={{ mt: 2 }}>{index + 1}.</Typography>
@@ -222,9 +195,6 @@ const AddTerm = props => {
                         })
                       )}
                     </FieldArray>
-
-                    <pre>{JSON.stringify(values, 0, 2)}</pre>
-
                   </Box>
                 )
               }}
@@ -237,7 +207,7 @@ const AddTerm = props => {
             <Button fullWidth variant='outlined' onClick={() => popFunction('terms')}>
               Remove Last
             </Button>
-            <Button fullWidth variant='outlined' onClick={() => pushFunction('terms', { tags: [] })}>
+            <Button fullWidth variant='outlined' onClick={() => pushFunction('terms', EMPTY_TERM)}>
               Add Term
             </Button>
 
