@@ -12,7 +12,7 @@ import { THEME_MODES } from 'src/theme'
 import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'src/assets/img'
 
 import Header from 'src/components/organisms/Header'
-import Loader from 'src/containers/Loader'
+import Loader from 'src/components/organisms/Loader'
 import { MainTitle } from 'src/components/atoms'
 
 const HEADER_HEIGHT = '100px'

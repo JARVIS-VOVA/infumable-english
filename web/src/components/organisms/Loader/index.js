@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
+import { useSelector } from 'react-redux'
 
 import { CURIOUS_BLUE } from 'src/constants/colors'
 
@@ -27,7 +28,10 @@ const StyledSpan = styled('span')({
   animationTimingFunction: 'ease',
 })
 
-const Loader = ({ isLoading }) => {
+const Loader = () => {
+  const { status } = useSelector(state => state.loader)
+  const isLoading = status
+
   const renderDots = () => {
     if (!isLoading) return null
 

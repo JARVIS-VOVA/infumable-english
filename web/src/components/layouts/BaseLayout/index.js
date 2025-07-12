@@ -12,7 +12,7 @@ import { useTheme } from '@emotion/react'
 import { mainBackgroundLightImg, mainBackgroundDarkImg } from 'src/assets/img'
 import Footer from 'src/components/organisms/Footer'
 import Header from 'src/components/organisms/Header'
-import Loader from 'src/containers/Loader'
+import Loader from 'src/components/organisms/Loader'
 import { THEME_MODES } from 'src/theme'
 
 const HEADER_HEIGHT = '100px'

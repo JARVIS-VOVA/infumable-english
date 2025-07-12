@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Form, Field } from 'react-final-form'
 import {
   Box,
@@ -9,12 +8,39 @@ import {
 } from '@mui/material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import KeyIcon from '@mui/icons-material/Key'
+import { useDispatch, useSelector } from 'react-redux'
+import toast from 'react-hot-toast'
+import _ from 'lodash'
+import { useNavigate } from 'react-router-dom'
 
 import { composeValidators, required, email, minLengthPassword } from 'src/helpers/validations/fieldLevelValidation'
 import { loginImg } from 'src/assets/img'
+import Api from 'src/helpers/api'
+import { currentUserActions, loaderActions, sessionActions } from 'src/store/actions'
+import showToastError from 'src/helpers/showToastError'
+import ROUTES from 'src/constants/routes'
 
-const SignIn = props => {
-  const { handleSubmit, isCreating } = props
+const SignIn = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isCreating = useSelector(state => state.session.isCreating)
+
+  const handleSubmit = async data => {
+    try {
+      dispatch(sessionActions.createRequest())
+      dispatch(loaderActions.changeStatus({ status: true }))
+      await Api.Session.create(data)
+      dispatch(sessionActions.createSuccess())
+      dispatch(loaderActions.changeStatus({ status: false }))
+      dispatch(currentUserActions.getRequest())
+      toast.success('You have successfully logged in!')
+      navigate(ROUTES.terms)
+    } catch (error) {
+      dispatch(sessionActions.createFailed())
+      dispatch(loaderActions.changeStatus({ status: false }))
+      showToastError(error)
+    }
+  }
 
   return (
     <>
@@ -83,11 +109,6 @@ const SignIn = props => {
       />
     </>
   )
-}
-
-SignIn.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  isCreating: PropTypes.bool.isRequired,
 }
 
 export default SignIn

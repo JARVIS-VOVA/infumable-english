@@ -1,7 +1,7 @@
 import React from 'react'
 
 import EasyLayout from 'src/components/layouts/EasyLayout'
-import Terms from 'src/containers/Terms'
+import Terms from 'src/components/organisms/Terms'
 
 const TermPage = () => (
   <EasyLayout title='Terms'>

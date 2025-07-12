@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Field } from 'react-final-form'
 import {
   Box,
@@ -10,12 +10,38 @@ import {
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import KeyIcon from '@mui/icons-material/Key'
 import PersonIcon from '@mui/icons-material/Person'
+import toast from 'react-hot-toast'
+import _ from 'lodash'
+import { useNavigate } from 'react-router-dom'
 
 import { composeValidators, required, email, minLengthPassword, passwordsMatch } from 'src/helpers/validations/fieldLevelValidation'
 import { loginImg } from 'src/assets/img'
+import { loaderActions, userActions, currentUserActions } from 'src/store/actions'
+import Api from 'src/helpers/api'
+import showToastError from 'src/helpers/showToastError'
+import ROUTES from 'src/constants/routes'
 
-const SignUp = props => {
-  const { handleSubmit, isCreating } = props
+const SignUp = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isCreating = useSelector(state => state.user.isCreating)
+
+  const handleSubmit = async data => {
+    try {
+      dispatch(loaderActions.changeStatus({ status: true }))
+      dispatch(userActions.createRequest())
+      await Api.User.create({ user: data })
+      dispatch(userActions.createSuccess())
+      dispatch(loaderActions.changeStatus({ status: false }))
+      dispatch(currentUserActions.getRequest())
+      toast.success('User was successfully created')
+      navigate(ROUTES.terms)
+    } catch (error) {
+      dispatch(userActions.createFailed())
+      dispatch(loaderActions.changeStatus({ status: false }))
+      showToastError(error)
+    }
+  }
 
   return (
     <>
@@ -123,11 +149,6 @@ const SignUp = props => {
       />
     </>
   )
-}
-
-SignUp.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  isCreating: PropTypes.bool.isRequired,
 }
 
 export default SignUp
