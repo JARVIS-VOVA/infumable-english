@@ -1,7 +1,7 @@
 import TAG from './constants'
 
 const initialState = {
-  items: undefined,
+  items: [],
   isFetching: false,
   isCreating: false,
   isUpdating: false,

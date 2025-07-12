@@ -23,7 +23,6 @@ const Tags = () => {
     tags,
     createTag,
     isTagsFetching,
-    isTagsFetched,
     deleteTag,
     updateTag,
   } = useTags()
@@ -172,8 +171,8 @@ const Tags = () => {
   return (
     <Container maxWidth='sm'>
       {isTagsFetching && <Box>Loading...</Box>}
-      {isTagsFetched && tags.length === 0 && renderNoTags()}
-      {isTagsFetched && tags.length > 0 && renderTags()}
+      {!isTagsFetching && tags.length === 0 && renderNoTags()}
+      {!isTagsFetching && tags.length > 0 && renderTags()}
     </Container>
   );
 }

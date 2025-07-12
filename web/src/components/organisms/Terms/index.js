@@ -29,7 +29,6 @@ const Terms = () => {
     deleteTerm,
     terms,
     isTermsFetching,
-    isTermsFetched,
     handleImportExcel,
   } = useTerms()
   const {
@@ -252,8 +251,8 @@ const Terms = () => {
   return (
     <>
       {isTermsFetching && <Box>Loading...</Box>}
-      {isTermsFetched && terms.length === 0 && renderNoTerms()}
-      {isTermsFetched && terms.length > 0 && renderTerms()}
+      {!isTermsFetching && terms.length === 0 && renderNoTerms()}
+      {!isTermsFetching && terms.length > 0 && renderTerms()}
     </>
   )
 }

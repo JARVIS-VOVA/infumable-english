@@ -10,10 +10,8 @@ const useTerms = () => {
   const terms = useSelector(state => state.term.items)
   const isTermsFetching = useSelector(state => state.term.isFetching)
 
-  const isTermsFetched = terms !== undefined
-
   const fetchTermsIfNotFetched = async () => {
-    if (isTermsFetched) {
+    if (terms.length > 0) {
       return
     }
 
@@ -74,7 +72,6 @@ const useTerms = () => {
     fetchTermsIfNotFetched,
     terms,
     isTermsFetching,
-    isTermsFetched,
     createTerms,
     updateTerm,
     importExcel,

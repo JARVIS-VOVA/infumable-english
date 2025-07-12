@@ -1,8 +1,11 @@
 import TERM from './constants'
 
 const initialState = {
-  items: undefined,
-  isFetching: false,
+  items: [],
+  isFetching: true,
+  isCreating: false,
+  isUpdating: false,
+  isDeleting: false,
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -17,14 +20,18 @@ export default (state = initialState, { type, payload }) => {
 
     // CREATE
     case TERM.CREATE_SUCCESS:
-      return { ...state, isCreating: false, items: [...payload, ...(state.items || [])] }
+      return {
+        ...state,
+        isCreating: false,
+        items: [...payload, ...state.items],
+      }
 
     // UPDATE
     case TERM.UPDATE_SUCCESS:
       return {
         ...state,
         isUpdating: false,
-        items: state.items.map(item => item.id === payload.id ? payload : item)
+        items: state.items.map(item => item.id === payload.id ? payload : item),
       }
 
     // DELETE
@@ -32,7 +39,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isDeleting: false,
-        items: state.items.filter(item => item.id !== payload.id)
+        items: state.items.filter(item => item.id !== payload.id),
       }
 
     default:

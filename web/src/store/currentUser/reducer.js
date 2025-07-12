@@ -1,7 +1,7 @@
 import CURRENT_USER from './constants'
 
 const initialState = {
-  item: undefined,
+  item: {},
   isGetting: false,
 }
 

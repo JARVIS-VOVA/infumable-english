@@ -11,10 +11,8 @@ const useTags = () => {
   const isTagsFetching = useSelector(state => state.tag.isTagsFetching)
   const tags = useSelector(state => state.tag.items)
 
-  const isTagsFetched = tags !== undefined
-
   const fetchTagsIfNotFetched = async () => {
-    if (isTagsFetched) {
+    if (tags.length > 0) {
       return
     }
 
@@ -76,7 +74,6 @@ const useTags = () => {
     fetchTagsIfNotFetched,
     tags,
     isTagsFetching,
-    isTagsFetched,
     createTag,
     deleteTag,
     updateTag,
