@@ -1,5 +1,4 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Form, Field } from 'react-final-form'
 import {
   Box,
@@ -10,45 +9,21 @@ import {
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import KeyIcon from '@mui/icons-material/Key'
 import PersonIcon from '@mui/icons-material/Person'
-import toast from 'react-hot-toast'
 import _ from 'lodash'
-import { useNavigate } from 'react-router-dom'
 
+import { useUsers } from 'src/hooks'
 import { composeValidators, required, email, minLengthPassword, passwordsMatch } from 'src/helpers/validations/fieldLevelValidation'
 import { loginImg } from 'src/assets/img'
-import { loaderActions, userActions, currentUserActions } from 'src/store/actions'
-import Api from 'src/helpers/api'
-import showToastError from 'src/helpers/showToastError'
-import ROUTES from 'src/constants/routes'
 
 const SignUp = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const isCreating = useSelector(state => state.user.isCreating)
-
-  const handleSubmit = async data => {
-    try {
-      dispatch(loaderActions.changeStatus({ status: true }))
-      dispatch(userActions.createRequest())
-      await Api.User.create({ user: data })
-      dispatch(userActions.createSuccess())
-      dispatch(loaderActions.changeStatus({ status: false }))
-      dispatch(currentUserActions.getRequest())
-      toast.success('User was successfully created')
-      navigate(ROUTES.terms)
-    } catch (error) {
-      dispatch(userActions.createFailed())
-      dispatch(loaderActions.changeStatus({ status: false }))
-      showToastError(error)
-    }
-  }
+  const { createUser, isUserCreating } = useUsers()
 
   return (
     <>
       <Box component='img' src={loginImg} sx={{ display: 'flex', margin: '0 auto', width: '50%', maxWidth: '300px' }} />
 
       <Form
-        onSubmit={handleSubmit}
+        onSubmit={createUser}
         // TODO: Remove initialValues
         initialValues={{ email: 'user@example.com', username: 'Mary Poppins', password: 'password', passwordConfirmation: 'password' }}
         render={({ handleSubmit, values, invalid }) => (
@@ -142,7 +117,7 @@ const SignUp = () => {
             />
 
             <Button size='large' variant='contained' disabled={invalid} type='submit'>
-              {isCreating ? 'Loading...' : 'Sign Up'}
+              {isUserCreating ? 'Loading...' : 'Sign Up'}
             </Button>
           </Box>
         )}

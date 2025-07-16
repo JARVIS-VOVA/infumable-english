@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Form, Field } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import { FieldArray } from 'react-final-form-arrays'
@@ -25,8 +24,10 @@ import RedoIcon from '@mui/icons-material/Redo'
 import AcUnitIcon from '@mui/icons-material/AcUnit'
 // import AddIcon from '@mui/icons-material/Add'
 
-import { useTags, useTerms } from 'src/hooks'
 import { required } from 'src/helpers/validations/fieldLevelValidation'
+import {
+  useCreateTermsMutation,
+} from 'src/api/termsApi';
 
 const EMPTY_TERM = {
   phrase: '',
@@ -35,12 +36,7 @@ const EMPTY_TERM = {
 }
 
 const AddTerm = props => {
-  const { createTerms } = useTerms()
-  // const { tags, fetchTagsIfNotFetched } = useTags()
-
-  // React.useEffect(() => {
-  //   fetchTagsIfNotFetched()
-  // }, []);
+  const [createTerms, { isLoading: isTermsCreating }] = useCreateTermsMutation()
 
   let submitFunction
   let pushFunction
@@ -211,19 +207,14 @@ const AddTerm = props => {
               Add Term
             </Button>
 
-            <Button fullWidth variant='contained' onClick={event => submitFunction(event)}>
-              Create Terms
+            <Button fullWidth variant='contained' disabled={isTermsCreating} onClick={event => submitFunction(event)}>
+              {isTermsCreating ? 'Creating...' : 'Create Terms'}
             </Button>
           </CardActions>
         </Card>
       </Container>
     </Box>
   )
-}
-
-AddTerm.propTypes = {
-  terms: PropTypes.arrayOf(PropTypes.object),
-  handleImportExcel: PropTypes.func,
 }
 
 export default AddTerm

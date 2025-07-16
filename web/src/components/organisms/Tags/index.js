@@ -13,25 +13,22 @@ import CheckIcon from '@mui/icons-material/Check'
 import CloseIcon from '@mui/icons-material/Close'
 import { Form, Field } from 'react-final-form'
 
-import { useTags } from 'src/hooks'
 import { personWithFlugImg } from 'src/assets/img'
 import { required } from 'src/helpers/validations/fieldLevelValidation'
+import {
+  useGetTagsQuery,
+  useCreateTagMutation,
+  useUpdateTagMutation,
+  useDeleteTagMutation,
+} from 'src/api/tagsApi';
 
 const Tags = () => {
-  const {
-    fetchTagsIfNotFetched,
-    tags,
-    createTag,
-    isTagsFetching,
-    deleteTag,
-    updateTag,
-  } = useTags()
+  const [editTagId, setEditTagId] = React.useState(null)
 
-  const [editTagId, setEditTagId] = React.useState()
-
-  React.useEffect(() => {
-    fetchTagsIfNotFetched()
-  }, [])
+  const { data: tags, isLoading: isTagsLoading } = useGetTagsQuery()
+  const [createTag, { isLoading: isCreating }] = useCreateTagMutation()
+  const [updateTag, { isLoading: isUpdating }] = useUpdateTagMutation()
+  const [deleteTag] = useDeleteTagMutation()
 
   const getIsEditNow = id => id === editTagId
 
@@ -99,17 +96,25 @@ const Tags = () => {
 
               <Grid item xs={3}>
                 {!isEditMode && (
-                  <IconButton onClick={() => {
-                    handleSubmit()
-                    form.restart()
-                  }} disabled={invalid} type='submit'>
-                    <CheckIcon />
+                  <IconButton
+                    onClick={async () => {
+                      try {
+                        await handleSubmit();
+                        form.restart();
+                      } catch (error) {
+                        console.error('Error:', error);
+                      }
+                    }}
+                    disabled={invalid || isCreating}
+                    type='submit'
+                  >
+                    {isCreating ? <Box>Loading...</Box> : <CheckIcon />}
                   </IconButton>
                 )}
                 {isEditMode && (
                   <Box>
                     <IconButton onClick={handleSubmit} disabled={invalid} type='submit'>
-                      <CheckIcon />
+                      {(isUpdating && editTagId) ? <Box>Loading...</Box> : <CheckIcon />}
                     </IconButton>
                     <IconButton onClick={() => setEditTagId(null)}>
                       <CloseIcon />
@@ -155,7 +160,7 @@ const Tags = () => {
                     <IconButton onClick={() => setEditTagId(tag.id)}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={() => deleteTag({ id: tag.id })}>
+                    <IconButton onClick={() => deleteTag(tag.id)}>
                       <DeleteOutlineIcon />
                     </IconButton>
                   </Grid>
@@ -170,9 +175,9 @@ const Tags = () => {
 
   return (
     <Container maxWidth='sm'>
-      {isTagsFetching && <Box>Loading...</Box>}
-      {!isTagsFetching && tags.length === 0 && renderNoTags()}
-      {!isTagsFetching && tags.length > 0 && renderTags()}
+      {isTagsLoading && <Box>Loading...</Box>}
+      {!isTagsLoading && tags.length === 0 && renderNoTags()}
+      {!isTagsLoading && tags.length > 0 && renderTags()}
     </Container>
   );
 }

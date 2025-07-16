@@ -15,11 +15,11 @@ function* watchGetRequest() {
   try {
     yield put(loaderActions.changeStatus({ status: true }))
     const response = yield call(Api.CurrentUser.show)
-    yield put(loaderActions.changeStatus({ status: false }))
     yield put(currentUserActions.getSuccess(response.data))
   } catch (error) {
-    yield put(loaderActions.changeStatus({ status: false }))
     yield put(currentUserActions.getFailed())
-    showToastError(error)
+    showToastError(error.response)
+  } finally {
+    yield put(loaderActions.changeStatus({ status: false }))
   }
 }

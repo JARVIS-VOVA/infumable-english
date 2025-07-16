@@ -1,13 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   Box,
   Button,
-  Chip,
   Grid,
   IconButton,
-  MenuItem,
-  Select,
   TextField,
   Typography,
 } from '@mui/material'
@@ -17,30 +13,25 @@ import CheckIcon from '@mui/icons-material/Check'
 import CloseIcon from '@mui/icons-material/Close'
 import { Field, Form } from 'react-final-form'
 
-import { useTags, useTerms } from 'src/hooks'
+import { useTerms } from 'src/hooks'
 import { personWithFlugImg, ExcelSvg } from 'src/assets/img'
 import { required } from 'src/helpers/validations/fieldLevelValidation'
+import {
+  useGetTermsQuery,
+  useCreateTermsMutation,
+  useUpdateTermMutation,
+  useDeleteTermMutation,
+} from 'src/api/termsApi';
 
 const Terms = () => {
-  const {
-    fetchTermsIfNotFetched,
-    createTerms,
-    updateTerm,
-    deleteTerm,
-    terms,
-    isTermsFetching,
-    handleImportExcel,
-  } = useTerms()
-  const {
-    fetchTagsIfNotFetched,
-  } = useTags()
+  const [editTermId, setEditTermId] = React.useState(null)
 
-  const [editTermId, setEditTermId] = React.useState()
+  const { data: terms, isLoading: isTermsLoading } = useGetTermsQuery()
+  const [createTerms, { isLoading: isCreating }] = useCreateTermsMutation()
+  const [updateTerm, { isLoading: isUpdating }] = useUpdateTermMutation()
+  const [deleteTerm] = useDeleteTermMutation()
 
-  React.useEffect(() => {
-    fetchTermsIfNotFetched()
-    fetchTagsIfNotFetched()
-  }, [])
+  const { handleImportExcel } = useTerms()
 
   const getIsEditNow = termId => termId === editTermId
 
@@ -164,14 +155,17 @@ const Terms = () => {
                   <IconButton onClick={() => {
                     handleSubmit()
                     form.restart()
-                  }} disabled={invalid} type='submit'>
-                    <CheckIcon />
+                  }}
+                    disabled={invalid}
+                    type='submit'
+                  >
+                    {isCreating ? <Box>Loading...</Box> : <CheckIcon />}
                   </IconButton>
                 )}
                 {isEditMode && (
                   <Box>
                     <IconButton onClick={handleSubmit} disabled={invalid} type='submit'>
-                      <CheckIcon />
+                      {isUpdating ? <Box>Loading...</Box> : <CheckIcon />}
                     </IconButton>
                     <IconButton onClick={() => setEditTermId(null)}>
                       <CloseIcon />
@@ -235,7 +229,7 @@ const Terms = () => {
                     <IconButton onClick={() => setEditTermId(term.id)}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={() => deleteTerm({ id: term.id })}>
+                    <IconButton onClick={() => deleteTerm(term.id)}>
                       <DeleteOutlineIcon />
                     </IconButton>
                   </Grid>
@@ -250,16 +244,11 @@ const Terms = () => {
 
   return (
     <>
-      {isTermsFetching && <Box>Loading...</Box>}
-      {!isTermsFetching && terms.length === 0 && renderNoTerms()}
-      {!isTermsFetching && terms.length > 0 && renderTerms()}
+      {isTermsLoading && <Box>Loading...</Box>}
+      {!isTermsLoading && terms.length === 0 && renderNoTerms()}
+      {!isTermsLoading && terms.length > 0 && renderTerms()}
     </>
   )
-}
-
-Terms.propTypes = {
-  terms: PropTypes.arrayOf(PropTypes.object),
-  handleImportExcel: PropTypes.func,
 }
 
 export default Terms

@@ -5,7 +5,7 @@ const initialState = {
   isGetting: false,
 }
 
-export default (state = initialState, { payload, type }) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case CURRENT_USER.GET_REQUEST:
       return { ...state, isGetting: true }
@@ -17,8 +17,9 @@ export default (state = initialState, { payload, type }) => {
       return { ...state, isGetting: false, item: null }
     }
 
+
     case CURRENT_USER.RESET:
-      return { ...state, item: null }
+      return { ...state, item: initialState.item }
 
     default:
       return state

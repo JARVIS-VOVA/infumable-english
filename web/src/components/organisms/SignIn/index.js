@@ -16,38 +16,20 @@ import { useNavigate } from 'react-router-dom'
 import { composeValidators, required, email, minLengthPassword } from 'src/helpers/validations/fieldLevelValidation'
 import { loginImg } from 'src/assets/img'
 import Api from 'src/helpers/api'
-import { currentUserActions, loaderActions, sessionActions } from 'src/store/actions'
+import { loaderActions, sessionActions } from 'src/store/actions'
 import showToastError from 'src/helpers/showToastError'
 import ROUTES from 'src/constants/routes'
+import { useSession } from 'src/hooks'
 
 const SignIn = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const isCreating = useSelector(state => state.session.isCreating)
-
-  const handleSubmit = async data => {
-    try {
-      dispatch(sessionActions.createRequest())
-      dispatch(loaderActions.changeStatus({ status: true }))
-      await Api.Session.create(data)
-      dispatch(sessionActions.createSuccess())
-      dispatch(loaderActions.changeStatus({ status: false }))
-      dispatch(currentUserActions.getRequest())
-      toast.success('You have successfully logged in!')
-      navigate(ROUTES.terms)
-    } catch (error) {
-      dispatch(sessionActions.createFailed())
-      dispatch(loaderActions.changeStatus({ status: false }))
-      showToastError(error)
-    }
-  }
+  const { createSession, isSessionCreating } = useSession()
 
   return (
     <>
       <Box component='img' src={loginImg} sx={{ display: 'flex', margin: '0 auto', width: '50%', maxWidth: '300px' }} />
 
       <Form
-        onSubmit={handleSubmit}
+        onSubmit={createSession}
         // TODO: Remove initialValues
         initialValues={{ email: 'user@example.com', password: 'password' }}
         render={({ handleSubmit, invalid }) => (
@@ -102,7 +84,7 @@ const SignIn = () => {
             />
 
             <Button size='large' variant='contained' disabled={invalid} type='submit'>
-              {isCreating ? 'Loading...' : 'Sign In'}
+              {isSessionCreating ? 'Loading...' : 'Sign In'}
             </Button>
           </Box>
         )}

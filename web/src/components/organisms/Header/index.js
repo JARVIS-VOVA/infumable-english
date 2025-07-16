@@ -13,7 +13,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import styled from '@emotion/styled'
 
-import { useSession, useCurrentUser } from 'src/hooks'
+import { useSession } from 'src/hooks'
 import ROUTES from 'src/constants/routes'
 import { ThemeModeContext } from 'src/contexts'
 import { THEME_MODES } from 'src/theme'
@@ -49,8 +49,8 @@ const StyledButton = styled(Button)({
 const Header = () => {
   const isDeleting = useSelector(state => state.session.isDeleting)
   const { themeMode, toggleThemeMode } = React.useContext(ThemeModeContext)
-  const { onLogout } = useSession()
-  const { currentUser } = useCurrentUser()
+
+  const { isAuthenticated, onLogout } = useSession()
 
   return (
     <Box sx={{ display: 'flex', flexGrow: 1, alignItems: 'center', gap: 3 }}>
@@ -77,12 +77,13 @@ const Header = () => {
           {themeMode === THEME_MODES.light ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
 
-        {_.isEmpty(currentUser) ? (
+        {!isAuthenticated && (
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <MUILink component={Link} to={ROUTES.signIn} color='secondary'>Sing In</MUILink>
             <MUILink component={Link} to={ROUTES.signUp}>Sing Up</MUILink>
           </Box>
-        ) : (
+        )}
+        {isAuthenticated && (
           <>
             {SIGNED_PAGES.map(({ path, pageName }) => (
               <StyledButton variant='contained' color='primary' key={pageName} component={Link} to={path}>
