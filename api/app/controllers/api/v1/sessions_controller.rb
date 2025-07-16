@@ -1,13 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::SessionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[create]
-
-  def show
-    return head :ok if user_signed_in?
-
-    head :unauthorized
-  end
+  skip_before_action :authenticate_user!, only: %i[create show]
 
   def create
     @user = User.find_by(email: user_params[:email])
@@ -17,6 +11,10 @@ class Api::V1::SessionsController < ApplicationController
     end
     render json: { error: I18n.t('devise.failed.not_found_in_database', authentication_keys: :email) },
            status: :unprocessable_entity
+  end
+
+  def show
+    render json: { authenticated: user_signed_in? }
   end
 
   def destroy
