@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   devise_for :users, skip: :all
   namespace :api do
+    get '/healthz', to: 'healthz#show'
+
     namespace :v1 do
       resources :users, only: %w[index create show]
       resource :current_user, only: %w[show]
