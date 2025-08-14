@@ -1,0 +1,27 @@
+service: api_new
+image: your-user/api_new
+servers:
+  web:
+    - 192.168.0.1
+proxy:
+  ssl: true
+  host: app.example.com
+registry:
+  username: your-user
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+env:
+  secret:
+    - RAILS_MASTER_KEY
+  clear:
+    SOLID_QUEUE_IN_PUMA: true
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+volumes:
+  - "api_new_storage:/rails/storage"
+asset_path: /rails/public/assets
+builder:
+  arch: amd64
