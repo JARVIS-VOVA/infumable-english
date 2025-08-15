@@ -14,9 +14,9 @@ gem 'rack-cors', '~> 3.0'
 gem 'rails', '~> 8.0.2', '>= 8.0.2.1'
 gem 'rswag-api', '~> 2.16'
 gem 'rswag-ui', '~> 2.16'
-gem 'solid_cable'
-gem 'solid_cache'
-gem 'solid_queue'
+gem 'solid_cable', '~> 3.0.12'
+gem 'solid_cache', '~> 1.0.7'
+gem 'solid_queue', '~> 1.2.1'
 gem 'thruster', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
