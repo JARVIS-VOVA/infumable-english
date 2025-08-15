@@ -1,9 +1,11 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+
   devise_for :users, skip: :all
+
+  get 'up', to: 'rails/health#show', as: :rails_health_check
+
   namespace :api do
     get '/healthz', to: 'healthz#show'
 

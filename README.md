@@ -31,28 +31,36 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
   rails db:create && rails db:migrate && rails db:seed
 ```
 
-## Testing, lintering and rswag
+### Testing, lintering and rswag
 ```
-  rubocop && fasterer && rspec spec
-  rails rswag # update rswag
+  rubocop && fasterer && brakeman && rspec spec && rails rswag
 ```
 
-## Run
+### Cache
+Check new record in solid_cache_entries
+
+### Queue
+Check new record in solid_queue_jobs
+```
+  bundle exec rails solid_queue:start
+```
+
+### Run rails server
 ```
   rails s
 ```
 
-## Deploy
+### Deploy
 ```
 ```
 
-## Credentials
+### Credentials
 ```
   EDITOR=vi bin/rails credentials:edit -e production
-  Rails.application.credentials[Rails.env.to_sym][:db][:user]
+  Rails.application.credentials.dig(:db, :username)
 ```
 
-## Api was created with command
+### Api was created with command
 ```
   rails new . --force --database=postgresql --api
 ```
@@ -65,20 +73,20 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
   cp web/.env.example web/.env
 ```
 
-## Run
+### Run
 ```
   yarn start
 ```
 
-## Available Scripts
+### Available Scripts
 ```
   yarn build
 ```
 
-## Deploy
+### Deploy
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-## Web was created with Create React App
+### Web was created with Create React App
 
 [Create React App](https://github.com/facebook/create-react-app)
