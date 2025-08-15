@@ -454,9 +454,9 @@ DEPENDENCIES
   rubocop-rspec (~> 3.6)
   shoulda-matchers (~> 6.5)
   simplecov (~> 0.22.0)
-  solid_cable
-  solid_cache
-  solid_queue
+  solid_cable (~> 3.0.12)
+  solid_cache (~> 1.0.7)
+  solid_queue (~> 1.2.1)
   thruster
   tzinfo-data
 
