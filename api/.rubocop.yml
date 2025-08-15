@@ -1,14 +1,13 @@
-require:
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
+plugins:
   - rubocop-performance
   - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 3.0.2
+  TargetRubyVersion: 3.4.5
   NewCops: enable
-  Exclude:
-    - bin/**/*
-    - db/**/*
-    - vendor/**/*
 
 Style/Documentation:
   Enabled: false
@@ -16,8 +15,18 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
+
 Layout/LineLength:
   Max: 120
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
 
 Metrics/BlockLength:
   Exclude:
@@ -33,3 +42,6 @@ RSpec/EmptyExampleGroup:
 
 RSpec/ImplicitExpect:
   EnforcedStyle: should
+
+RSpec/ExampleLength:
+  Enabled: false

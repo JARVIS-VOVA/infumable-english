@@ -66,14 +66,14 @@ components:
         email:
           type: string
           example: user@example.com
-        createdAt:
+        created_at:
           type: datatime
-          example: 1636311796-01-01 00:00:00 +0000
+          example: 1636311796-01-01 00:00:00 +0200
       required:
       - id
       - username
       - email
-      - createdAt
+      - created_at
     new_user:
       type: object
       properties:

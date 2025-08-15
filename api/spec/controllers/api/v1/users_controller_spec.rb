@@ -29,7 +29,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         user: {
           email: user_data.email,
           username: user_data.username,
-          password: user_data.password,
+          password: user_data.password
           # password_confirmation: 'password' # optional
         }
       }
@@ -56,7 +56,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     it 'sets a non-empty session' do
-      expect(session).to_not be_empty
+      expect(session).not_to be_empty
     end
   end
 

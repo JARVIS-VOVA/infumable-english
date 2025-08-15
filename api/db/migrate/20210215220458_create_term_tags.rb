@@ -1,4 +1,6 @@
-class CreateTermTags < ActiveRecord::Migration[5.2]
+# frozen_string_literal: true
+
+class CreateTermTags < ActiveRecord::Migration[8.0]
   def change
     create_table :term_tags do |t|
       t.references :user, index: true
