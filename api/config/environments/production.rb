@@ -8,6 +8,8 @@ Rails.application.configure do
   config.active_storage.service = :local
   config.assume_ssl = true
   config.force_ssl = true
+  config.action_dispatch.cookies_same_site_protection = :none
+  config.action_controller.forgery_protection_origin_check = false
   config.log_tags = [:request_id]
   config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
   config.log_level = ENV.fetch('RAILS_LOG_LEVEL') { 'info' }
