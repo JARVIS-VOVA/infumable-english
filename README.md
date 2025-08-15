@@ -2,7 +2,7 @@
 [![CircleCI](https://circleci.com/gh/JARVIS-VOVA/infumable-english.svg?style=shield)](https://app.circleci.com/pipelines/github/JARVIS-VOVA)
 [![codecov](https://codecov.io/gh/JARVIS-VOVA/infumable-english/branch/main/graph/badge.svg?token=9YV2GTED6Z)](https://codecov.io/gh/JARVIS-VOVA/infumable-english)
 
-Infumavle Englist is easy program for quick study english words
+Infumavle English is easy program for quick study words
 
 ## Additional links
 Take names colors for css from http://chir.ag/projects/name-that-color
@@ -15,6 +15,19 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 ```
   git clone git@github.com:JARVIS-VOVA/infumable-english.git && cd infumable-english
 ```
+
+# 🔗 Project Links
+
+## 🌐 API Endpoints
+- **Health Check**: [https://infumable-english.onrender.com/api/healthz](https://infumable-english.onrender.com/api/healthz)
+- **Health Check**: [https://infumable-english.onrender.com/up](https://infumable-english.onrender.com/up)
+
+## 🛠️ Deployment Services
+- **Backend Hosting**: [Render Dashboard](https://dashboard.render.com)
+- **Frontend Hosting**: [Vercel Dashboard](https://vercel.com)
+
+## 🖥️ Frontend
+- **Live Demo**: [https://infumable-english.vercel.app](https://infumable-english.vercel.app)
 
 # API
 ## Quick start
@@ -37,10 +50,10 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 ```
 
 ### Cache
-Check new record in solid_cache_entries
+Check records in solid_cache_entries
 
 ### Queue
-Check new record in solid_queue_jobs
+Check records in solid_queue_jobs
 ```
   bundle exec rails solid_queue:start
 ```
