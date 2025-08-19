@@ -21,6 +21,8 @@ Style/StringLiterals:
 Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
+  Exclude:
+    - config/**/*.rb
 
 Layout/LineLength:
   Max: 120

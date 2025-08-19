@@ -160,8 +160,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_015448) do
     t.bigint "user_id"
     t.string "title"
     t.string "color"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
@@ -178,8 +178,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_015448) do
     t.bigint "user_id"
     t.string "phrase"
     t.string "meaning"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.integer "knowledge_level", default: 0, null: false
+    t.datetime "last_practice_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["knowledge_level"], name: "index_terms_on_knowledge_level"
+    t.index ["last_practice_at"], name: "index_terms_on_last_practice_at"
     t.index ["user_id"], name: "index_terms_on_user_id"
   end
 

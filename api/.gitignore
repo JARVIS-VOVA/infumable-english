@@ -26,3 +26,5 @@
 
 # test
 /coverage
+
+/config/credentials/staging.key
