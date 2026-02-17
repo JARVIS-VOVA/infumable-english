@@ -6,6 +6,7 @@ class CreateTerms < ActiveRecord::Migration[8.0]
       t.references :user, index: true
       t.string :phrase
       t.string :meaning
+      t.datetime :last_practice_at, index: true
 
       t.timestamps
     end

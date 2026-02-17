@@ -31,14 +31,18 @@ class Api::V1::TermsController < ApplicationController
 
   def update
     @term = current_user.terms.find(params[:id])
-    return render 'api/terms/object', status: :accepted if @term.update(update_params)
+    if @term.update(update_params)
+      return render 'api/terms/object', status: :accepted
+    end
 
     render json: { errors: @term.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
     @term = current_user.terms.find(params[:id])
-    return head :ok if @term.destroy
+    if @term.destroy
+      return head :ok
+    end
 
     render json: { errors: @term.errors.full_messages }, status: :unprocessable_entity
   end
@@ -52,10 +56,10 @@ class Api::V1::TermsController < ApplicationController
   end
 
   def update_params
-    params.require(:term).permit(:phrase, :meaning, :tags)
+    params.require(:term).permit(:phrase, :meaning, :tags, :last_practice_at)
   end
 
   def filter_params
-    params.permit(:user_id)
+    params.permit(:user_id, :page, :per_page)
   end
 end
