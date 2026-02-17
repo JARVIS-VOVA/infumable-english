@@ -6,7 +6,6 @@ ruby '3.4.5'
 
 gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
-gem 'kamal', require: false
 gem 'pg', '~> 1.6.1'
 gem 'puma', '>= 5.0'
 gem 'rabl', '~> 0.17.0'
