@@ -22,6 +22,7 @@
 # Ignore keys for decrypting credentials and more.
 /config/credentials/development.key
 /config/credentials/production.key
+/config/credentials/staging.key
 /config/credentials/test.key
 
 # test
