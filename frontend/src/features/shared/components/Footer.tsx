@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ROUTES, { OUTSIDE_ROUTES } from 'src/constants/routes';
-import { gitHubSvg } from 'src/assets/img';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import ROUTES, { OUTSIDE_ROUTES } from 'src/constants/routes'
+import { gitHubSvg } from 'src/assets/img'
 
 export const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer className="w-full bg-slate-50 dark:bg-[#0a0a0c] border-t border-primary-500/10 py-12 mt-auto">
@@ -12,10 +12,10 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex-1 flex justify-center md:justify-start">
             <Link
-              to={ROUTES.police}
+              to={ROUTES.policy}
               className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-primary-500 transition-colors italic"
             >
-              System Policy
+              Policy
             </Link>
           </div>
 
@@ -39,5 +39,5 @@ export const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}

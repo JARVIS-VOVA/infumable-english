@@ -1,40 +1,40 @@
-import axios from 'axios';
-import snakecaseKeys from 'snakecase-keys';
-import camelcaseKeys from 'camelcase-keys';
-import { BACKEND_URL } from 'src/config/env';
+import axios from 'axios'
+import snakecaseKeys from 'snakecase-keys'
+import camelcaseKeys from 'camelcase-keys'
+import { BACKEND_URL } from 'src/config/env'
 
 const api = axios.create({
   baseURL: BACKEND_URL,
   withCredentials: true,
-});
+})
 
 api.interceptors.request.use(
   (config) => {
-    const newConfig = { ...config };
+    const newConfig = { ...config }
 
     if (newConfig.params) {
-      newConfig.params = snakecaseKeys(newConfig.params, { deep: true });
+      newConfig.params = snakecaseKeys(newConfig.params, { deep: true })
     }
 
     if (newConfig.data && !(newConfig.data instanceof FormData)) {
-      newConfig.data = snakecaseKeys(newConfig.data, { deep: true });
+      newConfig.data = snakecaseKeys(newConfig.data, { deep: true })
     }
 
-    return newConfig;
+    return newConfig
   },
   (error) => Promise.reject(error)
-);
+)
 
 api.interceptors.response.use(
   (response) => {
     if (response.data) {
-      response.data = camelcaseKeys(response.data, { deep: true });
+      response.data = camelcaseKeys(response.data, { deep: true })
     }
-    return response;
+    return response
   },
   (error) => {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
-export default api;
+export default api

@@ -5,8 +5,9 @@ class User < ApplicationRecord
          :trackable
 
   has_many :terms, dependent: :destroy
-  has_many :tags, dependent: :destroy
-  has_many :term_tags, dependent: :destroy
+  has_many :sources, dependent: :destroy
+
+  normalizes :username, with: ->(username) { username&.strip }
 
   validates :username, presence: true,
                        allow_blank: false,

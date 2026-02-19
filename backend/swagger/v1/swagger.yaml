@@ -4,6 +4,320 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/healthz":
+    get:
+      summary: "#show"
+      tags:
+      - Health
+      responses:
+        '200':
+          description: service healthy
+  "/api/v1/current_user":
+    get:
+      summary: "#show"
+      tags:
+      - CurrentUser
+      responses:
+        '200':
+          description: returns current user
+        '401':
+          description: unauthorized
+    patch:
+      summary: "#update"
+      tags:
+      - CurrentUser
+      parameters: []
+      responses:
+        '200':
+          description: updates current user
+        '422':
+          description: invalid payload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                  required:
+                  - username
+              required:
+              - user
+  "/api/v1/sessions":
+    post:
+      summary: "#create"
+      tags:
+      - Sessions
+      parameters: []
+      responses:
+        '200':
+          description: session created
+        '422':
+          description: invalid credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                  required:
+                  - email
+                  - password
+              required:
+              - session
+    get:
+      summary: "#show"
+      tags:
+      - Sessions
+      responses:
+        '200':
+          description: not authenticated
+    delete:
+      summary: "#destroy"
+      tags:
+      - Sessions
+      responses:
+        '200':
+          description: session destroyed
+        '401':
+          description: unauthorized
+  "/api/v1/sources":
+    get:
+      summary: "#index"
+      tags:
+      - Sources
+      responses:
+        '200':
+          description: sources list returned
+    post:
+      summary: "#create"
+      tags:
+      - Sources
+      parameters: []
+      responses:
+        '201':
+          description: source created
+        '422':
+          description: invalid payload
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    is_public:
+                      type: boolean
+                      nullable: true
+                    text:
+                      type: string
+                      nullable: true
+                  required:
+                  - title
+              required:
+              - source
+  "/api/v1/sources/public":
+    get:
+      summary: "#public_index"
+      tags:
+      - Sources
+      responses:
+        '200':
+          description: public sources returned
+  "/api/v1/sources/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: "#show"
+      tags:
+      - Sources
+      responses:
+        '200':
+          description: source found
+        '403':
+          description: forbidden for private source from other user
+    patch:
+      summary: "#update"
+      tags:
+      - Sources
+      parameters: []
+      responses:
+        '202':
+          description: source updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    is_public:
+                      type: boolean
+                      nullable: true
+              required:
+              - source
+    delete:
+      summary: "#destroy"
+      tags:
+      - Sources
+      responses:
+        '200':
+          description: source destroyed
+  "/api/v1/sources/{id}/clone":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: "#clone"
+      tags:
+      - Sources
+      responses:
+        '201':
+          description: source cloned
+  "/api/v1/sources/{id}/analyze":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: "#analyze"
+      tags:
+      - Sources
+      parameters: []
+      responses:
+        '200':
+          description: text analyzed and terms added
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                source:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                  required:
+                  - text
+              required:
+              - source
+  "/api/v1/terms":
+    get:
+      summary: "#index"
+      tags:
+      - Terms
+      responses:
+        '200':
+          description: terms list returned
+    post:
+      summary: "#create"
+      tags:
+      - Terms
+      parameters: []
+      responses:
+        '201':
+          description: term created
+        '403':
+          description: source does not belong to current user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                term:
+                  type: object
+                  properties:
+                    phrase:
+                      type: string
+                      nullable: true
+                    meaning:
+                      type: string
+                      nullable: true
+                    source_id:
+                      type: integer
+                  required:
+                  - source_id
+              required:
+              - term
+  "/api/v1/terms/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: "#show"
+      tags:
+      - Terms
+      responses:
+        '200':
+          description: term found
+    patch:
+      summary: "#update"
+      tags:
+      - Terms
+      parameters: []
+      responses:
+        '202':
+          description: term updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                term:
+                  type: object
+                  properties:
+                    phrase:
+                      type: string
+                      nullable: true
+                    meaning:
+                      type: string
+                      nullable: true
+                    learnt:
+                      type: boolean
+                      nullable: true
+              required:
+              - term
+    delete:
+      summary: "#destroy"
+      tags:
+      - Terms
+      responses:
+        '200':
+          description: term destroyed
   "/api/v1/users":
     get:
       summary: "#index"
@@ -66,14 +380,10 @@ components:
         email:
           type: string
           example: user@example.com
-        created_at:
-          type: datatime
-          example: 1636311796-01-01 00:00:00 +0200
       required:
       - id
       - username
       - email
-      - created_at
     new_user:
       type: object
       properties:

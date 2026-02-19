@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { ThemeModeContext, THEME_MODES } from 'src/features/shared/contexts/ThemeModeContext';
-import type { ThemeMode } from 'src/features/shared/contexts/ThemeModeContext';
+import { ThemeModeContext, THEME_MODES } from 'src/features/shared/contexts/ThemeModeContext'
+import type { ThemeMode } from 'src/features/shared/contexts/ThemeModeContext'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
       refetchOnReconnect: false,
     },
   },
-});
+})
 
 type AppProvidersProps = {
   children: React.ReactNode;
@@ -24,26 +24,26 @@ type AppProvidersProps = {
 export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [themeMode, setThemeMode] = useState<ThemeMode>(() => {
     // Try to get from local storage or system preference, defaulting to dark as before
-    const savedMode = localStorage.getItem('themeMode') as ThemeMode | null;
+    const savedMode = localStorage.getItem('themeMode') as ThemeMode | null
     if (savedMode && Object.values(THEME_MODES).includes(savedMode)) {
-      return savedMode;
+      return savedMode
     }
-    return THEME_MODES.default;
-  });
+    return THEME_MODES.default
+  })
 
   const toggleThemeMode = () => {
     setThemeMode((prev) => {
-      const newMode = prev === THEME_MODES.light ? THEME_MODES.dark : THEME_MODES.light;
-      localStorage.setItem('themeMode', newMode);
-      return newMode;
-    });
-  };
+      const newMode = prev === THEME_MODES.light ? THEME_MODES.dark : THEME_MODES.light
+      localStorage.setItem('themeMode', newMode)
+      return newMode
+    })
+  }
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(themeMode);
-  }, [themeMode]);
+    const root = window.document.documentElement
+    root.classList.remove('light', 'dark')
+    root.classList.add(themeMode)
+  }, [themeMode])
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -54,5 +54,5 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         </div>
       </ThemeModeContext.Provider>
     </QueryClientProvider>
-  );
-};
+  )
+}

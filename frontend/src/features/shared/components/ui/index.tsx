@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export const Button = React.forwardRef<
   HTMLButtonElement,
@@ -9,7 +9,7 @@ export const Button = React.forwardRef<
     isLoading?: boolean;
   }
 >(({ className = '', variant = 'primary', size = 'md', fullWidth = false, isLoading = false, children, disabled, ...props }, ref) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-2xl font-black italic uppercase tracking-wider transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100";
+  const baseStyles = "inline-flex items-center justify-center rounded-2xl font-black italic uppercase tracking-wider transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-95 disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100"
 
   const variants = {
     primary: "bg-primary-500 text-white hover:bg-primary-600 shadow-xl shadow-primary-500/25 focus:ring-primary-500",
@@ -18,16 +18,16 @@ export const Button = React.forwardRef<
     ghost: "bg-transparent hover:bg-slate-100 text-slate-700 dark:text-slate-300 dark:hover:bg-slate-800/50",
     danger: "bg-red-500 text-white hover:bg-red-600 shadow-xl shadow-red-500/25 focus:ring-red-500",
     glass: "glass-card hover:bg-white/20 dark:hover:bg-white/10 text-slate-900 dark:text-white border-white/20",
-  };
+  }
 
   const sizes = {
     sm: "h-9 px-4 text-xs",
     md: "h-12 px-6 text-sm",
     lg: "h-14 px-8 text-base",
-  };
+  }
 
-  const widthClass = fullWidth ? "w-full" : "";
-  const loadingClass = isLoading ? "opacity-80 pointer-events-none" : "";
+  const widthClass = fullWidth ? "w-full" : ""
+  const loadingClass = isLoading ? "opacity-80 pointer-events-none" : ""
 
   return (
     <button
@@ -44,8 +44,8 @@ export const Button = React.forwardRef<
       )}
       {children}
     </button>
-  );
-});
+  )
+})
 
 export const IconButton = React.forwardRef<
   HTMLButtonElement,
@@ -55,20 +55,20 @@ export const IconButton = React.forwardRef<
     color?: 'default' | 'primary' | 'danger' | 'success' | 'accent';
   }
 >(({ className = '', size = 'md', variant = 'ghost', color = 'default', children, ...props }, ref) => {
-  const baseStyles = "rounded-xl flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-90";
+  const baseStyles = "rounded-xl flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 active:scale-90"
 
   const sizes = {
     sm: "h-9 w-9 p-2",
     md: "h-11 w-11 p-2.5",
     lg: "h-14 w-14 p-3.5",
-  };
+  }
 
   const variants = {
     ghost: "hover:bg-slate-100 dark:hover:bg-slate-800/50",
     outline: "border-2 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800/50",
     filled: "bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700",
     glass: "glass hover:bg-white/20 dark:hover:bg-white/10 border-white/20",
-  };
+  }
 
   const colors = {
     default: "text-slate-500 dark:text-slate-400",
@@ -76,9 +76,9 @@ export const IconButton = React.forwardRef<
     accent: "text-accent-500 hover:bg-accent-50 dark:hover:bg-accent-950/30",
     danger: "text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30",
     success: "text-green-500 hover:bg-green-50 dark:hover:bg-green-950/30"
-  };
+  }
 
-  const colorClass = color !== 'default' && variant === 'ghost' ? colors[color] : colors['default'];
+  const colorClass = color !== 'default' && variant === 'ghost' ? colors[color] : colors['default']
 
   return (
     <button
@@ -88,8 +88,8 @@ export const IconButton = React.forwardRef<
     >
       {children}
     </button>
-  );
-});
+  )
+})
 
 export const Input = React.forwardRef<
   HTMLInputElement,
@@ -101,8 +101,8 @@ export const Input = React.forwardRef<
     containerClassName?: string;
   }
 >(({ className = '', label, error, helperText, fullWidth = false, containerClassName = '', id, ...props }, ref) => {
-  const inputId = id || React.useId();
-  const hasError = !!error;
+  const inputId = id || React.useId()
+  const hasError = !!error
 
   return (
     <div className={`flex flex-col gap-2 ${fullWidth ? 'w-full' : ''} ${containerClassName}`}>
@@ -131,8 +131,8 @@ export const Input = React.forwardRef<
         </p>
       )}
     </div>
-  );
-});
+  )
+})
 
 export const Card = ({ children, className = '', padding = 'md' }: { children: React.ReactNode; className?: string; padding?: 'none' | 'sm' | 'md' | 'lg' }) => {
   const paddings = {
@@ -140,11 +140,11 @@ export const Card = ({ children, className = '', padding = 'md' }: { children: R
     sm: 'p-4',
     md: 'p-6 md:p-8',
     lg: 'p-10 md:p-12',
-  };
+  }
 
   return (
     <div className={`glass-card rounded-[2.5rem] overflow-hidden ${paddings[padding]} ${className}`}>
       {children}
     </div>
-  );
-};
+  )
+}

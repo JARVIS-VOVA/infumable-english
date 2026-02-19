@@ -16,8 +16,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect_json([{
         id: user.id,
         username: user.username,
-        email: user.email,
-        created_at: user.created_at.utc.to_s
+        email: user.email
       }])
     end
   end
@@ -75,8 +74,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect_json({
         id: user.id,
         username: user.username,
-        email: user.email,
-        created_at: user.created_at.utc.to_s
+        email: user.email
       })
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_15_015448) do
+ActiveRecord::Schema[8.0].define(version: 2021_02_15_214524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -156,32 +156,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_015448) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "title"
-    t.string "color"
+  create_table "sources", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.boolean "is_public", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tags_on_user_id"
-  end
-
-  create_table "term_tags", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "term_id"
-    t.bigint "tag_id"
-    t.index ["tag_id"], name: "index_term_tags_on_tag_id"
-    t.index ["term_id"], name: "index_term_tags_on_term_id"
-    t.index ["user_id"], name: "index_term_tags_on_user_id"
+    t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
   create_table "terms", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "source_id"
     t.string "phrase"
     t.string "meaning"
-    t.datetime "last_practice_at"
+    t.integer "priority", default: 1, null: false
+    t.boolean "learnt", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["last_practice_at"], name: "index_terms_on_last_practice_at"
+    t.index ["learnt"], name: "index_terms_on_learnt"
+    t.index ["priority"], name: "index_terms_on_priority"
+    t.index ["source_id"], name: "index_terms_on_source_id"
     t.index ["user_id"], name: "index_terms_on_user_id"
   end
 
@@ -190,19 +185,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_015448) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: nil
-    t.datetime "remember_created_at", precision: nil
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: nil
-    t.datetime "last_sign_in_at", precision: nil
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "confirmation_token"
-    t.datetime "confirmed_at", precision: nil
-    t.datetime "confirmation_sent_at", precision: nil
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((username)::text)", name: "index_users_on_lower_username", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -214,4 +210,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_015448) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "sources", "users"
+  add_foreign_key "terms", "sources"
 end

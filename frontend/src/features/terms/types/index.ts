@@ -1,9 +1,11 @@
 export type Term = {
   id: number;
   phrase: string;
-  meaning: string;
+  meaning: string | null;
+  learnt?: boolean;
+  priority?: number;
+  sourceId?: number;
   example?: string;
-  tags?: string[];
 };
 
 export type CreateTermDTO = {
