@@ -1,8 +1,8 @@
-import React from 'react';
-import { BaseLayout } from '../../shared/components/BaseLayout';
-import { personWithFlugImg } from 'src/assets/img';
-import { Link } from 'react-router-dom';
-import { Button, Card } from 'src/features/shared/components/ui';
+import React from 'react'
+import { BaseLayout } from '../../shared/components/BaseLayout'
+import { personWithFlugImg } from 'src/assets/img'
+import { Link } from 'react-router-dom'
+import { Button, Card } from 'src/features/shared/components/ui'
 
 const WelcomePage: React.FC = () => {
   return (
@@ -34,15 +34,6 @@ const WelcomePage: React.FC = () => {
                 </svg>
               </Button>
             </Link>
-            <Link to="/tags" className="w-full sm:w-auto">
-              <Button
-                variant="outline"
-                size="lg"
-                fullWidth
-              >
-                Explore Labels
-              </Button>
-            </Link>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-10 border-t-2 border-primary-500/10">
@@ -52,7 +43,7 @@ const WelcomePage: React.FC = () => {
             </div>
             <div className="space-y-1">
               <span className="text-3xl font-black text-primary-500 italic">100%</span>
-              <p className="text-[10px] uppercase font-black tracking-[0.2em] text-slate-400 dark:text-slate-500">Custom Tags</p>
+              <p className="text-[10px] uppercase font-black tracking-[0.2em] text-slate-400 dark:text-slate-500">Focus Boost</p>
             </div>
             <div className="space-y-1 hidden md:block">
               <span className="text-3xl font-black text-accent-500 italic">FREE</span>
@@ -87,7 +78,7 @@ const WelcomePage: React.FC = () => {
         </div>
       </div>
     </BaseLayout>
-  );
-};
+  )
+}
 
-export default WelcomePage;
+export default WelcomePage

@@ -1,17 +1,23 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import React, { Suspense } from 'react';
-import { useUser } from 'src/features/auth/api/getUser';
-import { Loader } from 'src/features/shared/components/Loader';
-import { ScrollToTop } from 'src/features/shared/components/ScrollToTop';
+import { Routes, Route, Navigate } from 'react-router-dom'
+import React, { Suspense } from 'react'
+import { useUser } from 'src/features/auth/api/getUser'
+import { Loader } from 'src/features/shared/components/Loader'
+import { ScrollToTop } from 'src/features/shared/components/ScrollToTop'
 
 // Lazy load pages
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary } from 'react-error-boundary'
 
-const SignInPage = React.lazy(() => import('src/features/auth/components/SignInPage'));
-const SignUpPage = React.lazy(() => import('src/features/auth/components/SignUpPage'));
-const TermsPage = React.lazy(() => import('src/features/terms/components/TermsPage'));
-const TagsPage = React.lazy(() => import('src/features/tags/components/TagsPage'));
-const WelcomePage = React.lazy(() => import('src/features/welcome/components/WelcomePage'));
+const SignInPage = React.lazy(() => import('src/features/auth/components/SignInPage'))
+const SignUpPage = React.lazy(() => import('src/features/auth/components/SignUpPage'))
+const TermsPage = React.lazy(() => import('src/features/terms/components/TermsPage'))
+const SourcesPage = React.lazy(() => import('src/features/sources/components/SourcesPage'))
+const MySourcesPage = React.lazy(() => import('src/features/sources/components/MySourcesPage'))
+const PublicSourcesPage = React.lazy(() => import('src/features/sources/components/PublicSourcesPage'))
+const SourceView = React.lazy(() => import('src/features/sources/components/SourceView'))
+const PracticePage = React.lazy(() => import('src/features/sources/components/PracticePage'))
+const WelcomePage = React.lazy(() => import('src/features/welcome/components/WelcomePage'))
+const SettingsPage = React.lazy(() => import('src/features/settings/components/SettingsPage'))
+const PolicyPage = React.lazy(() => import('src/features/policy/components/PolicyPage'))
 
 const ErrorFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#0a0a0c] p-4 text-center">
@@ -31,14 +37,14 @@ const ErrorFallback = () => (
       </button>
     </div>
   </div>
-);
+)
 
 const App: React.FC = () => {
-  const { data: user, isLoading } = useUser();
-  const isAuthenticated = !!user;
+  const { data: user, isLoading } = useUser()
+  const isAuthenticated = !!user
 
   if (isLoading) {
-    return <Loader isLoading={true} />;
+    return <Loader isLoading={true} />
   }
 
   return (
@@ -51,6 +57,7 @@ const App: React.FC = () => {
             <>
               <Route path="/login" element={<SignInPage />} />
               <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/policy" element={<PolicyPage />} />
               <Route path="/" element={<WelcomePage />} />
               <Route path="*" element={<Navigate to="/login" replace />} />
             </>
@@ -60,7 +67,13 @@ const App: React.FC = () => {
           {isAuthenticated && (
             <>
               <Route path="/terms" element={<TermsPage />} />
-              <Route path="/tags" element={<TagsPage />} />
+              <Route path="/sources" element={<SourcesPage />} />
+              <Route path="/sources/my" element={<MySourcesPage />} />
+              <Route path="/sources/public" element={<PublicSourcesPage />} />
+              <Route path="/sources/:id" element={<SourceView />} />
+              <Route path="/sources/:id/practice" element={<PracticePage />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="/policy" element={<PolicyPage />} />
               <Route path="/" element={<WelcomePage />} />
               <Route path="/login" element={<Navigate to="/terms" replace />} />
               <Route path="/signup" element={<Navigate to="/terms" replace />} />
@@ -70,7 +83,7 @@ const App: React.FC = () => {
         </Routes>
       </Suspense>
     </ErrorBoundary>
-  );
-};
+  )
+}
 
-export default App;
+export default App

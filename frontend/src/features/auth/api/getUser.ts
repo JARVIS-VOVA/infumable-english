@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
-import api from 'src/lib/axios';
-import type { AuthUser } from '../types';
+import { useQuery } from '@tanstack/react-query'
+import api from 'src/lib/axios'
+import type { AuthUser } from '../types'
 
 export const getUser = (): Promise<AuthUser | null> => {
   return api
     .get('/api/v1/current_user')
     .then((res: any) => res.data)
-    .catch(() => null);
-};
+    .catch(() => null)
+}
 
 export const useUser = () => {
   return useQuery({
@@ -18,5 +18,5 @@ export const useUser = () => {
     refetchOnMount: false,
     refetchOnReconnect: false,
     staleTime: 1000 * 60 * 5, // 5 minutes
-  });
-};
+  })
+}

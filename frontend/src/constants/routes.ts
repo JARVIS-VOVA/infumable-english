@@ -1,21 +1,25 @@
 const ROUTES = {
   root: '/',
   welcome: '/welcome',
-  police: '/police',
+  policy: '/policy',
 
   terms: '/terms',
+  sources: '/sources',
+  sourcePractice: (id: number | string) => `/sources/${id}/practice`,
+  mySources: '/sources/my',
+  publicSources: '/sources/public',
+  settings: '/settings',
   addTerms: '/terms/add',
   importTerms: '/terms/import',
-  tags: '/tags',
 
   signUp: '/signup',
   signIn: '/login',
 
   notFound: '/not-found',
-} as const;
+} as const
 
-export default ROUTES;
+export default ROUTES
 
 export const OUTSIDE_ROUTES = {
   urlGitHubRepository: 'https://github.com/JARVIS-VOVA/infumable-english',
-} as const;
+} as const

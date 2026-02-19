@@ -8,7 +8,6 @@ gem 'bootsnap', require: false
 gem 'devise', '~> 4.9'
 gem 'pg', '~> 1.6.1'
 gem 'puma', '>= 5.0'
-gem 'rabl', '~> 0.17.0'
 gem 'rack-cors', '~> 3.0'
 gem 'rails', '~> 8.0.3'
 gem 'rswag-api', '~> 2.16'
@@ -16,6 +15,8 @@ gem 'rswag-ui', '~> 2.16'
 gem 'solid_cable', '~> 3.0.12'
 gem 'solid_cache', '~> 1.0.7'
 gem 'solid_queue', '~> 1.2.1'
+gem 'pagy', '~> 43.2'
+gem 'blueprinter', '~> 1.2'
 gem 'thruster', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
 

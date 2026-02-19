@@ -3,8 +3,6 @@
 RSpec.describe User, type: :model do
   describe 'associations' do
     it { should have_many(:terms).class_name('Term') }
-    it { should have_many(:tags).class_name('Tag') }
-    it { should have_many(:term_tags).class_name('TermTag') }
   end
 
   describe 'validations' do

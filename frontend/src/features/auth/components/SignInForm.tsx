@@ -1,28 +1,28 @@
-import React from 'react';
-import { Form, Field } from 'react-final-form';
-import { useNavigate, Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { useLogin } from '../api/login';
-import { composeValidators, required, email, minLengthPassword } from 'src/helpers/validations/fieldLevelValidation';
+import React from 'react'
+import { Form, Field } from 'react-final-form'
+import { useNavigate, Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { useLogin } from '../api/login'
+import { composeValidators, required, email, minLengthPassword } from 'src/helpers/validations/fieldLevelValidation'
 
 const SignInForm: React.FC = () => {
-  const navigate = useNavigate();
-  const loginMutation = useLogin();
+  const navigate = useNavigate()
+  const loginMutation = useLogin()
 
   const onSubmit = (values: any) => {
     loginMutation.mutate(
       { session: values },
       {
         onSuccess: () => {
-          toast.success('Access granted. Welcome back.');
-          navigate('/terms');
+          toast.success('Access granted. Welcome back.')
+          navigate('/terms')
         },
         onError: (error: any) => {
-          toast.error(error.response?.data?.error || 'Authentication failed');
+          toast.error(error.response?.data?.error || 'Authentication failed')
         },
       }
-    );
-  };
+    )
+  }
 
   return (
     <div className="max-w-md mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -104,7 +104,7 @@ const SignInForm: React.FC = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignInForm;
+export default SignInForm

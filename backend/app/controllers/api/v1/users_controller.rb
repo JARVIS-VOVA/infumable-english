@@ -4,8 +4,8 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index create show]
 
   def index
-    @users = User.all
-    render 'api/users/collection', status: :ok
+    users = User.all
+    render json: UserBlueprint.render_as_hash(users), status: :ok
   end
 
   def create
@@ -18,8 +18,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    render 'api/users/object', status: :ok
+    user = User.find(params[:id])
+    render json: UserBlueprint.render_as_hash(user), status: :ok
   end
 
   private

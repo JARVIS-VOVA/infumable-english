@@ -1,25 +1,25 @@
-import React from 'react';
-import { Form, Field } from 'react-final-form';
-import { useNavigate, Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { useSignup } from '../api/signup';
-import { composeValidators, required, email, minLengthPassword, passwordsMatch } from 'src/helpers/validations/fieldLevelValidation';
+import React from 'react'
+import { Form, Field } from 'react-final-form'
+import { useNavigate, Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { useSignup } from '../api/signup'
+import { composeValidators, required, email, minLengthPassword, passwordsMatch } from 'src/helpers/validations/fieldLevelValidation'
 
 const SignUpForm: React.FC = () => {
-  const navigate = useNavigate();
-  const signupMutation = useSignup();
+  const navigate = useNavigate()
+  const signupMutation = useSignup()
 
   const onSubmit = (values: any) => {
     signupMutation.mutate(values, {
       onSuccess: () => {
-        toast.success('Account localized. Welcome to the collective.');
-        navigate('/terms');
+        toast.success('Account localized. Welcome to the collective.')
+        navigate('/terms')
       },
       onError: (error: any) => {
-        toast.error(error.response?.data?.errors?.join(', ') || 'Registration failed');
+        toast.error(error.response?.data?.errors?.join(', ') || 'Registration failed')
       },
-    });
-  };
+    })
+  }
 
   return (
     <div className="max-w-md mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -132,7 +132,7 @@ const SignUpForm: React.FC = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

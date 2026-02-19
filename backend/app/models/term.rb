@@ -2,9 +2,24 @@
 
 class Term < ApplicationRecord
   belongs_to :user
+  belongs_to :source
 
-  has_many :term_tags, dependent: :destroy
-  has_many :tags, through: :term_tags
+  validates :priority, numericality: { greater_than: 0 }
+  validate :phrase_or_meaning_present
+  validate :source_belongs_to_user
 
-  validates :phrase, :meaning, presence: true
+  private
+
+  def phrase_or_meaning_present
+    return if phrase.present? || meaning.present?
+
+    errors.add(:base, 'Phrase or meaning must be present')
+  end
+
+  def source_belongs_to_user
+    return if source.blank? || user.blank?
+    return if source.user_id == user_id
+
+    errors.add(:source, 'must belong to the current user')
+  end
 end
