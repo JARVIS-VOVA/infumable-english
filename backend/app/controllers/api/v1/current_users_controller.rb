@@ -10,7 +10,7 @@ class Api::V1::CurrentUsersController < ApplicationController
       return render json: UserBlueprint.render_as_hash(current_user), status: :ok
     end
 
-    render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: current_user.errors.full_messages }, status: :unprocessable_content
   end
 
   private

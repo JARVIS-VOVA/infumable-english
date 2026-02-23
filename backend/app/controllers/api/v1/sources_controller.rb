@@ -21,7 +21,7 @@ class Api::V1::SourcesController < ApplicationController
       return render json: SourceBlueprint.render_as_hash(@source, view: :with_terms), status: :created
     end
 
-    render json: { errors: @source.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @source.errors.full_messages }, status: :unprocessable_content
   end
 
   def show
@@ -39,7 +39,7 @@ class Api::V1::SourcesController < ApplicationController
       return render json: SourceBlueprint.render_as_hash(source), status: :accepted
     end
 
-    render json: { errors: source.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: source.errors.full_messages }, status: :unprocessable_content
   end
 
   def destroy
@@ -50,7 +50,7 @@ class Api::V1::SourcesController < ApplicationController
       return head :ok
     end
 
-    render json: { errors: source.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: source.errors.full_messages }, status: :unprocessable_content
   end
 
   def public_index

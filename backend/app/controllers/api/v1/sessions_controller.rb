@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
       return head :ok
     end
     render json: { error: I18n.t('devise.failure.not_found_in_database', authentication_keys: :email) },
-           status: :unprocessable_entity
+           status: :unprocessable_content
   end
 
   def show

@@ -56,7 +56,7 @@ RSpec.describe Api::V1::CurrentUsersController, type: :controller do
 
       patch :update, params: { user: { username: 'taken_name' } }
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it 'returns validation error when username already exists' do

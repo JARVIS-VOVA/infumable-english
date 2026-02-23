@@ -34,12 +34,12 @@ class Api::V1::TermsController < ApplicationController
     end
 
     if @terms.empty?
-      return render json: { errors: ['At least one non-empty row is required'] }, status: :unprocessable_entity
+      return render json: { errors: ['At least one non-empty row is required'] }, status: :unprocessable_content
     end
 
     render json: TermBlueprint.render_as_hash(@terms), status: :created
   rescue ActiveRecord::RecordInvalid => e
-    render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: e.record.errors.full_messages }, status: :unprocessable_content
   end
 
   def show
@@ -53,7 +53,7 @@ class Api::V1::TermsController < ApplicationController
       return render json: TermBlueprint.render_as_hash(term), status: :accepted
     end
 
-    render json: { errors: term.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: term.errors.full_messages }, status: :unprocessable_content
   end
 
   def destroy
@@ -62,7 +62,7 @@ class Api::V1::TermsController < ApplicationController
       return head :ok
     end
 
-    render json: { errors: term.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: term.errors.full_messages }, status: :unprocessable_content
   end
 
   private

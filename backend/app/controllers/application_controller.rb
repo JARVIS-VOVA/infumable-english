@@ -19,6 +19,6 @@ class ApplicationController < ActionController::API
   end
 
   def record_not_unique
-    render json: { errors: ['Record has already been taken'] }, status: :unprocessable_entity
+    render json: { errors: ['Record has already been taken'] }, status: :unprocessable_content
   end
 end
