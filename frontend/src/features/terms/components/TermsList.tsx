@@ -7,6 +7,7 @@ import { PaginationControls } from 'src/features/shared/components/PaginationCon
 import toast from 'react-hot-toast'
 
 const PAGE_SIZE = 10
+type ErrorWithMessage = { message?: string }
 
 export const TermsList: React.FC = () => {
   const [page, setPage] = useState(1)
@@ -51,7 +52,7 @@ export const TermsList: React.FC = () => {
           </svg>
         </div>
         <h3 className="text-3xl font-black italic uppercase tracking-tighter text-slate-900 dark:text-white mb-4">Connection Failed</h3>
-        <p className="text-slate-500 dark:text-slate-400 font-medium mb-10">{(error as any).message || 'The linguistic terminal is currently unresponsive.'}</p>
+        <p className="text-slate-500 dark:text-slate-400 font-medium mb-10">{(error as ErrorWithMessage).message || 'The linguistic terminal is currently unresponsive.'}</p>
         <Button
           variant="danger"
           onClick={() => window.location.reload()}

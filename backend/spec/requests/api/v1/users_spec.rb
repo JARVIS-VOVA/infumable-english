@@ -11,9 +11,7 @@ RSpec.describe 'api/v1/users', type: :request do
       response 200, 'successful return all users' do
         let!(:user) { create(:user) }
         run_test! do |response|
-          # TODO: Move next line to helpers
-          data = JSON.parse(response.body, symbolize_names: true)
-          expect(data.last[:id]).to eq(user.id)
+          expect(json_response.last[:id]).to eq(user.id)
         end
       end
     end

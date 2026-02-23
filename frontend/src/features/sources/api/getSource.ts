@@ -3,7 +3,7 @@ import api from 'src/lib/axios'
 import type { Source } from '../types'
 
 export const getSource = (id: number): Promise<Source> => {
-  return api.get(`/api/v1/sources/${id}`).then((res: any) => res.data)
+  return api.get(`/api/v1/sources/${id}`).then((res) => res.data)
 }
 
 export const useSource = (id: number) => {

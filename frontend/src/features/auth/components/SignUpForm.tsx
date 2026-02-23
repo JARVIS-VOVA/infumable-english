@@ -3,20 +3,32 @@ import { Form, Field } from 'react-final-form'
 import { useNavigate, Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useSignup } from '../api/signup'
+import type { SignupDTO } from '../types'
 import { composeValidators, required, email, minLengthPassword, passwordsMatch } from 'src/helpers/validations/fieldLevelValidation'
+
+type ApiErrorPayload = {
+  errors?: string[];
+}
+
+type ApiError = {
+  response?: {
+    data?: ApiErrorPayload;
+  };
+}
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate()
   const signupMutation = useSignup()
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: SignupDTO) => {
     signupMutation.mutate(values, {
       onSuccess: () => {
         toast.success('Account localized. Welcome to the collective.')
         navigate('/terms')
       },
-      onError: (error: any) => {
-        toast.error(error.response?.data?.errors?.join(', ') || 'Registration failed')
+      onError: (error: unknown) => {
+        const apiError = error as ApiError
+        toast.error(apiError.response?.data?.errors?.join(', ') || 'Registration failed')
       },
     })
   }

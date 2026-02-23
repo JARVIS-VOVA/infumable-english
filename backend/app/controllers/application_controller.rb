@@ -6,7 +6,6 @@ class ApplicationController < ActionController::API
   before_action :authenticate_user!
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
 
   private
 
@@ -16,9 +15,5 @@ class ApplicationController < ActionController::API
 
   def not_found
     head :not_found
-  end
-
-  def record_not_unique
-    render json: { errors: ['Record has already been taken'] }, status: :unprocessable_content
   end
 end

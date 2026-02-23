@@ -1,31 +1,31 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { BaseLayout } from 'src/features/shared/components/BaseLayout';
-import { Button, Card, Input } from 'src/features/shared/components/ui';
-import { PaginationControls } from 'src/features/shared/components/PaginationControls';
-import ROUTES from 'src/constants/routes';
-import { useSources } from '../api/getSources';
-import { useCreateSource } from '../api/createSource';
-import { useUpdateSource } from '../api/updateSource';
-import type { Source } from '../types';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { BaseLayout } from 'src/features/shared/components/BaseLayout'
+import { Button, Card, Input } from 'src/features/shared/components/ui'
+import { PaginationControls } from 'src/features/shared/components/PaginationControls'
+import ROUTES from 'src/constants/routes'
+import { useSources } from '../api/getSources'
+import { useCreateSource } from '../api/createSource'
+import { useUpdateSource } from '../api/updateSource'
+import type { Source } from '../types'
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 8
 
 const MySourcesPage: React.FC = () => {
-  const navigate = useNavigate();
-  const [page, setPage] = React.useState(1);
-  const { data: mySourcesResponse, isLoading: isMyLoading } = useSources({ page, perPage: PAGE_SIZE });
-  const createSourceMutation = useCreateSource();
-  const updateSourceMutation = useUpdateSource();
-  const [title, setTitle] = React.useState('');
-  const [editingId, setEditingId] = React.useState<number | null>(null);
-  const [editTitle, setEditTitle] = React.useState('');
-  const [editIsPublic, setEditIsPublic] = React.useState(false);
+  const navigate = useNavigate()
+  const [page, setPage] = React.useState(1)
+  const { data: mySourcesResponse, isLoading: isMyLoading } = useSources({ page, perPage: PAGE_SIZE })
+  const createSourceMutation = useCreateSource()
+  const updateSourceMutation = useUpdateSource()
+  const [title, setTitle] = React.useState('')
+  const [editingId, setEditingId] = React.useState<number | null>(null)
+  const [editTitle, setEditTitle] = React.useState('')
+  const [editIsPublic, setEditIsPublic] = React.useState(false)
 
   const handleCreate = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!title.trim()) return;
+    event.preventDefault()
+    if (!title.trim()) return
 
     try {
       const source = await createSourceMutation.mutateAsync({
@@ -33,24 +33,24 @@ const MySourcesPage: React.FC = () => {
           title: title.trim(),
           isPublic: false,
         },
-      });
-      toast.success('Source created');
-      setTitle('');
-      navigate(`${ROUTES.sources}/${source.id}`);
+      })
+      toast.success('Source created')
+      setTitle('')
+      navigate(`${ROUTES.sources}/${source.id}`)
     } catch (error) {
-      toast.error('Could not create source');
-      console.error(error);
+      toast.error('Could not create source')
+      console.error(error)
     }
-  };
+  }
 
   const startEditing = (source: Source) => {
-    setEditingId(source.id);
-    setEditTitle(source.title);
-    setEditIsPublic(!!source.isPublic);
-  };
+    setEditingId(source.id)
+    setEditTitle(source.title)
+    setEditIsPublic(!!source.isPublic)
+  }
 
   const saveEdit = async (sourceId: number) => {
-    if (!editTitle.trim()) return;
+    if (!editTitle.trim()) return
 
     try {
       await updateSourceMutation.mutateAsync({
@@ -59,18 +59,18 @@ const MySourcesPage: React.FC = () => {
           title: editTitle.trim(),
           isPublic: editIsPublic,
         },
-      });
-      toast.success('Source updated');
-      setEditingId(null);
+      })
+      toast.success('Source updated')
+      setEditingId(null)
     } catch (error) {
-      toast.error('Could not update source');
-      console.error(error);
+      toast.error('Could not update source')
+      console.error(error)
     }
-  };
+  }
 
-  const mySources = mySourcesResponse?.data || [];
-  const totalPages = mySourcesResponse?.meta?.totalPages || 1;
-  const currentPage = mySourcesResponse?.meta?.currentPage || page;
+  const mySources = mySourcesResponse?.data || []
+  const totalPages = mySourcesResponse?.meta?.totalPages || 1
+  const currentPage = mySourcesResponse?.meta?.currentPage || page
 
   return (
     <BaseLayout title="My Sources">
@@ -166,7 +166,7 @@ const MySourcesPage: React.FC = () => {
         </Card>
       </div>
     </BaseLayout>
-  );
-};
+  )
+}
 
-export default MySourcesPage;
+export default MySourcesPage

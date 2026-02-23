@@ -4,8 +4,8 @@ import type { AuthUser } from '../types'
 
 export const getUser = (): Promise<AuthUser | null> => {
   return api
-    .get('/api/v1/current_user')
-    .then((res: any) => res.data)
+    .get<AuthUser>('/api/v1/current_user')
+    .then((res) => res.data)
     .catch(() => null)
 }
 

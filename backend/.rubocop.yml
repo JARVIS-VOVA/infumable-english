@@ -47,3 +47,6 @@ RSpec/ImplicitExpect:
 
 RSpec/ExampleLength:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 3

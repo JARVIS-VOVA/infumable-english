@@ -5,11 +5,26 @@ import toast from 'react-hot-toast'
 import { useLogin } from '../api/login'
 import { composeValidators, required, email, minLengthPassword } from 'src/helpers/validations/fieldLevelValidation'
 
+type SignInFormValues = {
+  email: string;
+  password: string;
+}
+
+type ApiErrorPayload = {
+  error?: string;
+}
+
+type ApiError = {
+  response?: {
+    data?: ApiErrorPayload;
+  };
+}
+
 const SignInForm: React.FC = () => {
   const navigate = useNavigate()
   const loginMutation = useLogin()
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: SignInFormValues) => {
     loginMutation.mutate(
       { session: values },
       {
@@ -17,8 +32,9 @@ const SignInForm: React.FC = () => {
           toast.success('Access granted. Welcome back.')
           navigate('/terms')
         },
-        onError: (error: any) => {
-          toast.error(error.response?.data?.error || 'Authentication failed')
+        onError: (error: unknown) => {
+          const apiError = error as ApiError
+          toast.error(apiError.response?.data?.error || 'Authentication failed')
         },
       }
     )

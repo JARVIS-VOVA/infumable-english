@@ -5,6 +5,16 @@ import { useUpdateCurrentUser } from 'src/features/auth/api/updateCurrentUser'
 import { BaseLayout } from 'src/features/shared/components/BaseLayout'
 import { THEME_MODES, ThemeModeContext } from 'src/features/shared/contexts/ThemeModeContext'
 
+type ApiErrorPayload = {
+  errors?: string[];
+}
+
+type ApiError = {
+  response?: {
+    data?: ApiErrorPayload;
+  };
+}
+
 const SettingsPage: React.FC = () => {
   const { data: user, isLoading } = useUser()
   const updateCurrentUserMutation = useUpdateCurrentUser()
@@ -36,8 +46,9 @@ const SettingsPage: React.FC = () => {
         onSuccess: () => {
           toast.success('Username updated')
         },
-        onError: (error: any) => {
-          const apiErrors = error.response?.data?.errors
+        onError: (error: unknown) => {
+          const apiError = error as ApiError
+          const apiErrors = apiError.response?.data?.errors
           toast.error(Array.isArray(apiErrors) ? apiErrors.join(', ') : 'Failed to update username')
         },
       }

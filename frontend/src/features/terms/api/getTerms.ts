@@ -13,7 +13,7 @@ type GetTermsParams = {
 export const getTerms = ({ page, perPage, sourceId, learnt }: GetTermsParams): Promise<PaginatedResponse<Term>> => {
   return api
     .get('/api/v1/terms', { params: { page, perPage, sourceId, learnt } })
-    .then((res: any) => res.data)
+    .then((res) => res.data)
 }
 
 export const useTerms = ({ page, perPage, sourceId, learnt }: GetTermsParams) => {

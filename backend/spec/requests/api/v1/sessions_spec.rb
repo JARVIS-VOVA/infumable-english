@@ -49,15 +49,13 @@ RSpec.describe 'api/v1/sessions', type: :request do
         let(:auth_user) { current_user }
 
         run_test! do |response|
-          payload = JSON.parse(response.body, symbolize_names: true)
-          expect(payload[:authenticated]).to be(true)
+          expect(json_response[:authenticated]).to be(true)
         end
       end
 
       response 200, 'not authenticated' do
         run_test! do |response|
-          payload = JSON.parse(response.body, symbolize_names: true)
-          expect(payload[:authenticated]).to be(false)
+          expect(json_response[:authenticated]).to be(false)
         end
       end
     end

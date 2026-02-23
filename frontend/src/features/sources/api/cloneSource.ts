@@ -3,7 +3,7 @@ import api from 'src/lib/axios'
 import type { Source } from '../types'
 
 export const cloneSource = (id: number): Promise<Source> => {
-  return api.post(`/api/v1/sources/${id}/clone`).then((res: any) => res.data)
+  return api.post(`/api/v1/sources/${id}/clone`).then((res) => res.data)
 }
 
 export const useCloneSource = () => {

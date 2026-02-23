@@ -3,7 +3,7 @@ import api from 'src/lib/axios'
 import type { Session } from '../types'
 
 export const getSession = (): Promise<Session> => {
-  return api.get('/api/v1/sessions').then((res: any) => res.data)
+  return api.get<Session>('/api/v1/sessions').then((res) => res.data)
 }
 
 export const useSession = () => {

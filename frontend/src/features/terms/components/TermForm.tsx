@@ -6,6 +6,12 @@ import { Input, Button } from 'src/features/shared/components/ui'
 import type { Term } from '../types/index'
 import { useSources } from 'src/features/sources/api/getSources'
 
+type TermFormValues = {
+  phrase?: string;
+  meaning?: string | null;
+  sourceId?: string | number;
+}
+
 type TermFormProps = {
   initialValues?: Partial<Term>;
   onSuccess?: () => void;
@@ -23,7 +29,7 @@ export const TermForm: React.FC<TermFormProps> = ({ initialValues, onSuccess, on
   const hasLockedSource = Number.isFinite(sourceId)
   const defaultSourceId = sourceId ?? initialValues?.sourceId
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: TermFormValues) => {
     try {
       const payload = {
         ...values,
@@ -41,7 +47,7 @@ export const TermForm: React.FC<TermFormProps> = ({ initialValues, onSuccess, on
     }
   }
 
-  const validate = (values: any) => {
+  const validate = (values: TermFormValues) => {
     const errors: Record<string, string> = {}
     if (!values.phrase?.trim()) errors.phrase = 'Phrase is required'
     if (!values.sourceId) errors.sourceId = 'Source is required'

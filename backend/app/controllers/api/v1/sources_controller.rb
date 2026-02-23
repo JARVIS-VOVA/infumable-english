@@ -33,7 +33,6 @@ class Api::V1::SourcesController < ApplicationController
 
   def update
     source = current_user.sources.find(params[:id])
-    return head :forbidden unless source.user_id == current_user.id
 
     if source.update(update_params)
       return render json: SourceBlueprint.render_as_hash(source), status: :accepted
@@ -44,7 +43,6 @@ class Api::V1::SourcesController < ApplicationController
 
   def destroy
     source = current_user.sources.find(params[:id])
-    return head :forbidden unless source.user_id == current_user.id
 
     if source.destroy
       return head :ok
@@ -75,7 +73,7 @@ class Api::V1::SourcesController < ApplicationController
     source = current_user.sources.find(params[:id])
     text = params.require(:source).permit(:text)[:text].to_s
 
-    SourceProcessor.new(text: text, source_id: source.id, replace_existing: false).call
+    SourceProcessor.new(text: text, source_id: source.id).call
     source.reload
 
     render json: SourceBlueprint.render_as_hash(source, view: :with_terms), status: :ok

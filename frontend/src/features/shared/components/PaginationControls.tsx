@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from './ui';
+import React from 'react'
+import { Button } from './ui'
 
 type PaginationControlsProps = {
   currentPage: number;
@@ -14,16 +14,16 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
   onPageChange,
   className = '',
 }) => {
-  if (totalPages <= 1) return null;
+  if (totalPages <= 1) return null
 
-  const maxVisiblePages = 5;
-  const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-  const normalizedStartPage = Math.max(1, endPage - maxVisiblePages + 1);
+  const maxVisiblePages = 5
+  const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
+  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
+  const normalizedStartPage = Math.max(1, endPage - maxVisiblePages + 1)
   const pages = Array.from(
     { length: endPage - normalizedStartPage + 1 },
     (_, index) => normalizedStartPage + index
-  );
+  )
 
   return (
     <div className={`flex flex-wrap items-center justify-center gap-2 ${className}`}>
@@ -70,5 +70,5 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
         Last
       </Button>
     </div>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import api from 'src/lib/axios';
-import type { Source } from '../types';
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import api from 'src/lib/axios'
+import type { Source } from '../types'
 
 type UpdateSourceDTO = {
   id: number;
@@ -12,18 +12,18 @@ type UpdateSourceDTO = {
 };
 
 export const updateSource = ({ id, ...data }: UpdateSourceDTO): Promise<Source> => {
-  return api.patch(`/api/v1/sources/${id}`, data).then((res: any) => res.data);
-};
+  return api.patch(`/api/v1/sources/${id}`, data).then((res) => res.data)
+}
 
 export const useUpdateSource = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: updateSource,
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['sources', 'mine'] });
-      queryClient.invalidateQueries({ queryKey: ['source', variables.id] });
-      queryClient.invalidateQueries({ queryKey: ['sources', 'public'] });
+      queryClient.invalidateQueries({ queryKey: ['sources', 'mine'] })
+      queryClient.invalidateQueries({ queryKey: ['source', variables.id] })
+      queryClient.invalidateQueries({ queryKey: ['sources', 'public'] })
     },
-  });
-};
+  })
+}

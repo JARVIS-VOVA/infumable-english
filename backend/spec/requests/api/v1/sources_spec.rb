@@ -17,8 +17,7 @@ RSpec.describe 'api/v1/sources', type: :request do
         let!(:source) { Source.create!(user: current_user, title: 'Spanish basics') }
 
         run_test! do |response|
-          payload = JSON.parse(response.body, symbolize_names: true)
-          expect(payload[:data].map { |item| item[:id] }).to include(source.id)
+          expect(json_response[:data].map { |item| item[:id] }).to include(source.id)
         end
       end
     end
@@ -69,8 +68,7 @@ RSpec.describe 'api/v1/sources', type: :request do
         let!(:private_source) { Source.create!(user: owner, title: 'Private source', is_public: false) }
 
         run_test! do |response|
-          payload = JSON.parse(response.body, symbolize_names: true)
-          ids = payload[:data].map { |item| item[:id] }
+          ids = json_response[:data].map { |item| item[:id] }
           expect(ids).to include(public_source.id)
           expect(ids).not_to include(private_source.id)
         end
@@ -126,12 +124,22 @@ RSpec.describe 'api/v1/sources', type: :request do
           expect(existing_source.reload.title).to eq('New title')
         end
       end
+
+      response 422, 'source update invalid payload' do
+        let(:existing_source) { Source.create!(user: current_user, title: 'Old title') }
+        let(:id) { existing_source.id }
+        let(:source) { { source: { title: '' } } }
+
+        run_test! do |_response|
+          expect(json_response[:errors]).to include("Title can't be blank")
+        end
+      end
     end
 
     delete '#destroy' do
       tags 'Sources'
 
-      response 200, 'source destroyed' do
+      response 204, 'source destroyed' do
         let(:existing_source) { Source.create!(user: current_user, title: 'To remove') }
         let(:id) { existing_source.id }
 
@@ -156,9 +164,8 @@ RSpec.describe 'api/v1/sources', type: :request do
 
         run_test! do |response|
           original_term
-          payload = JSON.parse(response.body, symbolize_names: true)
-          expect(payload[:user_id]).to eq(current_user.id)
-          expect(payload[:title]).to eq('Clone me')
+          expect(json_response[:user_id]).to eq(current_user.id)
+          expect(json_response[:title]).to eq('Clone me')
         end
       end
     end

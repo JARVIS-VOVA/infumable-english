@@ -101,7 +101,8 @@ export const Input = React.forwardRef<
     containerClassName?: string;
   }
 >(({ className = '', label, error, helperText, fullWidth = false, containerClassName = '', id, ...props }, ref) => {
-  const inputId = id || React.useId()
+  const generatedId = React.useId()
+  const inputId = id ?? generatedId
   const hasError = !!error
 
   return (

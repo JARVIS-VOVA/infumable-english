@@ -17,7 +17,7 @@ Figma https://www.figma.com/file/WoyEEo8LBPl67Wf5YL7NzT/Infumable-English
 
 # 🔗 Project Links
 
-## 🌐 API Endpoints
+## 🌐 Backend Endpoints
 - **Health Check**: [https://infumable-english.onrender.com/api/healthz](https://infumable-english.onrender.com/api/healthz)
 - **Health Check**: [https://infumable-english.onrender.com/up](https://infumable-english.onrender.com/up)
 
@@ -72,7 +72,7 @@ Check records in solid_queue_jobs
   Rails.application.credentials.dig(:db, :username)
 ```
 
-### Api was created with command
+### Backend was created with command
 ```
   rails new . --force --database=postgresql --api
 ```

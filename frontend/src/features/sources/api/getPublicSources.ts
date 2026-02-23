@@ -9,7 +9,7 @@ type GetPublicSourcesParams = {
 }
 
 export const getPublicSources = ({ page, perPage }: GetPublicSourcesParams): Promise<PaginatedResponse<Source>> => {
-  return api.get('/api/v1/sources/public', { params: { page, perPage } }).then((res: any) => res.data)
+  return api.get('/api/v1/sources/public', { params: { page, perPage } }).then((res) => res.data)
 }
 
 export const usePublicSources = ({ page, perPage }: GetPublicSourcesParams) => {

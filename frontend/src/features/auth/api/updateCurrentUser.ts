@@ -9,7 +9,7 @@ type UpdateCurrentUserDTO = {
 }
 
 export const updateCurrentUser = (data: UpdateCurrentUserDTO): Promise<AuthUser> => {
-  return api.patch('/api/v1/current_user', data).then((res: any) => res.data)
+  return api.patch<AuthUser>('/api/v1/current_user', data).then((res) => res.data)
 }
 
 export const useUpdateCurrentUser = () => {

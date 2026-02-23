@@ -17,8 +17,7 @@ RSpec.describe 'api/v1/current_user', type: :request do
         let(:auth_user) { current_user }
 
         run_test! do |response|
-          payload = JSON.parse(response.body, symbolize_names: true)
-          expect(payload[:id]).to eq(current_user.id)
+          expect(json_response[:id]).to eq(current_user.id)
         end
       end
 

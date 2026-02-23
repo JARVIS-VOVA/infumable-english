@@ -14,21 +14,15 @@ RSpec.describe Api::V1::CurrentUsersController, type: :controller do
     end
 
     it 'returns current user id' do
-      json = JSON.parse(response.body, symbolize_names: true)
-
-      expect(json[:id]).to eq(user.id)
+      expect(json_response[:id]).to eq(user.id)
     end
 
     it 'returns current user email' do
-      json = JSON.parse(response.body, symbolize_names: true)
-
-      expect(json[:email]).to eq(user.email)
+      expect(json_response[:email]).to eq(user.email)
     end
 
     it 'returns current user username' do
-      json = JSON.parse(response.body, symbolize_names: true)
-
-      expect(json[:username]).to eq(user.username)
+      expect(json_response[:username]).to eq(user.username)
     end
   end
 
@@ -64,8 +58,7 @@ RSpec.describe Api::V1::CurrentUsersController, type: :controller do
 
       patch :update, params: { user: { username: 'taken_name' } }
 
-      json = JSON.parse(response.body, symbolize_names: true)
-      expect(json[:errors]).to include('Username has already been taken')
+      expect(json_response[:errors]).to include('Username has already been taken')
     end
   end
 end

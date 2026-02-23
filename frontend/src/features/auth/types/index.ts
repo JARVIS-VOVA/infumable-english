@@ -14,3 +14,10 @@ export type LoginDTO = {
     password: string;
   };
 };
+
+export type SignupDTO = {
+  email: string;
+  username: string;
+  password: string;
+  passwordConfirmation: string;
+};

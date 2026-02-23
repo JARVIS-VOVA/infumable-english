@@ -10,9 +10,9 @@ source = user.sources.create_with(
 ).find_or_create_by(title: 'My Source')
 
 # Terms
-laptop_term = user.terms.create_with(phrase: 'Laptop', source: source).find_or_create_by(meaning: 'Ноутбук')
-app_term = user.terms.create_with(phrase: 'App', source: source).find_or_create_by(meaning: 'Додаток')
-sofa_term = user.terms.create_with(phrase: 'Sofa', source: source).find_or_create_by(meaning: 'Ліжко')
-meat_term = user.terms.create_with(phrase: 'Meat', source: source, learnt: true).find_or_create_by(meaning: 'Мясо')
+user.terms.create_with(phrase: 'Laptop', source: source).find_or_create_by(meaning: 'Ноутбук')
+user.terms.create_with(phrase: 'App', source: source).find_or_create_by(meaning: 'Додаток')
+user.terms.create_with(phrase: 'Sofa', source: source).find_or_create_by(meaning: 'Ліжко')
+user.terms.create_with(phrase: 'Meat', source: source, learnt: true).find_or_create_by(meaning: 'Мясо')
 
 p 'Success seed'
