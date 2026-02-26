@@ -6,18 +6,18 @@ ruby '3.4.5'
 
 gem 'blueprinter', '~> 1.2'
 gem 'bootsnap', require: false
-gem 'devise', '~> 4.9'
+gem 'devise', '~> 5.0'
 gem 'ostruct', '~> 0.6.3'
-gem 'pagy', '~> 43.2'
+gem 'pagy', '~> 43.3'
 gem 'pg', '~> 1.6.1'
 gem 'puma', '>= 5.0'
 gem 'rack-cors', '~> 3.0'
 gem 'rails', '~> 8.1.2'
-gem 'rswag-api', '~> 2.16'
+gem 'rswag-api', '~> 2.17'
 gem 'rswag-ui', '~> 2.16'
 gem 'solid_cable', '~> 3.0.12'
 gem 'solid_cache', '~> 1.0.7'
-gem 'solid_queue', '~> 1.2.1'
+gem 'solid_queue', '~> 1.3.2'
 gem 'thruster', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
@@ -35,7 +35,7 @@ end
 
 group :test do
   gem 'airborne', '~> 0.2.13'
-  gem 'rubocop-performance', '~> 1.25', require: false
+  gem 'rubocop-performance', '~> 1.26', require: false
   gem 'rubocop-rspec', '~> 3.6', require: false
   gem 'shoulda-matchers', '~> 6.5'
   gem 'simplecov', '~> 0.22.0', require: false
