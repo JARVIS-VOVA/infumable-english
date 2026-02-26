@@ -31,9 +31,11 @@ export const TermForm: React.FC<TermFormProps> = ({ initialValues, onSuccess, on
 
   const onSubmit = async (values: TermFormValues) => {
     try {
+      const parsedSourceId = Number(values.sourceId)
       const payload = {
-        ...values,
-        sourceId: Number(values.sourceId),
+        phrase: values.phrase?.trim() ?? '',
+        meaning: values.meaning ?? null,
+        sourceId: parsedSourceId,
       }
 
       if (isEditMode) {
