@@ -1,6 +1,5 @@
-type FormValues = Record<string, unknown>
 type ValidatorValue = unknown
-type Validator = (value: ValidatorValue, allValues?: FormValues) => string | undefined
+type Validator = (value: ValidatorValue, allValues: object) => string | undefined
 
 export const required: Validator = (value) => (value ? undefined : 'Required')
 
@@ -14,8 +13,8 @@ export const minLength = (min: number): Validator => (value) =>
 
 export const minLengthPassword = minLength(6)
 
-export const passwordsMatch = (targetValue: string): Validator => (value) =>
-  value !== targetValue ? 'Passwords do not match' : undefined
+export const passwordsMatch: Validator = (value, allValues) =>
+  value !== (allValues as { password?: unknown }).password ? 'Passwords do not match' : undefined
 
-export const composeValidators = (...validators: Validator[]) => (value: ValidatorValue, allValues: FormValues) =>
-  validators.reduce((error, validator) => error || validator(value, allValues), undefined)
+export const composeValidators = (...validators: Validator[]) => (value: ValidatorValue, allValues: object) =>
+  validators.reduce<string | undefined>((error, validator) => error ?? validator(value, allValues), undefined)

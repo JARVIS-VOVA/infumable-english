@@ -45,7 +45,7 @@ const SignUpForm: React.FC = () => {
 
         <Form
           onSubmit={onSubmit}
-          render={({ handleSubmit, invalid, values }) => (
+          render={({ handleSubmit, invalid }) => (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
                 <Field
@@ -107,7 +107,7 @@ const SignUpForm: React.FC = () => {
 
                 <Field
                   name="passwordConfirmation"
-                  validate={composeValidators(required, minLengthPassword, passwordsMatch(values.password))}
+                  validate={composeValidators(required, minLengthPassword, passwordsMatch)}
                   render={({ input, meta }) => (
                     <div className="space-y-1">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 ml-1">Confirm Identity</label>
