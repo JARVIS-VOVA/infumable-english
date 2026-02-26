@@ -6,7 +6,7 @@ ruby '3.4.5'
 
 gem 'blueprinter', '~> 1.2'
 gem 'bootsnap', require: false
-gem 'devise', '~> 4.9'
+gem 'devise', '~> 5.0'
 gem 'ostruct', '~> 0.6.3'
 gem 'pagy', '~> 43.2'
 gem 'pg', '~> 1.6.1'
