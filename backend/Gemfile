@@ -37,7 +37,7 @@ group :test do
   gem 'airborne', '~> 0.2.13'
   gem 'rubocop-performance', '~> 1.25', require: false
   gem 'rubocop-rspec', '~> 3.6', require: false
-  gem 'shoulda-matchers', '~> 6.5'
+  gem 'shoulda-matchers', '~> 7.0'
   gem 'simplecov', '~> 0.22.0', require: false
   gem 'codecov', '~> 0.2.12', require: false
   gem 'fasterer', '~> 0.11.0', require: false
