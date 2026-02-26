@@ -196,7 +196,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
-    pagy (43.2.10)
+    pagy (43.3.1)
       json
       uri
       yaml
@@ -425,7 +425,7 @@ DEPENDENCIES
   ffaker (~> 2.24)
   fuubar (~> 2.5.1)
   ostruct (~> 0.6.3)
-  pagy (~> 43.2)
+  pagy (~> 43.3)
   pg (~> 1.6.1)
   pry (~> 0.15.2)
   puma (>= 5.0)
