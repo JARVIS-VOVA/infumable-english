@@ -4,12 +4,12 @@ on:
   pull_request:
     paths:
       - 'backend/**'
-      - '.github/workflows/ci.yml'
+      - '.github/workflows/backend-ci.yml'
   push:
     branches: [ main ]
     paths:
       - 'backend/**'
-      - '.github/workflows/ci.yml'
+      - '.github/workflows/backend-ci.yml'
   workflow_dispatch:
 
 permissions:
@@ -21,7 +21,8 @@ concurrency:
 
 env:
   RUBY_VERSION: '3.4.5'
-  BUNDLE_GEMFILE: backend/Gemfile
+  BUNDLE_GEMFILE: ${{ github.workspace }}/backend/Gemfile
+  BUNDLE_PATH: ${{ github.workspace }}/vendor/bundle
   RAILS_ENV: test
 
 jobs:
@@ -57,7 +58,9 @@ jobs:
     needs: quality
     environment: test
     env:
+      DATABASE_URL: ${{ secrets.BACKEND_TEST_DATABASE_URL != '' && secrets.BACKEND_TEST_DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/infumable_english_test' }}
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     defaults:
       run:
         working-directory: backend
@@ -90,6 +93,8 @@ jobs:
         run: bundle exec rspec spec
 
       - name: Generate Swagger via rswag
+        env:
+          SIMPLECOV_DISABLED_BY_SWAGGER: 'true'
         run: bundle exec rails rswag
 
       - name: Upload coverage artifact

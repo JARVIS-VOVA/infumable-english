@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'swagger_helper'
+require 'securerandom'
 
 RSpec.describe 'api/v1/users', type: :request do
   path '/api/v1/users' do
@@ -11,7 +12,7 @@ RSpec.describe 'api/v1/users', type: :request do
       response 200, 'successful return all users' do
         let!(:user) { create(:user) }
         run_test! do |response|
-          expect(json_response.last[:id]).to eq(user.id)
+          expect(json_response.map { |item| item[:id] }).to include(user.id)
         end
       end
     end
@@ -22,19 +23,23 @@ RSpec.describe 'api/v1/users', type: :request do
       parameter name: :user, in: :body, schema: { '$ref' => '#/components/schemas/new_user' }
 
       response 201, 'successful user created' do
+        let(:email) { "email_#{SecureRandom.hex(4)}@example.com" }
+        let(:username) { "username_#{SecureRandom.hex(4)}" }
         let(:user) do
           {
             user: {
-              email: 'email@example.com',
+              email: email,
               password: 'password',
-              username: 'Mary Poppins'
+              username: username
             }
           }
         end
 
         run_test! do |response|
           expect(response.status).to eq(201)
-          expect(User.find_by(email: user[:user][:email]).email).to eq(user[:user][:email])
+          created_user = User.find_by(email: email)
+          expect(created_user).to be_present
+          expect(created_user.username).to eq(username)
         end
       end
 

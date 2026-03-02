@@ -13,11 +13,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
 
     it 'user should be present' do
-      expect_json([{
-        id: user.id,
-        username: user.username,
-        email: user.email
-      }])
+      expect(json_response).to include(
+        include(
+          id: user.id,
+          username: user.username,
+          email: user.email
+        )
+      )
     end
   end
 
