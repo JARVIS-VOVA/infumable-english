@@ -440,8 +440,8 @@ DEPENDENCIES
   rack-cors (~> 3.0)
   rails (~> 8.1.2)
   rspec-rails (~> 8.0)
-  rswag-specs (~> 2.17)
   rswag-api (~> 2.17)
+  rswag-specs (~> 2.17)
   rswag-ui (~> 2.16)
   rubocop-performance (~> 1.26)
   rubocop-rails-omakase
