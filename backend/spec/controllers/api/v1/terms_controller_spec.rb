@@ -51,13 +51,12 @@ RSpec.describe Api::V1::TermsController, type: :controller do
       sign_in(user)
       allow(controller).to receive(:current_user).and_return(user)
 
-      terms_assoc = instance_double('ActiveRecord::Associations::CollectionProxy')
+      terms_assoc = instance_double(ActiveRecord::Associations::CollectionProxy)
       allow(user).to receive(:terms).and_return(terms_assoc)
       allow(terms_assoc).to receive(:find).with(term.id.to_s).and_return(term)
 
-      errors_obj = instance_double('ActiveModel::Errors', full_messages: errors)
-      allow(term).to receive(:destroy).and_return(false)
-      allow(term).to receive(:errors).and_return(errors_obj)
+      errors_obj = instance_double(ActiveModel::Errors, full_messages: errors)
+      allow(term).to receive_messages(destroy: false, errors: errors_obj)
     end
 
     it 'returns unprocessable content with errors when destroy fails' do
