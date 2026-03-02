@@ -26,7 +26,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: backend/.ruby-version
+          ruby-version: '3.4.5'
           bundler-cache: true
 
       - name: Lint code for consistent style
@@ -63,7 +63,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: backend/.ruby-version
+          ruby-version: '3.4.5'
           bundler-cache: true
 
       - name: Prepare database
