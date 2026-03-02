@@ -16,9 +16,9 @@ class SourceProcessor
         term.user ||= source.user
         term.priority = if term.persisted?
                           term.priority.to_i + priority
-                        else
+        else
                           priority
-                        end
+        end
         term.save!
       end
     end
