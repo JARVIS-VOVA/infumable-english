@@ -15,11 +15,11 @@ module Paginatable
       client_max_limit: max_per_page
     )
 
-    if requested_page > 1 && pagy_obj.in.zero? && pagy_obj.pages.positive?
+    if requested_page > 1 && pagy_obj.in.zero? && pagy_obj.last.positive?
       pagy_obj, records = pagy(
         :offset,
         scope,
-        page: pagy_obj.pages,
+        page: pagy_obj.last,
         limit: pagy_obj.limit,
         client_max_limit: max_per_page
       )
@@ -33,8 +33,8 @@ module Paginatable
   def pagination_meta(pagy)
     {
       current_page: pagy.page,
-      next_page:    pagy.instance_variable_get(:@next),
-      prev_page:    pagy.instance_variable_get(:@prev),
+      next_page:    pagy.next,
+      prev_page:    pagy.previous,
       total_pages:  pagy.last,
       total_count:  pagy.count,
       per_page:     pagy.limit
