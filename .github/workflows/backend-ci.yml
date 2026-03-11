@@ -2,18 +2,32 @@ name: Backend CI
 
 on:
   pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
   push:
     branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
-  group: backend-ci-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  BUNDLE_GEMFILE: backend/Gemfile
+  RUBY_VERSION: '3.4.5'
+  BUNDLE_GEMFILE: ${{ github.workspace }}/backend/Gemfile
+  BUNDLE_PATH: ${{ github.workspace }}/vendor/bundle
+  RAILS_ENV: test
 
 jobs:
   quality:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,12 +35,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: backend/.ruby-version
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Lint code for consistent style
@@ -39,8 +53,14 @@ jobs:
         run: bundle exec brakeman --no-pager
 
   test_and_docs:
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     needs: quality
+    environment: test
+    env:
+      DATABASE_URL: ${{ secrets.BACKEND_TEST_DATABASE_URL != '' && secrets.BACKEND_TEST_DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/infumable_english_test' }}
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     defaults:
       run:
         working-directory: backend
@@ -58,35 +78,28 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: backend/.ruby-version
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Prepare database
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/infumable_english_test
         run: bundle exec rails db:prepare
 
       - name: Run RSpec
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/infumable_english_test
         run: bundle exec rspec spec
 
       - name: Generate Swagger via rswag
         env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/infumable_english_test
+          SIMPLECOV_DISABLED_BY_SWAGGER: 'true'
         run: bundle exec rails rswag
 
       - name: Upload coverage artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: backend-coverage
           path: backend/coverage

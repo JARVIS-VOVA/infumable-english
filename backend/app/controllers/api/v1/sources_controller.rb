@@ -45,7 +45,7 @@ class Api::V1::SourcesController < ApplicationController
     source = current_user.sources.find(params[:id])
 
     if source.destroy
-      return head :ok
+      return head :no_content
     end
 
     render json: { errors: source.errors.full_messages }, status: :unprocessable_content
