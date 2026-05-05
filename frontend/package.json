@@ -22,7 +22,7 @@
     "react-dropzone": "^15.0.0",
     "react-error-boundary": "^6.0.0",
     "react-final-form": "^7.0.0",
-    "react-final-form-arrays": "^4.0.0",
+    "react-final-form-arrays": "^5.0.0",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^7.6.3",
     "snakecase-keys": "^9.0.2",
